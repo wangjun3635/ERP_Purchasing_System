@@ -13,8 +13,6 @@
         <result column="updateUserId" property="updateUserId" />
     </resultMap>
 
-    <parameterMap id="City" type="org.spring.springboot.domain.City"/>
-
     <sql id="Base_Column_List">
          id,
 		 title,
