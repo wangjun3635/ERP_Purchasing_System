@@ -2,3 +2,10 @@ server:
   port: 8080
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://rm-uf63u4d917ni9w6o0jo.sqlserver.rds.aliyuncs.com:1433;DatabaseName=reagentshop
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: shopadmin
+    password: Ah7SiHdyMon#p

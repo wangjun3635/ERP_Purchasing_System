@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.purchasing.mapper.ProclamationDao">
+
+    <resultMap id="BaseResultMap" type="com.team.purchasing.bean.Proclamation">
+        <result column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="attachment" property="attachment" />
+        <result column="content" property="content" />
+        <result column="auditStatus" property="auditStatus" />
+        <result column="createTime" property="createTime" />
+        <result column="createUserId" property="createUserId" />
+        <result column="updateTime" property="updateTime" />
+        <result column="updateUserId" property="updateUserId" />
+    </resultMap>
+
+
+    <select id="queryProclamationList" resultMap="BaseResultMap">
+        select top #{currentNum} o.id,
+        o.title
+        o.attachment,
+        o.content,
+        o.auditStatus,
+        o.createTime,
+        o.createUserId,
+        o.updateTime,
+        o.updateUserId from
+        (select row_number() over(order by updateTime desc) as rownumber, * from
+        (select * from tb_proclamation) as oo  ) as o where rownumber > #{rowNumber}
+    </select>
+
+    <insert id="addProclamation" parameterType="com.team.purchasing.bean.Proclamation">
+      insert into tb_promotion(
+      title,
+      attachment,
+      content,
+      auditStatus,
+      createTime,
+      createUserId,
+      updateTime,
+      updateUserId) values (
+       #{title},
+       #{attachment},
+       #{content},
+       #{auditStatus},
+       #{createTime},
+       #{createUserId},
+       #{updateTime},
+       #{updateUserId})
+    </insert>
+
+</mapper>
