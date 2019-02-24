@@ -32,11 +32,12 @@ public class ProclamationController {
     @ApiOperation(value="公告信息查询", notes = "公告信息查询")
     public String queryProclamationByPage(@RequestBody Proclamation proclamation) {
 
-        //更新page
+        //1 更新page
         proclamation.getPage().setRowNumber();
         int count = proclamationService.queryProclamationCount();
         proclamation.getPage().setTotal(count);
 
+        //2 查询数据
         List<Proclamation> proclamations
                 = proclamationService.queryProclamationList(proclamation);
 

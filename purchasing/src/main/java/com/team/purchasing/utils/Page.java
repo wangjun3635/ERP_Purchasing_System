@@ -31,5 +31,4 @@ public class Page {
         this.rowNumber = this.currentNum * (currentPage - 1);
     }
 
-
 }
