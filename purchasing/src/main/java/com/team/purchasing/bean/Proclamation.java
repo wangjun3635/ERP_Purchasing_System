@@ -3,12 +3,14 @@ package com.team.purchasing.bean;
 import com.team.purchasing.utils.Page;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Auther:ynhuang
  * @Date:23/2/19 下午5:36
  */
 @Data
-public class Proclamation extends Page {
+public class Proclamation implements Serializable {
 
     private int id;
 
@@ -27,5 +29,7 @@ public class Proclamation extends Page {
     private String updateTime;
 
     private int updateUserId;
+
+    private Page page;
 
 }

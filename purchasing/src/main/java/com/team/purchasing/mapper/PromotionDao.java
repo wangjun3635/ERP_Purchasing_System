@@ -11,12 +11,12 @@ import java.util.List;
  */
 public interface PromotionDao {
 
-    public List<Promotion> queryAll();
+    public List<Promotion> queryPromotionList(Promotion promotion);
 
-    public Promotion queryById(@Param("id") int id);
+    public int queryPromotionCount();
 
-    public int addPromotion(@Param("promotion") Promotion promotion);
+    public int addPromotion(Promotion promotion);
 
-    public int updatePromotion(@Param("promotion") Promotion promotion);
+    public int updatePromotion(Promotion promotion);
 
 }

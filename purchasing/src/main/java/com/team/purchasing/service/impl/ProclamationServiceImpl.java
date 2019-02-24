@@ -39,4 +39,9 @@ public class ProclamationServiceImpl implements ProclamationService {
 
 
     }
+
+    @Override
+    public int queryProclamationCount() {
+        return proclamationDao.queryProclamationCount();
+    }
 }

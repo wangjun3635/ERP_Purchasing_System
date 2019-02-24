@@ -24,10 +24,12 @@ public class Page {
     @Setter
     private int currentNum;
 
+    @Getter
     private int rowNumber;
 
-    public Page(){
+    public void setRowNumber(){
         this.rowNumber = this.currentNum * (currentPage - 1);
     }
+
 
 }

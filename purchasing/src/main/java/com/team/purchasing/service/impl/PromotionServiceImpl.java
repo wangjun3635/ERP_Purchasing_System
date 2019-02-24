@@ -22,13 +22,13 @@ public class PromotionServiceImpl implements PromotionService {
     private PromotionDao promotionDao;
 
     @Override
-    public List<Promotion> queryAll() {
-        return promotionDao.queryAll();
+    public List<Promotion> queryPromotionList(Promotion promotion) {
+        return promotionDao.queryPromotionList(promotion);
     }
 
     @Override
-    public Promotion queryById(int id) {
-        return promotionDao.queryById(id);
+    public int queryPromotionCount() {
+        return promotionDao.queryPromotionCount();
     }
 
     @Override

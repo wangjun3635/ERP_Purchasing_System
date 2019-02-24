@@ -11,9 +11,9 @@ import java.util.List;
  */
 public interface PromotionService {
 
-    public List<Promotion> queryAll();
+    public List<Promotion> queryPromotionList(Promotion promotion);
 
-    public Promotion queryById(int id);
+    public int queryPromotionCount();
 
     public int addPromotion(Promotion promotion);
 
