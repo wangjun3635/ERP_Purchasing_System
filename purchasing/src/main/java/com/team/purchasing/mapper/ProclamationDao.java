@@ -12,7 +12,11 @@ import java.util.List;
 public interface ProclamationDao {
 
     //查询公告信息
-    public List<Proclamation> queryProclamationList(@Param("proclamation") Proclamation proclamation);
+    public List<Proclamation> queryProclamationList(Proclamation proclamation);
 
-    public int addProclamation(@Param("proclamation") Proclamation proclamation);
+    //添加一条公告信息
+    public int addProclamation(Proclamation proclamation);
+
+    //总条数查询
+    public int queryProclamationCount();
 }

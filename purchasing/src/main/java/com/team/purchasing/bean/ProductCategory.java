@@ -1,26 +1,26 @@
 package com.team.purchasing.bean;
 
-import com.team.purchasing.utils.Page;
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
  * @Auther:ynhuang
- * @Date:23/2/19 下午5:36
+ * @Date:24/2/19 下午3:57
+ * 产品类别表
  */
 @Data
-public class Proclamation implements Serializable {
+public class ProductCategory implements Serializable {
 
     private int id;
 
-    private String title;
+    private String name;
 
-    private String attachment;
+    private String level;
 
-    private String content;
+    private String parentId;
 
-    private int auditStatus;
+    private int isDeleted;
 
     private String createTime;
 
@@ -29,7 +29,5 @@ public class Proclamation implements Serializable {
     private String updateTime;
 
     private int updateUserId;
-
-    private Page page;
 
 }

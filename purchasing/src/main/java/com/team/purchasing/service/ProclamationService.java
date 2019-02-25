@@ -14,4 +14,6 @@ public interface ProclamationService {
 
     public int addProclamation(Proclamation proclamation);
 
+    public int queryProclamationCount();
+
 }

@@ -13,28 +13,21 @@
         <result column="updateUserId" property="updateUserId" />
     </resultMap>
 
-    <sql id="Base_Column_List">
-         id,
-		 title,
-         attachmentImg,
-         content,
-         createTime,
-         createUserId,
-         updateTime,
-         updateUserId
-	</sql>
-
-
-    <select id="queryAll" resultMap="BaseResultMap">
-        select
-          <include refid="Base_Column_List" />
-        from tb_promotion
+    <select id="queryPromotionList" resultMap="BaseResultMap">
+        select top #{page.currentNum} o.id,
+        o.title
+        o.attachmentImg,
+        o.content,
+        o.createTime,
+        o.createUserId,
+        o.updateTime,
+        o.updateUserId from
+        (select row_number() over(order by updateTime asc) as rownumber, * from
+        (select * from tb_promotion) as oo  ) as o where rownumber > #{page.rowNumber}
     </select>
 
-    <select id="queryById" resultType="com.team.purchasing.bean.Promotion">
-      select
-         <include refid="Base_Column_List" />
-         from tb_promotion where id=#{id}
+    <select id="queryPromotionCount">
+        select count(*) from tb_promotion;
     </select>
 
     <insert id="addPromotion" parameterType="com.team.purchasing.bean.Promotion">

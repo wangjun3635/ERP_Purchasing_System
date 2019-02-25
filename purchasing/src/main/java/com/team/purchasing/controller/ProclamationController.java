@@ -26,10 +26,18 @@ public class ProclamationController {
     @Resource
     private ProclamationService proclamationService;
 
-    @GetMapping("/getProclamation")
+    // TODO: 24/2/19 创建公告之后，不能立刻在商城上显示，需要审核通过之后才能在商城展示
+
+    @PostMapping("/getProclamation")
     @ApiOperation(value="公告信息查询", notes = "公告信息查询")
     public String queryProclamationByPage(@RequestBody Proclamation proclamation) {
 
+        //1 更新page
+        proclamation.getPage().setRowNumber();
+        int count = proclamationService.queryProclamationCount();
+        proclamation.getPage().setTotal(count);
+
+        //2 查询数据
         List<Proclamation> proclamations
                 = proclamationService.queryProclamationList(proclamation);
 

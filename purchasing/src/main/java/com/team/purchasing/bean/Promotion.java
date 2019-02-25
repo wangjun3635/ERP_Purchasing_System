@@ -1,13 +1,16 @@
 package com.team.purchasing.bean;
 
+import com.team.purchasing.utils.Page;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * @Auther:ynhuang
  * @Date:19/2/19 下午9:28
  */
 @Data
-public class Promotion {
+public class Promotion implements Serializable {
 
     private int id;
 
@@ -24,5 +27,7 @@ public class Promotion {
     private String updateTime;
 
     private int updateUserId;
+
+    private Page page;
 
 }

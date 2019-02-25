@@ -16,7 +16,7 @@
 
 
     <select id="queryProclamationList" resultMap="BaseResultMap">
-        select top #{currentNum} o.id,
+        select top #{page.currentNum} o.id,
         o.title
         o.attachment,
         o.content,
@@ -26,7 +26,11 @@
         o.updateTime,
         o.updateUserId from
         (select row_number() over(order by updateTime desc) as rownumber, * from
-        (select * from tb_proclamation) as oo  ) as o where rownumber > #{rowNumber}
+        (select * from tb_proclamation) as oo  ) as o where rownumber > #{page.rowNumber}
+    </select>
+
+    <select id="queryProclamationCount">
+        select count(*) from  tb_proclamation;
     </select>
 
     <insert id="addProclamation" parameterType="com.team.purchasing.bean.Proclamation">

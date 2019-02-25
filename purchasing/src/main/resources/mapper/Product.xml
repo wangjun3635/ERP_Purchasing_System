@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.purchasing.mapper.ProductDao">
+
+    <resultMap id="BaseResultMap" type="com.team.purchasing.bean.Product">
+        <result column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="barCode" property="barCode" />
+        <result column="name" property="name" />
+        <result column="genericName" property="genericName" />
+        <result column="shortName" property="shortName" />
+        <result column="specs" property="specs" />
+        <result column="unit" property="unit" />
+        <result column="unitPrice" property="unitPrice" />
+        <result column="manufacturer" property="manufacturer" />
+        <result column="components" property="components" />
+        <result column="purpose" property="purpose" />
+        <result column="taboo" property="taboo" />
+        <result column="qualityStandard" property="qualityStandard" />
+        <result column="packingSpecs" property="packingSpecs" />
+        <result column="catalogs" property="catalogs" />
+        <result column="registerNO" property="registerNO" />
+        <result column="registerExpireDate" property="registerExpireDate" />
+        <result column="licenseNO" property="licenseNO" />
+        <result column="licenseExpireDate" property="licenseExpireDate" />
+        <result column="transRequire" property="transRequire" />
+        <result column="storageRequire" property="storageRequire" />
+        <result column="minStock" property="minStock" />
+        <result column="maxStock" property="maxStock" />
+        <result column="remark" property="remark" />
+        <result column="dataStatus" property="dataStatus" />
+        <result column="auditStatus" property="auditStatus" />
+        <result column="auditFlowCode" property="auditFlowCode" />
+        <result column="auditNodeIndex" property="auditNodeIndex" />
+        <result column="isEnabled" property="isEnabled" />
+        <result column="isDeleted" property="isDeleted" />
+        <result column="createTime" property="createTime" />
+        <result column="createUserId" property="createUserId" />
+        <result column="updateTime" property="updateTime" />
+        <result column="updateUserId" property="updateUserId" />
+        <result column="supplierId" property="supplierId" />
+        <result column="brandId" property="brandId" />
+        <result column="deliveryTime" property="deliveryTime" />
+        <result column="levelFirst" property="productLevelFirst" />
+        <result column="levelSecond" property="productLevelSecond" />
+        <result column="levelThird" property="productLevelThird" />
+    </resultMap>
+
+    <sql id="baseQuery">
+        <if test="name != null">
+            and name like '%#{productName}%'
+        </if>
+        <if test="barCode != null">
+            and barCode like '%#{barCode}%'
+        </if>
+        <if test="unit != null">
+            and unit=#{unit}
+        </if>
+        <if test="unitPrice != null">
+            and unitPrice=#{unitPrice}
+        </if>
+        <if test="deliveryTime != null">
+            and deliveryTime=#{deliveryTime}
+        </if>
+        <if test="productLevelFirst != null">
+            and levelFirst=#{productLevelFirst}
+        </if>
+        <if test="productLevelSecond != null">
+            and levelSecond=#{productLevelSecond}
+        </if>
+        <if test="productLevelThird != null">
+            and levelThird=#{productLevelThird}
+        </if>
+        <if test="supplierName != null">
+            and supplierId in
+            (select id from tb_supplier where name like '%#{supplierName}%'
+            <if test="salesAreaType ！= null">
+                and salesAreaType=#{salesAreaType}
+            </if>
+            <if test="salesProvince != null">
+                and salesProvince=#{salesProvince}
+            </if>
+            )
+        </if>
+    </sql>
+
+    <select id="queryProductList" resultMap="BaseResultMap">
+        select top #{page.currentNum} o.id,
+        o.code
+        o.supplierId,
+        o.brandId,
+        o.barcode,
+        o.name,
+        o.genericname,
+        o.shortname,
+        o.specs,
+        o.unit,
+        o.unitprice,
+        o.deliverytime,
+        o.firstlevel,
+        o.secondlevel
+        o.thirdlevel
+        o.manufacturer
+        o.components
+        o.purpose
+        o.taboo
+        o.qualitystandard
+        o.packingspecs
+        o.catalogs
+        o.registerno
+        o.registerexpiredate
+        o.licenseno
+        o.licenseexpiredate
+        o.transrequire
+        o.storagerequire
+        o.minstock
+        o.maxstock
+        o.remark
+        o.datastatus
+        o.auditstatus
+        o.auditflowcode
+        o.auditnodeindex
+        o.isenabled
+        o.isdeleted
+        o.createtime
+        o.createuserid
+        o.updatetime
+        o.updateuserid from
+        (select row_number() over(order by updateTime desc) as rownumber, * from
+        ( select * from tb_porduct where 1=1 <include refid="baseQuery" /> ) as oo  )
+        as o where rownumber > #{page.rowNumber}
+    </select>
+
+    <select id="queryProductCount">
+        select count(*) from tb_porduct
+        where 1=1 <include refid="baseQuery" />
+    </select>
+
+</mapper>
