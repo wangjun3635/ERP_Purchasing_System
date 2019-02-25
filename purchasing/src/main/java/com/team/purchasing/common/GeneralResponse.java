@@ -11,4 +11,7 @@ public class GeneralResponse {
 	@ApiModelProperty
 	private MessageInfo messageInfo;
 	
+	public GeneralResponse() {
+		this.messageInfo = new MessageInfo();
+	}
 }

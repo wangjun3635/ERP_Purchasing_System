@@ -2,6 +2,10 @@ package com.team.purchasing.bean;
 
 import java.math.BigDecimal;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,6 +23,12 @@ public class Bargain {
 	@ApiModelProperty(value = "供应商id")
 	private Long supplierId;
 	
+	@ApiModelProperty(value = "用户id")
+	private Long userId;
+	
+	@ApiModelProperty(value = "医院学校id")
+	private Long hsId;
+	
 	@ApiModelProperty(value = "单价")
 	private BigDecimal unitPrice;
 	
@@ -35,15 +45,15 @@ public class Bargain {
 	private String remark;
 	
 	@ApiModelProperty(value = "创建时间")
-	private String CreateTime;
+	private String createTime;
 	
-	@ApiModelProperty(value = "")
-	private Long CreateUserId;
+	@ApiModelProperty(value = "创建人id")
+	private Long createUserId;
 	
-	@ApiModelProperty(value = "")
-	private String UpdateTime;
+	@ApiModelProperty(value = "修改时间")
+	private String updateTime;
 	
-	@ApiModelProperty(value = "")
-	private Long UpdateUserId;
+	@ApiModelProperty(value = "修改人")
+	private Long updateUserId;
 
 }

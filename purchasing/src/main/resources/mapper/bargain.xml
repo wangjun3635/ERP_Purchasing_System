@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.team.purchasing.mapper.PromotionDao">
+<mapper namespace="com.team.purchasing.mapper.BargainDao">
 
    
-   <insert id="createBargain" >
-   		insert into (
+   <insert id="createBargain" 
+   		parameterType="com.team.purchasing.bean.Bargain">
+   		insert into tb_bargain (
    			productId,
-   			productId,
+   			userId,
+			hcId,
 			supplierId,
 			unitPrice,
 			quantity,
@@ -14,10 +16,12 @@
 			expireDay,
 			AuditStatus,
 			remark,
-			CreateTime,
-			CreateUserId
+			createTime,
+			createUserId
    		) values(
    			#{productId},
+   			#{userId},
+   			#{hcId},
 			#{productId},
 			#{supplierId},
 			#{unitPrice},
@@ -27,9 +31,56 @@
 			#{AuditStatus},
 			#{remark},
 			GETDATE(),
-			#{CreateUserId}
+			#{createUserId}
    		) 
    </insert>
    
+   <sql id="sql_queryBargainList">
+		id,
+		productId,
+		supplierId,
+		userId,
+		hcId,
+		unitPrice,
+		quantity,
+		supplierCategory,
+		expireDay,
+		remark,
+		CreateTime,
+		CreateUserId,
+		UpdateTime,
+		UpdateUserId	
+   </sql>
+   
+   <sql id="where_queryBargainList">
+	   	<if test="userId != null">
+		 and t.userId = #{userId}
+		</if>
+		<if test="hcId != null">
+		 and t.hcId = #{hcId}
+		</if>
+		<if test="supplierId != null">
+		 and t.supplierId = #{supplierId}
+		</if>
+   </sql>
+   
+   <select id="queryBargainList">
+   		select * from (
+   			select 
+   			 SELECT ROW_NUMBER() OVER ( tb_bargain.createTime DESC ) AS rownum ,
+   			<include refid="sql_queryBargainList"></include>
+   			from tb_bargain	
+   		) t
+   		where 1=1
+   			<include refid="where_queryBargainList"></include>
+   			and t.rownum BETWEEN  #{start} AND #{end}
+   </select>
+   
+   <select id="countBargainList">
+   		select count(*)
+   			from tb_bargain t
+		where 1=1
+		<include refid="where_queryBargainList"></include>   			
+   </select>
    
 </mapper>
