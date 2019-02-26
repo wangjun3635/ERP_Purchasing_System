@@ -33,9 +33,10 @@ public class ProclamationController {
     public String queryProclamationByPage(@RequestBody Proclamation proclamation) {
 
         //1 更新page
-        proclamation.getPage().setRowNumber();
-        int count = proclamationService.queryProclamationCount();
-        proclamation.getPage().setTotal(count);
+//        proclamation.getPage().setRowNumber();
+//        int count = proclamationService.queryProclamationCount();
+//        proclamation.getPage().setTotal(count);
+        proclamation.getPage().init(100);
 
         //2 查询数据
         List<Proclamation> proclamations

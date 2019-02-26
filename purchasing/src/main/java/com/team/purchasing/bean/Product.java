@@ -134,4 +134,6 @@ public class Product implements Serializable {
 
     private int productLevelThird;
 
+    private Page page;
+
 }

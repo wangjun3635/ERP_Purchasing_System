@@ -11,23 +11,30 @@ public class Page {
 
     //总数据
     @Getter
-    @Setter
     private int total;
 
     //当前是第几页
     @Getter
-    @Setter
     private int currentPage;
 
     //当前一页显示多少数据
     @Getter
-    @Setter
     private int currentNum;
 
+    //数据库分页所取到的数据
     @Getter
     private int rowNumber;
 
     public void setRowNumber(){
+        this.rowNumber = this.currentNum * (currentPage - 1);
+    }
+
+    /**
+     * 初始化分页信息
+     * @param total
+     */
+    public void init(int total){
+        this.total = total;
         this.rowNumber = this.currentNum * (currentPage - 1);
     }
 

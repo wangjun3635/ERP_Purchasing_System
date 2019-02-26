@@ -47,8 +47,8 @@
     </resultMap>
 
     <sql id="baseQuery">
-        <if test="name != null">
-            and name like '%#{productName}%'
+        <if test="productName != null">
+            and 'name' like '%#{productName}%'
         </if>
         <if test="barCode != null">
             and barCode like '%#{barCode}%'
@@ -74,13 +74,15 @@
         <if test="supplierName != null">
             and supplierId in
             (select id from tb_supplier where name like '%#{supplierName}%'
-            <if test="salesAreaType ！= null">
-                and salesAreaType=#{salesAreaType}
-            </if>
-            <if test="salesProvince != null">
-                and salesProvince=#{salesProvince}
-            </if>
             )
+        </if>
+
+        <if test="salesAreaType != null">
+            and supplierId in (select id from tb_supplier where salesAreaType=#{salesAreaType})
+        </if>
+
+        <if test="salesProvince != null">
+            and supplierId in (select id from tb_supplier where salesProvince=#{salesProvince})
         </if>
     </sql>
 
@@ -131,7 +133,7 @@
         as o where rownumber > #{page.rowNumber}
     </select>
 
-    <select id="queryProductCount">
+    <select id="queryProductCount" resultType="java.lang.Integer" >
         select count(*) from tb_porduct
         where 1=1 <include refid="baseQuery" />
     </select>

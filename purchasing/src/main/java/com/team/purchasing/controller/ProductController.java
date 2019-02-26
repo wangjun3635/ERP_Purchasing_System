@@ -34,9 +34,10 @@ public class ProductController {
     public String queryProductList(@RequestBody ProductSupplierRelation product) throws JsonProcessingException {
 
         //1 更新page
-        product.getPage().setRowNumber();
-        int count = productService.queryProductCount(product);
-        product.getPage().setTotal(count);
+//        product.getPage().setRowNumber();
+//        int count = productService.queryProductCount(product);
+//        product.getPage().setTotal(count);
+        product.getPage().init(100);
 
         //2 查询数据
         List<Product> products = productService.queryProductList(product);
