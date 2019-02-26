@@ -33,10 +33,8 @@ public class PromotionController {
     public String queryProclamationByPage(@RequestBody Promotion promotion) {
 
         //更新page
-//        promotion.getPage().setRowNumber();
-//        int count = promotionService.queryPromotionCount();
-//        promotion.getPage().setTotal(count);
-        promotion.getPage().init(100);
+        int count = promotionService.queryPromotionCount();
+        promotion.getPage().init(count);
 
         List<Promotion> promotions = promotionService.queryPromotionList(promotion);
 
