@@ -3,6 +3,8 @@ package com.team.purchasing.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.purchasing.bean.Promotion;
+import com.team.purchasing.controller.request.PromotionRequest;
+import com.team.purchasing.controller.response.PromotionResponse;
 import com.team.purchasing.service.PromotionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,7 +32,9 @@ public class PromotionController {
 
     @PostMapping("/getProclamation")
     @ApiOperation(value="促销活动信息查询", notes = "促销活动信息查询")
-    public String queryProclamationByPage(@RequestBody Promotion promotion) {
+    public PromotionResponse queryProclamationByPage(@RequestBody PromotionRequest request) {
+
+        Promotion promotion = request.getPromotion();
 
         //更新page
         int count = promotionService.queryPromotionCount();
@@ -38,17 +42,12 @@ public class PromotionController {
 
         List<Promotion> promotions = promotionService.queryPromotionList(promotion);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String proclamationJson;
-        try {
-            proclamationJson
-                    = objectMapper.writeValueAsString(promotions);
-        } catch (JsonProcessingException e) {
-            log.error("json转换错误,当前promotions为：{}", promotions, e);
-            throw new RuntimeException("json error");
-        }
 
-        return proclamationJson;
+        //参数拼接
+        PromotionResponse promotionResponse = new PromotionResponse();
+        promotionResponse.setPromotionList(promotions);
+
+        return promotionResponse;
     }
 
     // TODO: 24/2/19 促销不需要审核，创建好后直接在商城展示, 促销要有图片【需要考虑图片的存储】

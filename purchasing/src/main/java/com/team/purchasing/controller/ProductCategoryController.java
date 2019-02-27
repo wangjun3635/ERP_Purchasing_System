@@ -1,6 +1,7 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.ProductCategory;
+import com.team.purchasing.controller.request.ProductCategoryRequest;
 import com.team.purchasing.service.ProductCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +28,10 @@ public class ProductCategoryController {
 
     @PostMapping("/updateProductCategory")
     @ApiOperation(value="产品类型数据更新", notes = "产品类型数据更新")
-    public int updateProductCategory(@RequestBody ProductCategory productCategory){
+    public int updateProductCategory(@RequestBody ProductCategoryRequest request){
+
+        ProductCategory productCategory = request.getProductCategory();
+
         return productCategoryService.updateProductCategory(productCategory);
     }
 }

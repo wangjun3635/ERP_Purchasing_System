@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.ProductSupplierRelation;
+import com.team.purchasing.controller.request.ProductSupplierRequest;
+import com.team.purchasing.controller.response.ProductSupplierResponse;
 import com.team.purchasing.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +33,9 @@ public class ProductController {
 
     @PostMapping("/getProductList")
     @ApiOperation(value="产品信息查询", notes = "产品信息查询")
-    public String queryProductList(@RequestBody ProductSupplierRelation product) throws JsonProcessingException {
+    public ProductSupplierResponse queryProductList(@RequestBody ProductSupplierRequest request) throws JsonProcessingException {
+
+        ProductSupplierRelation product = request.getProductSupplierRelation();
 
         //1 更新page
         int count = productService.queryProductCount(product);
@@ -39,10 +43,12 @@ public class ProductController {
 
         //2 查询数据
         List<Product> products = productService.queryProductList(product);
-        //3 数据转换
-        ObjectMapper objectMapper = new ObjectMapper();
-        String result = objectMapper.writeValueAsString(products);
-        return result;
+
+        //4 拼接参数
+        ProductSupplierResponse productSupplierResponse = new ProductSupplierResponse();
+        productSupplierResponse.setProductList(products);
+
+        return productSupplierResponse;
     }
 
 }

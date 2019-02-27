@@ -1,13 +1,16 @@
 package com.team.purchasing.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.purchasing.bean.Proclamation;
+import com.team.purchasing.controller.request.ProclamationRequest;
+import com.team.purchasing.controller.response.ProclamationResponse;
 import com.team.purchasing.service.ProclamationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -30,7 +33,9 @@ public class ProclamationController {
 
     @PostMapping("/getProclamation")
     @ApiOperation(value="公告信息查询", notes = "公告信息查询")
-    public String queryProclamationByPage(@RequestBody Proclamation proclamation) {
+    public ProclamationResponse queryProclamationByPage(@RequestBody ProclamationRequest request) {
+
+        Proclamation proclamation = request.getProclamation();
 
         //1 更新page
         int count = proclamationService.queryProclamationCount();
@@ -40,22 +45,18 @@ public class ProclamationController {
         List<Proclamation> proclamations
                 = proclamationService.queryProclamationList(proclamation);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String proclamationJson;
-        try {
-            proclamationJson
-                    = objectMapper.writeValueAsString(proclamations);
-        } catch (JsonProcessingException e) {
-            log.error("json转换错误,当前proclamations为：{}", proclamations, e);
-            throw new RuntimeException("json error");
-        }
+        ProclamationResponse proclamationResponse = new ProclamationResponse();
+        proclamationResponse.setProclamationList(proclamations);
 
-        return proclamationJson;
+        return proclamationResponse;
     }
 
     @PostMapping("/addProclamation")
     @ApiOperation(value="公告信息添加", notes = "公告信息添加")
-    public int addProclamation(@RequestBody Proclamation proclamation){
+    public int addProclamation(@RequestBody ProclamationRequest request){
+
+        Proclamation proclamation = request.getProclamation();
+
         int result = proclamationService.addProclamation(proclamation);
         return result;
     }
