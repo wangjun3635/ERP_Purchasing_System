@@ -5,8 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.team.purchasing.bean.Bargain;
+import com.team.purchasing.bean.BargainComment;
 import com.team.purchasing.common.GeneralResponse;
+import com.team.purchasing.controller.request.BargainCommentCmd;
+import com.team.purchasing.controller.request.QueryBargainCommentListRequest;
 import com.team.purchasing.controller.request.QueryBargainListRequest;
+import com.team.purchasing.controller.response.QueryBargainCommentListResponse;
 import com.team.purchasing.controller.response.QueryBargainListResponse;
 import com.team.purchasing.service.BargainService;
 
@@ -33,6 +37,25 @@ public class BargainController {
 		Long count = bargainService.countBargainList(request);
 		
 		response.setBargainList(bargainList);
+		return response;
+	}
+	
+	public GeneralResponse createBargainComment(BargainCommentCmd cmd) {
+		
+		GeneralResponse response = new GeneralResponse();
+		
+		Long id = bargainService.createBargainComment(cmd);
+		response.getMessageInfo().setKey(id+"");
+		
+		return response;
+	}
+	
+	public QueryBargainCommentListResponse queryBargainCommentList(QueryBargainCommentListRequest request) {
+		
+		QueryBargainCommentListResponse response = new QueryBargainCommentListResponse();
+		
+		List<BargainComment> list = bargainService.queryBargainCommentList(request);
+		response.setList(list);
 		return response;
 	}
 	
