@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.purchasing.mapper.booking.OrderBookingDao">
+
+    <delete id="cancelBookingOrder">
+        delete from tb_order where id=#{orderBooking.id}
+    </delete>
+
+    <update id="updateBookingOrder">
+        update tb_order set
+         userId=#{orderBooking.userId},
+         HCId=#{orderBooking.HCId},
+         orderNumber=#{orderBooking.orderNumber},
+         totalAmount=#{orderBooking.totalAmount},
+         orderstatus=#{orderBooking.orderstatus},
+         orderRemark=#{orderBooking.orderRemark},
+         deliveryNumber=#{orderBooking.deliveryNumber},
+         receiverName=#{orderBooking.receiverName},
+         receiverPhone=#{orderBooking.receiverPhone},
+         receiverPostCode=#{orderBooking.receiverPostCode},
+         receiverProvince=#{orderBooking.receiverProvince},
+         receiverCity=#{orderBooking.receiverCity},
+         receiverRegion=#{orderBooking.receiverRegion},
+         createTime=#{orderBooking.createTime},
+         createUserId=#{orderBooking.createUserId},
+         updateTime=GETDATE(),
+         updateUserId=#{orderBooking.updateUserId}
+        where id==#{orderBooking.id}
+    </update>
+
+    <insert id="createBookingOrder">
+        insert into tb_order(userId,
+         HCId,
+         orderNumber,
+         totalAmount,
+         orderstatus,
+         orderRemark,
+         deliveryNumber,
+         receiverName,
+         receiverPhone,
+         receiverPostCode,
+         receiverProvince,
+         receiverCity,
+         receiverRegion,
+         createTime,
+         createUserId,
+         updateTime,
+         updateUserId) values(#{orderBooking.userId},
+          #{orderBooking.HCId},
+          #{orderBooking.orderNumber},
+          #{orderBooking.totalAmount},
+          #{orderBooking.orderstatus},
+          #{orderBooking.orderRemark},
+          #{orderBooking.deliveryNumber},
+          #{orderBooking.receiverName},
+          #{orderBooking.receiverPhone},
+          #{orderBooking.receiverPostCode},
+          #{orderBooking.receiverProvince},
+          #{orderBooking.receiverCity},
+          #{orderBooking.receiverRegion},
+          GETDATE(),
+          #{shopCar.createUserId},
+          GETDATE(),
+          #{shopCar.updateUserId});
+    </insert>
+
+</mapper>
