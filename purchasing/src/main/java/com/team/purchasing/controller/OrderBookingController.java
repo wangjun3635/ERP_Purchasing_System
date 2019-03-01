@@ -32,6 +32,8 @@ public class OrderBookingController {
     public OrderBookingResponse createOrderBooking(@RequestBody OrderBookingRequest orderBookingRequest){
 
         OrderBooking orderBooking = orderBookingRequest.getOrderBooking();
+        // TODO: 1/3/19 对于订单编号生成的规则确认
+
         int bookingOrder = orderBookingService.createBookingOrder(orderBooking);
 
         OrderBookingResponse orderBookingResponse = new OrderBookingResponse();

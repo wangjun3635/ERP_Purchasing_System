@@ -51,6 +51,7 @@ public class PromotionController {
     }
 
     // TODO: 24/2/19 促销不需要审核，创建好后直接在商城展示, 促销要有图片【需要考虑图片的存储】
+    // TODO: 1/3/19 图片存储考虑使用websocket做文件上传 
     @PostMapping("/addProclamation")
     @ApiOperation(value="公告信息添加", notes = "公告信息添加")
     public int addProclamation(@RequestBody Promotion promotion){
