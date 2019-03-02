@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.purchasing.mapper.orderproduct.OrderProductDao">
+
+    <resultMap id="baseMap" type="com.team.purchasing.bean.orderproduct.OrderProduct">
+       <result property="id" column="id" />
+       <result property="orderId" column="orderId" />
+       <result property="orderNumber" column="orderNumber" />
+       <result property="productId" column="productId" />
+       <result property="branchId" column="branchId" />
+       <result property="productName" column="productName" />
+       <result property="productPrice" column="productPrice" />
+       <result property="productQuantity" column="productQuantity" />
+       <result property="createTime" column="createTime" />
+       <result property="createUserId" column="createUserId" />
+       <result property="updateTime" column="updateTime" />
+       <result property="updateUserId" column="updateUserId" />
+    </resultMap>
+
+    <select id="queryOrderProductList" resultMap="baseMap">
+        select id,
+        orderId,
+        orderNumber,
+        productId,
+        branchId,
+        productName,
+        productPrice,
+        productQuantity,
+        createTime,
+        createUserId,
+        updateTime,
+        updateUserId from tb_order_product
+        where orderId=#{orderId}
+    </select>
+
+</mapper>

@@ -14,7 +14,7 @@ import com.team.purchasing.service.BiddingService;
 @Service
 public class BiddingServiceImpl implements BiddingService {
 
-	@Autowired
+	@Autowired(required = false)
 	private BiddingDao bidingDao; 
 	
 	@Override

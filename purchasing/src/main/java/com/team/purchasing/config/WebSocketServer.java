@@ -18,7 +18,7 @@ import java.nio.ByteBuffer;
 @ServerEndpoint(value = "/upload/{userId}")
 @Component
 @Slf4j
-// TODO: 1/3/19 需要一点的是：如果设置了拦截器，该请求路径一定要设置为允许 
+// TODO: 1/3/19 需要一点的是：如果设置了拦截器，该请求路径一定要设置为允许
 public class WebSocketServer {
 
     /*
