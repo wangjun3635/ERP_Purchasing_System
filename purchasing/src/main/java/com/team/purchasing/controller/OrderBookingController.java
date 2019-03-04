@@ -33,9 +33,6 @@ public class OrderBookingController {
     @Resource
     private OrderBookingService orderBookingService;
 
-    @Resource
-    private OrderProductService orderProductService;
-
     @PostMapping("/createOrderBooking")
     @ApiOperation(value="预定下单", notes = "预定下单")
     public OrderBookingResponse createOrderBooking(@RequestBody OrderBookingRequest orderBookingRequest){
@@ -49,30 +46,7 @@ public class OrderBookingController {
         OrderBookingResponse orderBookingResponse = new OrderBookingResponse();
         orderBookingResponse.getMessageInfo().setKey(String.valueOf(bookingOrder));
 
-        // TODO: 1/3/19 落地产品信息快照 tb_order_product 收货地址表落地
-        createOrderProduct(orderBooking);
-
         return orderBookingResponse;
-    }
-
-    private void createOrderProduct(OrderBooking orderBooking) {
-
-        List<Integer> productIds = orderBooking.getProductIds();
-        OrderProduct orderProduct = new OrderProduct();
-
-
-        productIds.stream()
-                .filter(x -> x != null)
-                .forEach(x -> {
-                    try {
-                        orderProductService.addOrderProduct(orderProduct);
-                    }catch (Exception e) {
-                        log.error("快照数据生成失败,orderId为：{}, productId为:{}", orderBooking.getId(), x , e);
-                        throw new RuntimeException("订单产品信息快照数据生成失败");
-                    }
-                });
-
-
     }
 
     @PostMapping("/cancelOrderBooking")
