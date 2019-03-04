@@ -4,6 +4,7 @@ import com.team.purchasing.bean.booking.OrderBooking;
 import com.team.purchasing.controller.request.booking.OrderBookingRequest;
 import com.team.purchasing.controller.response.booking.OrderBookingResponse;
 import com.team.purchasing.service.OrderBookingService;
+import com.team.purchasing.utils.OrderIDUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,7 @@ public class OrderBookingController {
 
         OrderBooking orderBooking = orderBookingRequest.getOrderBooking();
         // TODO: 1/3/19 对于订单编号生成的规则确认
+        orderBooking.setOrderNumber(OrderIDUtil.getOrderId());
 
         int bookingOrder = orderBookingService.createBookingOrder(orderBooking);
 
