@@ -12,4 +12,7 @@ public interface OrderProductService {
 
     public List<OrderProduct> queryOrderProductList(Long orderId);
 
+    public int addOrderProduct(OrderProduct orderProduct);
+
+
 }

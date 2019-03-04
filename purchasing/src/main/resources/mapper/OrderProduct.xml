@@ -33,4 +33,15 @@
         where orderId=#{orderId}
     </select>
 
+    <insert id="addOrderProduct">
+        insert into tb_order_product
+        (orderId, orderNumber, productId, branchId, productName,
+         productPrice, productQuantity, createTime, createUserId,
+         updateTime, updateUserId) values
+        (#{orderProduct.orderId}, #{orderProduct.orderNumber}, #{orderProduct.productId}
+        #{orderProduct.branchId},#{orderProduct.productName},#{orderProduct.productPrice},
+        #{orderProduct.productQuantity},GETDATE(),#{orderProduct.createUserId},
+        GETDATE(),#{orderProduct.updateUserId})
+    </insert>
+
 </mapper>

@@ -3,6 +3,7 @@ package com.team.purchasing.bean.orderproduct;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @Auther:ynhuang
@@ -17,7 +18,7 @@ public class OrderProduct {
 
     private String orderNumber;
 
-    private int productId;
+    private List<Integer> productId;
 
     private int branchId;
 

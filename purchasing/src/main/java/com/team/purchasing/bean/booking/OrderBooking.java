@@ -16,7 +16,7 @@ public class OrderBooking {
     private int id;
 
     /** 商品id **/
-    private List<Integer> productId;
+    private List<Integer> productIds;
 
     /** 用户id **/
     private int userId;

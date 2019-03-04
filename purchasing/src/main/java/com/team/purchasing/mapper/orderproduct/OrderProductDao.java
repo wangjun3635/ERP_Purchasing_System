@@ -14,4 +14,6 @@ public interface OrderProductDao {
     /** 订单id查询产品信息**/
     public List<OrderProduct> queryOrderProductList(@Param("orderId") Long orderId);
 
+    public int addOrderProduct(@Param("orderProduct") OrderProduct orderProduct);
+
 }
