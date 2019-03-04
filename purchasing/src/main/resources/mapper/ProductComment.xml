@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.purchasing.mapper.ShopCarDao">
+
+    <select id="queryProductComment" resultType="com.team.purchasing.bean.productcomment.ProductComment">
+        select id,
+         productId,
+         userId,
+         star,
+         comment,
+         createTime,
+         createUserId,
+         updateTime,
+         updateUserId from tb_product_comment
+         where productId=#{productId}
+    </select>
+
+    <insert id="addComment">
+        insert into tb_product_comment(
+         productId,
+         userId,
+         star,
+         comment,
+         createTime,
+         createUserId,
+         updateTime,
+         updateUserId) values(#{productComment.productId},
+          #{productComment.userId},
+          #{productComment.star},
+          #{productComment.comment},
+          GETDATE(),
+          #{productComment.createUserId},
+          GETDATE(),
+          #{productComment.updateUserId});
+    </insert>
+
+</mapper>
