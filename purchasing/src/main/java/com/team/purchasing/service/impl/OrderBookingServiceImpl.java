@@ -28,20 +28,25 @@ public class OrderBookingServiceImpl implements OrderBookingService {
 
     @Override
     @Transactional
-    public int createBookingOrder(OrderBooking orderBooking) {
+    public OrderBooking createBookingOrder(OrderBooking orderBooking) {
 
         try {
-            int bookingOrder = orderBookingDao.createBookingOrder(orderBooking);
+            OrderBooking bookingOrder = orderBookingDao.createBookingOrder(orderBooking);
 
             //生成订单商品快照订单
             List<Integer> productIds = orderBooking.getProductIds();
             OrderProduct orderProduct = new OrderProduct();
+
+            //初始化orderProduct快照信息
+            orderProduct.setOrderId(bookingOrder.getId());
+            orderProduct.setOrderNumber(orderBooking.getOrderNumber());
 
             // TODO: 4/3/19 订单商品快照 
             productIds.stream()
                     .filter(x -> x != null)
                     .forEach(x -> {
                         try {
+                            orderProduct.setProductId(x);
                             orderProductService.addOrderProduct(orderProduct);
                         }catch (Exception e) {
                             log.error("快照数据生成失败,orderId为：{}, productId为:{}", orderBooking.getId(), x , e);

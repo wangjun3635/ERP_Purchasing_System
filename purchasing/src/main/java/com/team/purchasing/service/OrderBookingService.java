@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderBookingService {
 
     //创建预定订单
-    public int createBookingOrder(OrderBooking orderBooking);
+    public OrderBooking createBookingOrder(OrderBooking orderBooking);
 
     //取消订单
     public int cancelBookingOrder(OrderBooking orderBooking);

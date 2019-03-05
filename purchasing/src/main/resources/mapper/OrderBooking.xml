@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.team.purchasing.mapper.booking.OrderBookingDao">
 
+    <resultMap id="baseMap" type="com.team.purchasing.bean.booking.OrderBooking">
+        <result property="id" column="id" />
+    </resultMap>
+
     <delete id="cancelBookingOrder">
         delete from tb_order where id=#{orderBooking.id}
     </delete>
@@ -28,7 +32,10 @@
         where id==#{orderBooking.id}
     </update>
 
-    <insert id="createBookingOrder">
+    <insert id="createBookingOrder" parameterMap="baseMap">
+        <selectKey resultType="_long" keyProperty="id" order="AFTER">
+          select @@IDENTITY as id
+        </selectKey>
         insert into tb_order(userId,
          HCId,
          orderNumber,

@@ -18,7 +18,7 @@ public class OrderProduct {
 
     private String orderNumber;
 
-    private List<Integer> productId;
+    private int productId;
 
     private int branchId;
 
