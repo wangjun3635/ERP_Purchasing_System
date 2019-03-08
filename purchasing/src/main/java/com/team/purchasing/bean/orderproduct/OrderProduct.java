@@ -3,7 +3,6 @@ package com.team.purchasing.bean.orderproduct;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * @Auther:ynhuang

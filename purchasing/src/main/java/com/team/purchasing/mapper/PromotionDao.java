@@ -1,7 +1,6 @@
 package com.team.purchasing.mapper;
 
 import com.team.purchasing.bean.Promotion;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

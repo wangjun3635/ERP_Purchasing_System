@@ -1,10 +1,10 @@
 package com.team.purchasing.bean;
 
-import java.util.List;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @ApiModel(description = "竞价实体类")

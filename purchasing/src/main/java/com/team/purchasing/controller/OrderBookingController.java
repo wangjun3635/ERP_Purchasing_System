@@ -1,13 +1,9 @@
 package com.team.purchasing.controller;
 
-import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.booking.OrderBooking;
-import com.team.purchasing.bean.orderproduct.OrderProduct;
 import com.team.purchasing.controller.request.booking.OrderBookingRequest;
 import com.team.purchasing.controller.response.booking.OrderBookingResponse;
 import com.team.purchasing.service.OrderBookingService;
-import com.team.purchasing.service.OrderProductService;
-import com.team.purchasing.service.ProductService;
 import com.team.purchasing.utils.OrderIDUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @Auther:ynhuang
@@ -41,7 +36,7 @@ public class OrderBookingController {
         // TODO: 1/3/19 对于订单编号生成的规则确认
         orderBooking.setOrderNumber(OrderIDUtil.getOrderId());
 
-        int bookingOrder = orderBookingService.createBookingOrder(orderBooking);
+        OrderBooking bookingOrder = orderBookingService.createBookingOrder(orderBooking);
 
         OrderBookingResponse orderBookingResponse = new OrderBookingResponse();
         orderBookingResponse.getMessageInfo().setKey(String.valueOf(bookingOrder));

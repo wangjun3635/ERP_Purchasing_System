@@ -1,7 +1,6 @@
 package com.team.purchasing.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.ProductSupplierRelation;
 import com.team.purchasing.controller.request.ProductSupplierRequest;

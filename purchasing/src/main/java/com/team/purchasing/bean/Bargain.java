@@ -1,14 +1,10 @@
 package com.team.purchasing.bean;
 
-import java.math.BigDecimal;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.alibaba.fastjson.annotation.JSONField;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.math.BigDecimal;
 
 @Data
 @ApiModel

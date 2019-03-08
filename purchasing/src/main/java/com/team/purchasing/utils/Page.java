@@ -1,7 +1,6 @@
 package com.team.purchasing.utils;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @Auther:ynhuang

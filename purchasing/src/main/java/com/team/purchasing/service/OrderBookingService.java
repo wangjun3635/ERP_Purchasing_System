@@ -1,7 +1,6 @@
 package com.team.purchasing.service;
 
 import com.team.purchasing.bean.booking.OrderBooking;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * @Auther:ynhuang

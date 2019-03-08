@@ -1,21 +1,20 @@
 package com.team.purchasing.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.team.purchasing.bean.Bidding;
 import com.team.purchasing.controller.request.OperateBiddingCmd;
 import com.team.purchasing.controller.request.QueryBiddingListRequest;
 import com.team.purchasing.mapper.BiddingDao;
 import com.team.purchasing.service.BiddingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BiddingServiceImpl implements BiddingService {
 
 	@Autowired(required = false)
-	private BiddingDao bidingDao; 
+	private BiddingDao bidingDao;
 	
 	@Override
 	public List<Bidding> queryBiddingList(QueryBiddingListRequest request) {

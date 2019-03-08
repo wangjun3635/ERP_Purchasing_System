@@ -1,9 +1,5 @@
 package com.team.purchasing.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.team.purchasing.bean.Bargain;
 import com.team.purchasing.bean.BargainComment;
 import com.team.purchasing.common.GeneralResponse;
@@ -13,6 +9,9 @@ import com.team.purchasing.controller.request.QueryBargainListRequest;
 import com.team.purchasing.controller.response.QueryBargainCommentListResponse;
 import com.team.purchasing.controller.response.QueryBargainListResponse;
 import com.team.purchasing.service.BargainService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class BargainController {
 	

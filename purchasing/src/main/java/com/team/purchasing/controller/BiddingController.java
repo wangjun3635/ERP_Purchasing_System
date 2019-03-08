@@ -1,16 +1,15 @@
 package com.team.purchasing.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.team.purchasing.bean.Bidding;
 import com.team.purchasing.common.GeneralResponse;
 import com.team.purchasing.controller.request.OperateBiddingCmd;
 import com.team.purchasing.controller.request.QueryBiddingListRequest;
 import com.team.purchasing.controller.response.QueryBiddingListResponse;
 import com.team.purchasing.service.BiddingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class BiddingController {

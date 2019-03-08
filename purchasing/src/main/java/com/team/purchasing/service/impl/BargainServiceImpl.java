@@ -1,10 +1,5 @@
 package com.team.purchasing.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.team.purchasing.bean.Bargain;
 import com.team.purchasing.bean.BargainComment;
 import com.team.purchasing.controller.request.BargainCommentCmd;
@@ -12,6 +7,10 @@ import com.team.purchasing.controller.request.QueryBargainCommentListRequest;
 import com.team.purchasing.controller.request.QueryBargainListRequest;
 import com.team.purchasing.mapper.BargainDao;
 import com.team.purchasing.service.BargainService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BargainServiceImpl implements BargainService {

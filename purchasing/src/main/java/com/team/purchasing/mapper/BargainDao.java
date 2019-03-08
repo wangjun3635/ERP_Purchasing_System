@@ -1,14 +1,13 @@
 package com.team.purchasing.mapper;
 
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
-
 import com.team.purchasing.bean.Bargain;
 import com.team.purchasing.bean.BargainComment;
 import com.team.purchasing.controller.request.QueryBargainCommentListRequest;
 import com.team.purchasing.controller.request.QueryBargainListRequest;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface BargainDao {

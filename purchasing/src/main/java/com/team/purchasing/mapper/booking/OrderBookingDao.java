@@ -10,12 +10,12 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderBookingDao {
 
     //创建预定订单
-    public OrderBooking createBookingOrder(@Param("orderBooking")OrderBooking orderBooking);
+    public OrderBooking createBookingOrder(@Param("orderBooking") OrderBooking orderBooking);
 
     //取消订单
-    public int cancelBookingOrder(@Param("orderBooking")OrderBooking orderBooking);
+    public int cancelBookingOrder(@Param("orderBooking") OrderBooking orderBooking);
 
     //修改订单
-    public int updateBookingOrder(@Param("orderBooking")OrderBooking orderBooking);
+    public int updateBookingOrder(@Param("orderBooking") OrderBooking orderBooking);
 
 }

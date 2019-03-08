@@ -1,10 +1,10 @@
 package com.team.purchasing.service;
 
-import java.util.List;
-
 import com.team.purchasing.bean.Bidding;
 import com.team.purchasing.controller.request.OperateBiddingCmd;
 import com.team.purchasing.controller.request.QueryBiddingListRequest;
+
+import java.util.List;
 
 public interface BiddingService {
 

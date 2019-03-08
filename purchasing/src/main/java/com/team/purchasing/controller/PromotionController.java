@@ -1,7 +1,5 @@
 package com.team.purchasing.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team.purchasing.bean.Promotion;
 import com.team.purchasing.controller.request.PromotionRequest;
 import com.team.purchasing.controller.response.PromotionResponse;
