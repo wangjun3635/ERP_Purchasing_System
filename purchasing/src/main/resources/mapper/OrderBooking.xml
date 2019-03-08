@@ -4,6 +4,24 @@
 
     <resultMap id="baseMap" type="com.team.purchasing.bean.booking.OrderBooking">
         <result property="id" column="id" />
+        <result property="userId" column="userId" />
+        <result property="HCId" column="HCId" />
+        <result property="orderNumber" column="orderNumber" />
+        <result property="totalAmount" column="totalAmount" />
+        <result property="orderstatus" column="orderstatus" />
+        <result property="orderRemark" column="orderRemark" />
+        <result property="deliveryNumber" column="deliveryNumber" />
+        <result property="receiverName" column="receiverName" />
+        <result property="receiverPhone" column="receiverPhone" />
+        <result property="receiverPostCode" column="receiverPostCode" />
+        <result property="receiverProvince" column="receiverProvince" />
+        <result property="receiverCity" column="receiverCity" />
+        <result property="receiverRegion" column="receiverRegion" />
+        <result property="createTime" column="createTime" />
+        <result property="createUserId" column="createUserId" />
+        <result property="updateTime" column="updateTime" />
+        <result property="updateUserId" column="updateUserId" />
+
     </resultMap>
 
     <delete id="cancelBookingOrder">
@@ -32,7 +50,7 @@
         where id==#{orderBooking.id}
     </update>
 
-    <insert id="createBookingOrder" parameterMap="baseMap">
+    <insert id="createBookingOrder">
         <selectKey resultType="_long" keyProperty="id" order="AFTER">
           select @@IDENTITY as id
         </selectKey>
