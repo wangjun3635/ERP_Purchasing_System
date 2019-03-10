@@ -36,6 +36,7 @@ public class PromotionServiceImpl implements PromotionService {
     public int addPromotion(Promotion promotion) {
 
         try {
+            log.info("promotionServiceImpl入参对象为:{}", promotion);
             int result = promotionDao.addPromotion(promotion);
             return result;
         } catch (Exception e) {
