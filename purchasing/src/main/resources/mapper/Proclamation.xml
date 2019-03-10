@@ -10,26 +10,26 @@
         <result column="auditStatus" property="auditStatus" />
         <result column="createTime" property="createTime" />
         <result column="createUserId" property="createUserId" />
-        <result column="updateTime" property="updateTime" />
-        <result column="updateUserId" property="updateUserId" />
+        <result column="modifyTime" property="updateTime" />
+        <result column="modifyUserId" property="updateUserId" />
     </resultMap>
 
 
     <select id="queryProclamationList" resultMap="BaseResultMap">
-        select top #{page.currentNum} o.id,
+        select top (#{page.currentNum}) o.id,
         o.title
         o.attachment,
         o.content,
         o.auditStatus,
         o.createTime,
         o.createUserId,
-        o.updateTime,
-        o.updateUserId from
-        (select row_number() over(order by updateTime desc) as rownumber, * from
-        (select * from tb_proclamation) as oo  ) as o where rownumber > #{page.rowNumber}
+        o.modifyTime,
+        o.modifyUserId from
+        (select row_number() over(order by id desc) as rownumber, * from
+        (select * from tb_proclamation order by modifyTime desc) as oo  ) as o where rownumber > #{page.rowNumber}
     </select>
 
-    <select id="queryProclamationCount">
+    <select id="queryProclamationCount" resultType="java.lang.Integer">
         select count(*) from  tb_proclamation;
     </select>
 
@@ -41,15 +41,15 @@
       auditStatus,
       createTime,
       createUserId,
-      updateTime,
-      updateUserId) values (
+      modifyTime,
+      modifyUserId) values (
        #{title},
        #{attachment},
        #{content},
        #{auditStatus},
-       #{createTime},
+       GETDATE(),
        #{createUserId},
-       #{updateTime},
+       GETDATE(),
        #{updateUserId})
     </insert>
 

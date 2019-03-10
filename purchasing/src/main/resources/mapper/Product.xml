@@ -36,8 +36,8 @@
         <result column="isDeleted" property="isDeleted" />
         <result column="createTime" property="createTime" />
         <result column="createUserId" property="createUserId" />
-        <result column="updateTime" property="updateTime" />
-        <result column="updateUserId" property="updateUserId" />
+        <result column="modifyTime" property="updateTime" />
+        <result column="modifyUserId" property="updateUserId" />
         <result column="supplierId" property="supplierId" />
         <result column="brandId" property="brandId" />
         <result column="deliveryTime" property="deliveryTime" />
@@ -87,7 +87,7 @@
     </sql>
 
     <select id="queryProductList" resultMap="BaseResultMap">
-        select top #{page.currentNum} o.id,
+        select top (#{page.currentNum}) o.id,
         o.code
         o.supplierId,
         o.brandId,
@@ -126,10 +126,11 @@
         o.isdeleted
         o.createtime
         o.createuserid
-        o.updatetime
-        o.updateuserid from
-        (select row_number() over(order by updateTime desc) as rownumber, * from
-        ( select * from tb_porduct where 1=1 <include refid="baseQuery" /> ) as oo  )
+        o.modifyTime
+        o.modifyUserId from
+        (select row_number() over(order by id desc) as rownumber, * from
+        ( select * from tb_porduct where 1=1 <include refid="baseQuery" />
+         order by modifyTime desc) as oo  )
         as o where rownumber > #{page.rowNumber}
     </select>
 

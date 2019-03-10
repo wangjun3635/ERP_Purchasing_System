@@ -8,10 +8,10 @@
          level=#{level},
          parentid=#{parentid},
          isdeleted=#{isDeleted},
-         createtime=to_date(#{createTime}, 'YYYY-MM-DD'),
-         createuserId=#{createUserId},
-         updatetime=to_date(#{updateTime}, 'YYYY-MM-DD'),
-         updateuserid=#{updateUserId}
+         <!-- createtime=GETDATE(),
+         createuserId=#{createUserId}, -->
+         modifyTime=GETDATE(),
+         modifyUserId=#{updateUserId}
          where id=#{id}
     </update>
 

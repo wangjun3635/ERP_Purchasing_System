@@ -9,24 +9,24 @@
         <result column="content" property="content" />
         <result column="createTime" property="createTime" />
         <result column="createUserId" property="createUserId" />
-        <result column="updateTime" property="updateTime" />
-        <result column="updateUserId" property="updateUserId" />
+        <result column="modifyTime" property="updateTime" />
+        <result column="modifyTimeUserId" property="updateUserId" />
     </resultMap>
 
     <select id="queryPromotionList" resultMap="BaseResultMap">
-        select top #{page.currentNum} o.id,
-        o.title
+        select top (#{page.currentNum}) o.id,
+        o.title,
         o.attachmentImg,
         o.content,
         o.createTime,
         o.createUserId,
-        o.updateTime,
-        o.updateUserId from
-        (select row_number() over(order by updateTime asc) as rownumber, * from
-        (select * from tb_promotion) as oo  ) as o where rownumber > #{page.rowNumber}
+        o.modifyTime,
+        o.modifyUserId from
+        (select row_number() over(order by id asc) as rownumber, * from
+        (select * from tb_promotion order by modifyTime desc) as oo  ) as o where rownumber > #{page.rowNumber}
     </select>
 
-    <select id="queryPromotionCount">
+    <select id="queryPromotionCount" resultType="java.lang.Integer">
         select count(*) from tb_promotion;
     </select>
 
@@ -37,14 +37,14 @@
       content,
       createTime,
       createUserId,
-      updateTime,
-      updateUserId) values (#{id},
+      modifyTime,
+      modifyUserId) values (#{id},
        #{title},
        #{attachmentImg},
        #{content},
-       #{createTime},
+       GETDATE(),
        #{createUserId},
-       #{updateTime},
+       GETDATE(),
        #{updateUserId})
     </insert>
 
@@ -52,10 +52,10 @@
       update tb_promotion tp set tp.title=#{title},
       tp.attachmentImg=#{attachmentImg},
       tp.content=#{content},
-      tp.createTime=#{createTime},
-      tp.createUserId=#{createUserId},
-      tp.updateTime=#{updateTime},
-      tp.updateUserId=#{updateUserId}
+      <!-- tp.createTime=#{createTime},
+      tp.createUserId=#{createUserId}, -->
+      tp.modifyTime=GETDATE(),
+      tp.modifyUserId=#{updateUserId}
       where tp.id=#{id}
     </update>
 

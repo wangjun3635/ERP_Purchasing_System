@@ -10,9 +10,9 @@
          comment,
          createTime,
          createUserId,
-         updateTime,
-         updateUserId from tb_product_comment
-         where productId=#{productId}
+         modifyTime,
+         modifyUserId from tb_product_comment
+         where productId=#{productId} order by modifyTime desc
     </select>
 
     <insert id="addComment">
@@ -23,8 +23,8 @@
          comment,
          createTime,
          createUserId,
-         updateTime,
-         updateUserId) values(#{productComment.productId},
+         modifyTime,
+         modifyUserId) values(#{productComment.productId},
           #{productComment.userId},
           #{productComment.star},
           #{productComment.comment},

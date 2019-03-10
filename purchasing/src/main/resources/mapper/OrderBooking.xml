@@ -19,8 +19,8 @@
         <result property="receiverRegion" column="receiverRegion" />
         <result property="createTime" column="createTime" />
         <result property="createUserId" column="createUserId" />
-        <result property="updateTime" column="updateTime" />
-        <result property="updateUserId" column="updateUserId" />
+        <result property="modifyTime" column="updateTime" />
+        <result property="modifyUserId" column="updateUserId" />
 
     </resultMap>
 
@@ -43,10 +43,10 @@
          receiverProvince=#{orderBooking.receiverProvince},
          receiverCity=#{orderBooking.receiverCity},
          receiverRegion=#{orderBooking.receiverRegion},
-         createTime=#{orderBooking.createTime},
-         createUserId=#{orderBooking.createUserId},
-         updateTime=GETDATE(),
-         updateUserId=#{orderBooking.updateUserId}
+         <!-- createTime=#{orderBooking.createTime},
+         createUserId=#{orderBooking.createUserId}, -->
+         modifyTime=GETDATE(),
+         modifyUserId=#{orderBooking.updateUserId}
         where id==#{orderBooking.id}
     </update>
 
@@ -69,8 +69,8 @@
          receiverRegion,
          createTime,
          createUserId,
-         updateTime,
-         updateUserId) values(#{orderBooking.userId},
+         modifyTime,
+         modifyUserId) values(#{orderBooking.userId},
           #{orderBooking.HCId},
           #{orderBooking.orderNumber},
           #{orderBooking.totalAmount},

@@ -19,11 +19,11 @@
        <result property="receiverRegion" column="receiverRegion" />
        <result property="createTime" column="createTime" />
        <result property="createUserId" column="createUserId" />
-       <result property="updateTime" column="updateTime" />
-       <result property="updateUserId" column="updateUserId" />
+       <result property="modifyTime" column="updateTime" />
+       <result property="modifyUserId" column="updateUserId" />
     </resultMap>
 
-    <select id="queryOrderCount">
+    <select id="queryOrderCount" resultType="java.lang.Integer">
         select count(*) from
         (select row_number() over(order by updateTime desc) as rownumber, * from
         ( select * from tb_order <include refid="baseQuery" /> ) as oo  )
@@ -31,28 +31,28 @@
     </select>
 
     <select id="queryOrderList" resultMap="baseMap">
-        select id,
-     userId,
-     HCId,
-     orderNumber,
-     totalAmount,
-     orderStatus,
-     orderRemark,
-     deliveryNumber,
-     receiverName,
-     receiverPhone,
-     receiverPostCode,
-     receiverProvince,
-     receiverCity,
-     receiverRegion,
-     createTime,
-     createUserId,
-     updateTime,
-     updateUserId
+        select top (#{order.page.currentNum}) o.id,
+        o.userId,
+        o.HCId,
+        o.orderNumber,
+        o.totalAmount,
+        o.orderStatus,
+        o.orderRemark,
+        o.deliveryNumber,
+        o.receiverName,
+        o.receiverPhone,
+        o.receiverPostCode,
+        o.receiverProvince,
+        o.receiverCity,
+        o.receiverRegion,
+        o.createTime,
+        o.createUserId,
+        o.modifyTime,
+        o.modifyUserId
 
      from
-     (select row_number() over(order by updateTime desc) as rownumber, * from
-     ( select * from tb_order <include refid="baseQuery" /> ) as oo  )
+     (select row_number() over(order by id asc) as rownumber, * from
+     ( select * from tb_order <include refid="baseQuery" /> order by modifyTime desc ) as oo  )
      as o where rownumber > #{order.page.rowNumber}
     </select>
 
