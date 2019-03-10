@@ -17,7 +17,7 @@
 
     <select id="queryProclamationList" resultMap="BaseResultMap">
         select top (#{page.currentNum}) o.id,
-        o.title
+        o.title,
         o.attachment,
         o.content,
         o.auditStatus,
@@ -25,8 +25,8 @@
         o.createUserId,
         o.modifyTime,
         o.modifyUserId from
-        (select row_number() over(order by id desc) as rownumber, * from
-        (select * from tb_proclamation order by modifyTime desc) as oo  ) as o where rownumber > #{page.rowNumber}
+        (select row_number() over(order by modifyTime desc) as rownumber, * from
+        (select * from tb_proclamation) as oo  ) as o where rownumber > #{page.rowNumber}
     </select>
 
     <select id="queryProclamationCount" resultType="java.lang.Integer">

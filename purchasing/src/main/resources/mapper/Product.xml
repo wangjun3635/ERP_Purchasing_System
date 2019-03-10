@@ -128,9 +128,8 @@
         o.createuserid
         o.modifyTime
         o.modifyUserId from
-        (select row_number() over(order by id desc) as rownumber, * from
-        ( select * from tb_porduct where 1=1 <include refid="baseQuery" />
-         order by modifyTime desc) as oo  )
+        (select row_number() over(order by modifyTime desc) as rownumber, * from
+        ( select * from tb_porduct where 1=1 <include refid="baseQuery" />) as oo  )
         as o where rownumber > #{page.rowNumber}
     </select>
 
