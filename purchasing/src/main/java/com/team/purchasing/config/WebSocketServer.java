@@ -1,6 +1,7 @@
 package com.team.purchasing.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -20,6 +21,9 @@ import java.nio.ByteBuffer;
 @Slf4j
 // TODO: 1/3/19 需要一点的是：如果设置了拦截器，该请求路径一定要设置为允许
 public class WebSocketServer {
+
+    @Value("${file.path}")
+    private String filePath;
 
     /*
      New Connected
@@ -42,7 +46,7 @@ public class WebSocketServer {
                             ByteBuffer message, Session session) throws IOException {
 
         //1 存储文件到服务器路径
-        File file = new File("filepath");
+        File file = new File(filePath);
 
         //2 输入流
         FileOutputStream fe = new FileOutputStream(file,true);
