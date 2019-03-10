@@ -31,14 +31,14 @@
     </select>
 
     <insert id="addPromotion" parameterType="com.team.purchasing.bean.Promotion">
-      insert into tb_promotion(id,
+      insert into tb_promotion(
       title,
       attachmentImg,
       content,
       createTime,
       createUserId,
       modifyTime,
-      modifyUserId) values (#{id},
+      modifyUserId) values (
        #{title},
        #{attachmentImg},
        #{content},

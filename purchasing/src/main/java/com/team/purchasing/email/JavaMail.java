@@ -31,7 +31,7 @@ public class JavaMail {
                                   String to,
                                   String fromPasswd,
                                   String title,
-                                  String context){
+                                  String context) throws MessagingException {
         // 获取系统属性
         Properties properties = System.getProperties();
 
@@ -69,6 +69,7 @@ public class JavaMail {
             Transport.send(message);
         }catch (Exception e) {
             log.error("消息发送失败:", "错误", e);
+            throw e;
         }
 
         return "Sent message successfully....from runoob.com";
