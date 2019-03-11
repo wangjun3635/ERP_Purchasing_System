@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class Supplier {
 
-    private int id;
+    private Integer id;
 
     //供应商名称
     private String name;
@@ -19,16 +19,16 @@ public class Supplier {
     private String code;
 
     //分类
-    private int category;
+    private Integer category;
 
     //销售区域分类
-    private int salesAreaType;
+    private Integer salesAreaType;
 
     //销售省份
-    private int salesProvince;
+    private Integer salesProvince;
 
     //生产或者经营范围
-    private int businessScope;
+    private Integer businessScope;
 
     //地址
     private String managementAddress;
@@ -82,24 +82,24 @@ public class Supplier {
     private String sellerLegalPersonIDCardPic;
 
     //审批状态
-    private int auditStatus;
+    private Integer auditStatus;
 
     //可用标志（0不可用，1可用）
-    private int isEnabled;
+    private Integer isEnabled;
 
     //删除标志（0未删除，1删除）
-    private int isvalid;
+    private Integer isvalid;
 
     //创建时间
     private String createTime;
 
     //创建人id
-    private int createUserId;
+    private Integer createUserId;
 
     //最近更新时间
     private String updateTime;
 
     //最近更新人
-    private int updateUserId;
+    private Integer updateUserId;
 
 }

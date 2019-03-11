@@ -73,8 +73,7 @@
         </if>
         <if test="supplierName != null">
             and supplierId in
-            (select id from tb_supplier where name like '%#{supplierName}%'
-            )
+            (select id from tb_supplier where name like '%#{supplierName}%')
         </if>
 
         <if test="salesAreaType != null">

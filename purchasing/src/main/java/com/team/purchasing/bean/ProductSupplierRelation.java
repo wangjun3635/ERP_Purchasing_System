@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class ProductSupplierRelation {
 
     /** 产品模块 **/
-    private int productId;
+    private Integer productId;
 
     private String productName;
 
@@ -27,21 +27,21 @@ public class ProductSupplierRelation {
     private BigDecimal unitPrice;
 
     //货期  1:现货2：期货
-    private int deliveryTime;
+    private Integer deliveryTime;
 
     //产品类别，一级、二级、三级
-    private int productLevelFirst;
+    private Integer productLevelFirst;
 
-    private int productLevelSecond;
+    private Integer productLevelSecond;
 
-    private int productLevelThird;
+    private Integer productLevelThird;
 
     /** 供应商模块 **/
     private String supplierName;
 
-    private int salesAreaType;
+    private Integer salesAreaType;
 
-    private int salesProvince;
+    private Integer salesProvince;
 
     private Page page;
 

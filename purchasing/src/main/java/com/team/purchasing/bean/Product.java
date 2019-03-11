@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Data
 public class Product implements Serializable {
 
-    private int id;
+    private Integer id;
 
     //料件系统编号
     private String code;
@@ -89,50 +89,50 @@ public class Product implements Serializable {
     private String remark;
 
     //数据状态
-    private int dataStatus;
+    private Integer dataStatus;
 
     //审批状态
-    private int auditStatus;
+    private Integer auditStatus;
 
     //审批流程编号
     private String auditFlowCode;
 
     //审批节点序号
-    private int auditNodeIndex;
+    private Integer auditNodeIndex;
 
     //可用标志（0不可用，1可用）
-    private int isEnabled;
+    private Integer isEnabled;
 
     //删除标志（0未删除，1删除）
-    private int isDeleted;
+    private Integer isDeleted;
 
     //创建时间
     private String createTime;
 
     //创建人id
-    private int createUserId;
+    private Integer createUserId;
 
     //最近更新时间
     private String updateTime;
 
     //最近更新人id
-    private int updateUserId;
+    private Integer updateUserId;
 
     //供应商id
-    private int supplierId;
+    private Integer supplierId;
 
     //品牌id
-    private int brandId;
+    private Integer brandId;
 
     //货期  1:现货2：期货
-    private int deliveryTime;
+    private Integer deliveryTime;
 
     //产品类别 一级、二级、三级
-    private int productLevelFirst;
+    private Integer productLevelFirst;
 
-    private int productLevelSecond;
+    private Integer productLevelSecond;
 
-    private int productLevelThird;
+    private Integer productLevelThird;
 
     private Page page;
 

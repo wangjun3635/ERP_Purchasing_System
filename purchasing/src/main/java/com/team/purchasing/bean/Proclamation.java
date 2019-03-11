@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 public class Proclamation implements Serializable {
 
-    private int id;
+    private Integer id;
 
     private String title;
 
@@ -20,15 +20,15 @@ public class Proclamation implements Serializable {
 
     private String content;
 
-    private int auditStatus;
+    private Integer auditStatus;
 
     private String createTime;
 
-    private int createUserId;
+    private Integer createUserId;
 
     private String updateTime;
 
-    private int updateUserId;
+    private Integer updateUserId;
 
     private Page page;
 

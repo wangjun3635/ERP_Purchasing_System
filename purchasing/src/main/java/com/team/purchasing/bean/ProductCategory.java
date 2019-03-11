@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 public class ProductCategory implements Serializable {
 
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -20,14 +20,14 @@ public class ProductCategory implements Serializable {
 
     private String parentId;
 
-    private int isDeleted;
+    private Integer isDeleted;
 
     private String createTime;
 
-    private int createUserId;
+    private Integer createUserId;
 
     private String updateTime;
 
-    private int updateUserId;
+    private Integer updateUserId;
 
 }

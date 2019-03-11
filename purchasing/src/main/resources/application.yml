@@ -12,3 +12,7 @@ spring:
 
 file:
   path: /Users/mac/Downloads
+
+logging:
+  level:
+    com.team.purchasing.mapper : debug

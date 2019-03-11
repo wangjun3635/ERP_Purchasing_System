@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 public class Promotion implements Serializable {
 
-    private int id;
+    private Integer id;
 
     private String title;
 
@@ -22,11 +22,11 @@ public class Promotion implements Serializable {
 
     private String createTime;
 
-    private int createUserId;
+    private Integer createUserId;
 
     private String updateTime;
 
-    private int updateUserId;
+    private Integer updateUserId;
 
     private Page page;
 
