@@ -37,7 +37,8 @@ public class ProductController {
         ProductSupplierRelation product = request.getProductSupplierRelation();
 
         //1 更新page
-        int count = productService.queryProductCount(product);
+        Integer count = productService.queryProductCount(product);
+
         product.getPage().init(count);
 
         //2 查询数据
