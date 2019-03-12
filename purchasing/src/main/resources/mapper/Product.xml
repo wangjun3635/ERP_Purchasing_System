@@ -4,6 +4,8 @@
 
     <resultMap id="BaseResultMap" type="com.team.purchasing.bean.Product">
         <result column="id" property="id" />
+        <result column="supplierId" property="supplierId" />
+        <result column="brandId" property="brandId" />
         <result column="code" property="code" />
         <result column="barCode" property="barCode" />
         <result column="name" property="name" />
@@ -12,6 +14,10 @@
         <result column="specs" property="specs" />
         <result column="unit" property="unit" />
         <result column="unitPrice" property="unitPrice" />
+        <result column="deliveryTime" property="deliveryTime" />
+        <result column="firstLevel" property="productLevelFirst" />
+        <result column="secondLevel" property="productLevelSecond" />
+        <result column="thirdLevel" property="productLevelThird" />
         <result column="manufacturer" property="manufacturer" />
         <result column="components" property="components" />
         <result column="purpose" property="purpose" />
@@ -38,12 +44,6 @@
         <result column="createUserId" property="createUserId" />
         <result column="modifyTime" property="updateTime" />
         <result column="modifyUserId" property="updateUserId" />
-        <result column="supplierId" property="supplierId" />
-        <result column="brandId" property="brandId" />
-        <result column="deliveryTime" property="deliveryTime" />
-        <result column="levelFirst" property="productLevelFirst" />
-        <result column="levelSecond" property="productLevelSecond" />
-        <result column="levelThird" property="productLevelThird" />
     </resultMap>
 
     <sql id="baseQuery">
@@ -72,10 +72,8 @@
             and levelThird=#{productLevelThird}
         </if>
         <if test="supplierName != null">
-            and supplierId in
-            (select id from tb_supplier where name like '%#{supplierName}%')
+            and supplierId in (select id from tb_supplier where name like '%#{supplierName}%')
         </if>
-
         <if test="salesAreaType != null">
             and supplierId in (select id from tb_supplier where salesAreaType=#{salesAreaType})
         </if>
@@ -83,58 +81,68 @@
         <if test="salesProvince != null">
             and supplierId in (select id from tb_supplier where salesProvince=#{salesProvince})
         </if>
+
+
     </sql>
 
     <select id="queryProductList" resultMap="BaseResultMap">
-        select top (#{page.currentNum}) o.id,
-        o.code
+        select top (#{page.currentNum})
+        o.id,
         o.supplierId,
         o.brandId,
-        o.barcode,
+        o.code,
+        o.barCode,
         o.name,
-        o.genericname,
-        o.shortname,
+        o.genericName,
+        o.shortName,
         o.specs,
         o.unit,
-        o.unitprice,
-        o.deliverytime,
-        o.firstlevel,
-        o.secondlevel
-        o.thirdlevel
-        o.manufacturer
-        o.components
-        o.purpose
-        o.taboo
-        o.qualitystandard
-        o.packingspecs
-        o.catalogs
-        o.registerno
-        o.registerexpiredate
-        o.licenseno
-        o.licenseexpiredate
-        o.transrequire
-        o.storagerequire
-        o.minstock
-        o.maxstock
-        o.remark
-        o.datastatus
-        o.auditstatus
-        o.auditflowcode
-        o.auditnodeindex
-        o.isenabled
-        o.isdeleted
-        o.createtime
-        o.createuserid
-        o.modifyTime
-        o.modifyUserId from
+        o.unitPrice,
+        o.deliveryTime,
+        o.firstLevel,
+        o.secondLevel,
+        o.thirdLevel,
+        o.manufacturer,
+        o.components,
+        o.purpose,
+        o.taboo,
+        o.qualityStandard,
+        o.packingSpecs,
+        o.catalogs,
+        o.registerNO,
+        o.registerExpireDate,
+        o.licenseNO,
+        o.licenseExpireDate,
+        o.transRequire,
+        o.storageRequire,
+        o.minStock,
+        o.maxStock,
+        o.remark,
+        o.dataStatus,
+        o.auditStatus,
+        o.auditFlowCode,
+        o.auditNodeIndex,
+        o.isEnabled,
+        o.isDeleted,
+        o.createTime,
+        o.createUserId,
+        o.modifyTime,
+        o.modifyUserId
+        from
         (select row_number() over(order by modifyTime desc) as rownumber, * from
-        ( select * from tb_porduct where 1=1 <include refid="baseQuery" />) as oo  )
-        as o where rownumber > #{page.rowNumber}
+        ( select * from tb_porduct
+          <where>
+              <include refid="baseQuery" />
+          </where>) as oo  )
+        as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 
-    <select id="queryProductCount" resultType="java.lang.Integer" >
-        select count(*) from tb_porduct
-        where 1=1 <include refid="baseQuery" />
+    <select id="queryProductCount" parameterType="com.team.purchasing.bean.ProductSupplierRelation" resultType="java.lang.Integer" >
+        select count(*) from (select * from tb_porduct
+        <where>
+            <include refid="baseQuery"/>
+        </where>)
+
     </select>
 
 </mapper>

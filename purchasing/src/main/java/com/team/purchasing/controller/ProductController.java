@@ -41,6 +41,8 @@ public class ProductController {
 
         product.getPage().init(count);
 
+        log.error("在contollrt中product.getPage()获取到的数据为:{}", product.getPage());
+
         //2 查询数据
         List<Product> products = productService.queryProductList(product);
 

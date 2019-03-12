@@ -28,7 +28,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Integer queryProductCount(ProductSupplierRelation product) {
-        Integer count = productDao.queryProductCount(product);
-        return count == null ? 0 : count;
+        return productDao.queryProductCount(product);
     }
 }
