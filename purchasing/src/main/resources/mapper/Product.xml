@@ -130,7 +130,7 @@
         o.modifyUserId
         from
         (select row_number() over(order by modifyTime desc) as rownumber, * from
-        ( select * from tb_porduct
+        ( select * from tb_product
           <where>
               <include refid="baseQuery" />
           </where>) as oo  )
@@ -140,10 +140,10 @@
     <select id="queryProductCount" parameterType="com.team.purchasing.bean.ProductSupplierRelation" resultType="java.lang.Integer" >
         select
         count(*)
-        from (select * from tb_porduct
+        from (select * from tb_product
         <where>
             <include refid="baseQuery"/>
-        </where>)
+        </where>) t
     </select>
 
 </mapper>
