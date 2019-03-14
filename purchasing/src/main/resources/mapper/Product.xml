@@ -138,11 +138,12 @@
     </select>
 
     <select id="queryProductCount" parameterType="com.team.purchasing.bean.ProductSupplierRelation" resultType="java.lang.Integer" >
-        select count(*) from (select * from tb_porduct
+        select
+        count(*)
+        from (select * from tb_porduct
         <where>
             <include refid="baseQuery"/>
         </where>)
-
     </select>
 
 </mapper>

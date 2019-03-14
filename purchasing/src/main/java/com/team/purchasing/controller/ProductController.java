@@ -1,6 +1,5 @@
 package com.team.purchasing.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.ProductSupplierRelation;
 import com.team.purchasing.controller.request.ProductSupplierRequest;
@@ -30,21 +29,19 @@ public class ProductController {
     @Resource
     private ProductService productService;
 
-    @PostMapping("/getProductList")
+    @PostMapping("/queryProductList")
     @ApiOperation(value="产品信息查询", notes = "产品信息查询")
-    public ProductSupplierResponse queryProductList(@RequestBody ProductSupplierRequest request) throws JsonProcessingException {
+    public ProductSupplierResponse queryProductList(@RequestBody ProductSupplierRequest request) {
 
-        ProductSupplierRelation product = request.getProductSupplierRelation();
+        ProductSupplierRelation productSupplierRelation = request.getProductSupplierRelation();
 
         //1 更新page
-        Integer count = productService.queryProductCount(product);
+        Integer count = productService.queryProductCount(productSupplierRelation);
 
-        product.getPage().init(count);
-
-        log.error("在contollrt中product.getPage()获取到的数据为:{}", product.getPage());
+        productSupplierRelation.getPage().init(count);
 
         //2 查询数据
-        List<Product> products = productService.queryProductList(product);
+        List<Product> products = productService.queryProductList(productSupplierRelation);
 
         //4 拼接参数
         ProductSupplierResponse productSupplierResponse = new ProductSupplierResponse();

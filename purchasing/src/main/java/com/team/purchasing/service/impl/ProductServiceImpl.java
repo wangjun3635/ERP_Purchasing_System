@@ -22,12 +22,12 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> queryProductList(ProductSupplierRelation product) {
-        return productDao.queryProductList(product);
+    public List<Product> queryProductList(ProductSupplierRelation productSupplierRelation) {
+        return productDao.queryProductList(productSupplierRelation);
     }
 
     @Override
-    public Integer queryProductCount(ProductSupplierRelation product) {
-        return productDao.queryProductCount(product);
+    public Integer queryProductCount(ProductSupplierRelation productSupplierRelation) {
+        return productDao.queryProductCount(productSupplierRelation);
     }
 }

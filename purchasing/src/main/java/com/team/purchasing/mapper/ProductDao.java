@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface ProductDao {
 
-    public List<Product> queryProductList(ProductSupplierRelation product);
+    public List<Product> queryProductList(ProductSupplierRelation productSupplierRelation);
 
-    public Integer queryProductCount(ProductSupplierRelation product);
+    public Integer queryProductCount(ProductSupplierRelation productSupplierRelation);
 
 }
