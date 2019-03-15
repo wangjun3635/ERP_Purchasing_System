@@ -28,7 +28,7 @@ public class PromotionController {
     @Resource
     private PromotionService promotionService;
 
-    @PostMapping("/getProclamation")
+    @PostMapping("/queryProclamation")
     @ApiOperation(value="促销活动信息查询", notes = "促销活动信息查询")
     public PromotionResponse queryProclamationByPage(@RequestBody PromotionRequest request) {
 
@@ -52,8 +52,11 @@ public class PromotionController {
     // TODO: 1/3/19 图片存储考虑使用websocket做文件上传 
     @PostMapping("/addProclamation")
     @ApiOperation(value="公告信息添加", notes = "公告信息添加")
-    public int addProclamation(@RequestBody Promotion promotion){
+    public int addProclamation(@RequestBody PromotionRequest request){
+
+        Promotion promotion = request.getPromotion();
         int result = promotionService.addPromotion(promotion);
+
         return result;
     }
 

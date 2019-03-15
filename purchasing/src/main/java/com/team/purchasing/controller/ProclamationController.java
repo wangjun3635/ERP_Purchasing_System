@@ -31,7 +31,7 @@ public class ProclamationController {
 
     // TODO: 24/2/19 创建公告之后，不能立刻在商城上显示，需要审核通过之后才能在商城展示
 
-    @PostMapping("/getProclamation")
+    @PostMapping("/queryProclamation")
     @ApiOperation(value="公告信息查询", notes = "公告信息查询")
     public ProclamationResponse queryProclamationByPage(@RequestBody ProclamationRequest request) {
 
