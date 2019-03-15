@@ -23,11 +23,27 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> queryProductList(ProductSupplierRelation productSupplierRelation) {
-        return productDao.queryProductList(productSupplierRelation);
+
+        try {
+            List<Product> productList = productDao.queryProductList(productSupplierRelation);
+            return productList;
+        }catch (Exception e) {
+            log.error("查询数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[ProductServiceImpl] 查询数据异常");
+        }
+
     }
 
     @Override
-    public Integer queryProductCount(ProductSupplierRelation productSupplierRelation) {
-        return productDao.queryProductCount(productSupplierRelation);
+    public int queryProductCount(ProductSupplierRelation productSupplierRelation) {
+
+        try {
+            int count = productDao.queryProductCount(productSupplierRelation);
+            return count;
+        }catch (Exception e) {
+            log.error("查询count数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[ProductServiceImpl] 查询count数据异常");
+        }
+
     }
 }

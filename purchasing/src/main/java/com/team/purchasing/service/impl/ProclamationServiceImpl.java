@@ -23,7 +23,15 @@ public class ProclamationServiceImpl implements ProclamationService {
 
     @Override
     public List<Proclamation> queryProclamationList(Proclamation proclamation) {
-        return proclamationDao.queryProclamationList(proclamation);
+
+        try {
+            List<Proclamation> proclamationList = proclamationDao.queryProclamationList(proclamation);
+            return proclamationList;
+        }catch (Exception e) {
+            log.error("查询数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[ProclamationServiceImpl] 查询数据异常");
+        }
+
     }
 
     @Override
@@ -42,6 +50,14 @@ public class ProclamationServiceImpl implements ProclamationService {
 
     @Override
     public int queryProclamationCount() {
-        return proclamationDao.queryProclamationCount();
+
+        try {
+            int count = proclamationDao.queryProclamationCount();
+            return count;
+        }catch (Exception e) {
+            log.error("查询count数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[ProclamationServiceImpl] 查询count数据异常");
+        }
+
     }
 }

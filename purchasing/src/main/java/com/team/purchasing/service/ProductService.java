@@ -13,6 +13,6 @@ public interface ProductService {
 
     public List<Product> queryProductList(ProductSupplierRelation product);
 
-    public Integer queryProductCount(ProductSupplierRelation product);
+    public int queryProductCount(ProductSupplierRelation product);
 
 }

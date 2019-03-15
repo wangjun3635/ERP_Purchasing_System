@@ -13,6 +13,6 @@ public interface ProductDao {
 
     public List<Product> queryProductList(ProductSupplierRelation productSupplierRelation);
 
-    public Integer queryProductCount(ProductSupplierRelation productSupplierRelation);
+    public int queryProductCount(ProductSupplierRelation productSupplierRelation);
 
 }

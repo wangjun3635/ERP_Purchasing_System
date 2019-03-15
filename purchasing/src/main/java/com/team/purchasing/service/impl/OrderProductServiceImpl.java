@@ -23,7 +23,14 @@ public class OrderProductServiceImpl implements OrderProductService {
 
     @Override
     public List<OrderProduct> queryOrderProductList(Long orderId) {
-        return orderProductDao.queryOrderProductList(orderId);
+        try {
+            List<OrderProduct> orderProductList = orderProductDao.queryOrderProductList(orderId);
+            return orderProductList;
+        }catch (Exception e) {
+            log.error("查询数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[OrderProductServiceImpl] 查询数据异常");
+        }
+
     }
 
     @Override

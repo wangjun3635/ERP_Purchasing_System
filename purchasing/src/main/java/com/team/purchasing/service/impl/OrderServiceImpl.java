@@ -3,6 +3,7 @@ package com.team.purchasing.service.impl;
 import com.team.purchasing.bean.order.Order;
 import com.team.purchasing.mapper.order.OrderDao;
 import com.team.purchasing.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import java.util.List;
  * @Date:2/3/19 上午11:12
  */
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     @Resource
@@ -20,12 +22,28 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> queryOrderList(Order order) {
-        return orderDao.queryOrderList(order);
+
+        try {
+            List<Order> orderList = orderDao.queryOrderList(order);
+            return orderList;
+        }catch (Exception e) {
+            log.error("查询数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[OrderServiceImpl] 查询数据异常");
+        }
+
     }
 
     @Override
     public int queryOrderCount(Order order) {
-        return orderDao.queryOrderCount(order);
+
+        try {
+            int count = orderDao.queryOrderCount(order);
+            return count;
+        }catch (Exception e) {
+            log.error("查询count数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[OrderServiceImpl] 查询count数据异常");
+        }
+
     }
 
 }

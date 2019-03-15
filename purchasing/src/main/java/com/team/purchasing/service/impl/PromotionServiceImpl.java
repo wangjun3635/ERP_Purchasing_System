@@ -23,12 +23,26 @@ public class PromotionServiceImpl implements PromotionService {
 
     @Override
     public List<Promotion> queryPromotionList(Promotion promotion) {
-        return promotionDao.queryPromotionList(promotion);
+
+        try {
+            List<Promotion> promotionList = promotionDao.queryPromotionList(promotion);
+            return promotionList;
+        }catch (Exception e) {
+            log.error("查询数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[PromotionServiceImpl] 查询数据异常");
+        }
+
     }
 
     @Override
     public int queryPromotionCount() {
-        return promotionDao.queryPromotionCount();
+        try {
+            int count = promotionDao.queryPromotionCount();
+            return count;
+        }catch (Exception e) {
+            log.error("查询count数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[PromotionServiceImpl] 查询count数据异常");
+        }
     }
 
     @Override
@@ -41,7 +55,7 @@ public class PromotionServiceImpl implements PromotionService {
             return result;
         } catch (Exception e) {
             log.error("促销添加失败,添加信息为:{}", promotion.toString(), e);
-            throw new RuntimeException("添加失败");
+            throw new RuntimeException("[PromotionServiceImpl] 添加失败");
         }
         
     }
@@ -55,7 +69,7 @@ public class PromotionServiceImpl implements PromotionService {
             return result;
         } catch (Exception e) {
             log.error("促销更新失败,更新信息为:{}", promotion.toString(), e);
-            throw new RuntimeException("更新失败");
+            throw new RuntimeException("[PromotionServiceImpl] 更新失败");
         }
     }
 }

@@ -1,15 +1,13 @@
 package com.team.purchasing.service.impl;
 
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.team.purchasing.bean.productcomment.ProductComment;
 import com.team.purchasing.mapper.productcomment.ProductCommentDao;
 import com.team.purchasing.service.ProductCommentService;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 /**
  * @Auther:ynhuang
@@ -37,7 +35,15 @@ public class ProductCommentServiceImpl implements ProductCommentService {
 
     @Override
     public ProductComment queryProductComment(int productId) {
-        return productCommentDao.queryProductComment(productId);
+
+        try {
+            ProductComment productComment = productCommentDao.queryProductComment(productId);
+            return productComment;
+        }catch (Exception e) {
+            log.error("查询数据异常,异常信息为: {}", e);
+            throw new RuntimeException("[ProductCommentServiceImpl] 查询数据异常");
+        }
+
     }
 
 }
