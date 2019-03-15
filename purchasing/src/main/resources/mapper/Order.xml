@@ -19,13 +19,13 @@
        <result property="receiverRegion" column="receiverRegion" />
        <result property="createTime" column="createTime" />
        <result property="createUserId" column="createUserId" />
-       <result property="modifyTime" column="updateTime" />
-       <result property="modifyUserId" column="updateUserId" />
+       <result property="updateTime" column="modifyTime" />
+       <result property="updateUserId" column="modifyUserId" />
     </resultMap>
 
     <select id="queryOrderCount" resultType="java.lang.Integer">
         select count(*) from
-        (select row_number() over(order by updateTime desc) as rownumber, * from
+        (select row_number() over(order by modifyTime desc) as rownumber, * from
         ( select * from tb_order <include refid="baseQuery" /> ) as oo  )
         as o where rownumber > #{order.page.rowNumber}
     </select>
@@ -65,7 +65,7 @@
         and orderNumber=#{order.orderNumber}
       </if>
       <if test="order.createTime != null">
-        and createTime=to_date(#{order.createTime}, 'YYYY-MM-DD')
+        and createTime=cast(#{order.createTime} as datetime) <!--  to_date(#{order.createTime}, 'YYYY-MM-DD') -->
       </if>
     </sql>
 

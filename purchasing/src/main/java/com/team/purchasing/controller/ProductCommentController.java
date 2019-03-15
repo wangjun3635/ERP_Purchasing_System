@@ -37,7 +37,7 @@ public class ProductCommentController {
     }
 
     @PostMapping("/queryProductComment")
-    @ApiOperation(value="添加评价数据", notes = "添加评价数据")
+    @ApiOperation(value="查询评价数据", notes = "查询评价数据")
     public ProductCommentResponse queryProductCategory(@RequestBody ProductCommentRequest request){
 
         ProductComment productComment = request.getProductComment();
