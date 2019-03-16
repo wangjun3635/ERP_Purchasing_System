@@ -9,7 +9,7 @@ import com.team.purchasing.bean.booking.OrderBooking;
 public interface OrderBookingService {
 
     //创建预定订单
-    public OrderBooking createBookingOrder(OrderBooking orderBooking);
+    public int createBookingOrder(OrderBooking orderBooking);
 
     //取消订单
     public int cancelBookingOrder(OrderBooking orderBooking);

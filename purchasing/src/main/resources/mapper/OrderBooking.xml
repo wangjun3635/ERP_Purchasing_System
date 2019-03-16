@@ -50,11 +50,10 @@
         where id==#{orderBooking.id}
     </update>
 
-    <insert id="createBookingOrder">
-        <selectKey resultType="_long" keyProperty="id" order="AFTER">
-          select @@IDENTITY as id
-        </selectKey>
-        insert into tb_order(userId,
+    <insert id="createBookingOrder" parameterType="com.team.purchasing.bean.booking.OrderBooking"
+    	 useGeneratedKeys="true" keyProperty="id" >
+        insert into tb_order(
+         userId,
          HCId,
          orderNumber,
          totalAmount,
@@ -70,23 +69,24 @@
          createTime,
          createUserId,
          modifyTime,
-         modifyUserId) values(#{orderBooking.userId},
-          #{orderBooking.HCId},
-          #{orderBooking.orderNumber},
-          #{orderBooking.totalAmount},
-          #{orderBooking.orderstatus},
-          #{orderBooking.orderRemark},
-          #{orderBooking.deliveryNumber},
-          #{orderBooking.receiverName},
-          #{orderBooking.receiverPhone},
-          #{orderBooking.receiverPostCode},
-          #{orderBooking.receiverProvince},
-          #{orderBooking.receiverCity},
-          #{orderBooking.receiverRegion},
+         modifyUserId) values(
+          #{userId},
+          #{HCId},
+          #{orderNumber},
+          #{totalAmount},
+          1,
+          #{orderRemark},
+          #{deliveryNumber},
+          #{receiverName},
+          #{receiverPhone},
+          #{receiverPostCode},
+          #{receiverProvince},
+          #{receiverCity},
+          #{receiverRegion},
           GETDATE(),
-          #{shopCar.createUserId},
+          #{createUserId},
           GETDATE(),
-          #{shopCar.updateUserId});
+          #{updateUserId});
     </insert>
 
 </mapper>

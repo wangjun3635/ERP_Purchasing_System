@@ -38,10 +38,17 @@
         (orderId, orderNumber, productId, brandId, productName,
          productPrice, productQuantity, createTime, createUserId,
          modifyTime, modifyUserId) values
-        (#{orderProduct.orderId}, #{orderProduct.orderNumber}, #{orderProduct.productId}
-        #{orderProduct.brandId},#{orderProduct.productName},#{orderProduct.productPrice},
-        #{orderProduct.productQuantity},GETDATE(),#{orderProduct.createUserId},
-        GETDATE(),#{orderProduct.updateUserId})
+        (#{orderProduct.orderId}, 
+         #{orderProduct.orderNumber},
+         #{orderProduct.productId},
+         #{orderProduct.brandId},
+         #{orderProduct.productName},
+         #{orderProduct.productPrice},
+         #{orderProduct.productQuantity},
+         GETDATE(),
+         #{orderProduct.createUserId},
+         GETDATE(),
+         #{orderProduct.updateUserId})
     </insert>
 
 </mapper>

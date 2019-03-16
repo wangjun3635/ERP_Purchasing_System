@@ -33,13 +33,13 @@ public class OrderBookingController {
     public OrderBookingResponse createOrderBooking(@RequestBody OrderBookingRequest orderBookingRequest){
 
         OrderBooking orderBooking = orderBookingRequest.getOrderBooking();
-        // TODO: 1/3/19 对于订单编号生成的规则确认
+        //订单编号自定义生成
         orderBooking.setOrderNumber(OrderIDUtil.getOrderId());
 
-        OrderBooking bookingOrder = orderBookingService.createBookingOrder(orderBooking);
+        int bookingOrderId = orderBookingService.createBookingOrder(orderBooking);
 
         OrderBookingResponse orderBookingResponse = new OrderBookingResponse();
-        orderBookingResponse.getMessageInfo().setKey(String.valueOf(bookingOrder));
+        orderBookingResponse.getMessageInfo().setKey(String.valueOf(bookingOrderId));
 
         return orderBookingResponse;
     }

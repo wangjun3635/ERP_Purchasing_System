@@ -51,11 +51,11 @@
      from
      (select row_number() over(order by modifyTime desc) as rownumber, * from
      ( select * from tb_order <include refid="baseQuery" />) as oo  )
-     as o where rownumber > #{order.page.rowNumber}
+     as o where rownumber <![CDATA[ > ]]> #{order.page.rowNumber}
     </select>
 
     <sql id="baseQuery">
-      where 1=1 and datediff(month,modifytime,getdate()) <= 6
+      where 1=1 and datediff(month,modifytime,getdate()) <![CDATA[ <= ]]> 6
       <if test="order.orderStatus != null">
         and orderStatus=#{order.orderStatus}
       </if>

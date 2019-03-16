@@ -21,7 +21,7 @@ import java.util.Arrays;
 @Slf4j
 public class LogAspect {
 
-    @Pointcut("execution(public * com.team.purchasing.service.impl.*.*(..))")
+    @Pointcut("execution(public * com.team.purchasing.controller.*.*(..))")
     public void webLog(){
 
     }
