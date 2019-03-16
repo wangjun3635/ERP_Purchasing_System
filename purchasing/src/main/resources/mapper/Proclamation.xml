@@ -8,6 +8,7 @@
         <result column="attachment" property="attachment" />
         <result column="content" property="content" />
         <result column="auditStatus" property="auditStatus" />
+        <result column="isValid" property="isValid" />
         <result column="createTime" property="createTime" />
         <result column="createUserId" property="createUserId" />
         <result column="modifyTime" property="updateTime" />
@@ -21,6 +22,7 @@
         o.attachment,
         o.content,
         o.auditStatus,
+        o.isValid,
         o.createTime,
         o.createUserId,
         o.modifyTime,
@@ -39,6 +41,7 @@
       attachment,
       content,
       auditStatus,
+      isValid,
       createTime,
       createUserId,
       modifyTime,
@@ -47,6 +50,7 @@
        #{attachment},
        #{content},
        #{auditStatus},
+       2
        GETDATE(),
        #{createUserId},
        GETDATE(),

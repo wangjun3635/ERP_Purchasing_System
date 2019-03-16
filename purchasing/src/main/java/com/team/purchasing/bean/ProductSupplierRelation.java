@@ -1,6 +1,8 @@
 package com.team.purchasing.bean;
 
 import com.team.purchasing.utils.Page;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,38 +13,52 @@ import java.math.BigDecimal;
  * 产品供应商关联表
  */
 @Data
+@ApiModel(value="产品供应商实体")
 public class ProductSupplierRelation {
 
     /** 产品模块 **/
+    @ApiModelProperty(value = "产品id")
     private Integer productId;
 
+    @ApiModelProperty(value = "产品name")
     private String productName;
 
+    @ApiModelProperty(value = "产品条码")
     private String barCode;
 
     //销售单位
+    @ApiModelProperty(value = "销售单位")
     private String unit;
 
     //单价
+    @ApiModelProperty(value = "产品单价")
     private BigDecimal unitPrice;
 
     //货期  1:现货2：期货
+    @ApiModelProperty(value = "期货：1:现货2：期货")
     private Integer deliveryTime;
 
     //产品类别，一级、二级、三级
+    @ApiModelProperty(value = "产品类别：一级")
     private Integer productLevelFirst;
 
+    @ApiModelProperty(value = "产品类别：二级")
     private Integer productLevelSecond;
 
+    @ApiModelProperty(value = "产品类别：三级")
     private Integer productLevelThird;
 
     /** 供应商模块 **/
+    @ApiModelProperty(value = "供应商名称")
     private String supplierName;
 
+    @ApiModelProperty(value = "产品类别：三级")
     private Integer salesAreaType;
 
+    @ApiModelProperty(value = "销售区域类型")
     private Integer salesProvince;
 
+    @ApiModelProperty(value = "分页")
     private Page page;
 
 }

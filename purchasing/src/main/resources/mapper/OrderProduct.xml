@@ -7,7 +7,7 @@
        <result property="orderId" column="orderId" />
        <result property="orderNumber" column="orderNumber" />
        <result property="productId" column="productId" />
-       <result property="branchId" column="branchId" />
+       <result property="brandId" column="brandId" />
        <result property="productName" column="productName" />
        <result property="productPrice" column="productPrice" />
        <result property="productQuantity" column="productQuantity" />
@@ -22,7 +22,7 @@
         orderId,
         orderNumber,
         productId,
-        branchId,
+        brandId,
         productName,
         productPrice,
         productQuantity,
@@ -35,11 +35,11 @@
 
     <insert id="addOrderProduct">
         insert into tb_order_product
-        (orderId, orderNumber, productId, branchId, productName,
+        (orderId, orderNumber, productId, brandId, productName,
          productPrice, productQuantity, createTime, createUserId,
          modifyTime, modifyUserId) values
         (#{orderProduct.orderId}, #{orderProduct.orderNumber}, #{orderProduct.productId}
-        #{orderProduct.branchId},#{orderProduct.productName},#{orderProduct.productPrice},
+        #{orderProduct.brandId},#{orderProduct.productName},#{orderProduct.productPrice},
         #{orderProduct.productQuantity},GETDATE(),#{orderProduct.createUserId},
         GETDATE(),#{orderProduct.updateUserId})
     </insert>

@@ -6,6 +6,7 @@
         select id,
          productId,
          userId,
+         userNickName,
          star,
          comment,
          createTime,
@@ -19,6 +20,7 @@
         insert into tb_product_comment(
          productId,
          userId,
+         userNickName
          star,
          comment,
          createTime,
@@ -26,6 +28,7 @@
          modifyTime,
          modifyUserId) values(#{productComment.productId},
           #{productComment.userId},
+          #{productComment.userNickName}
           #{productComment.star},
           #{productComment.comment},
           GETDATE(),
