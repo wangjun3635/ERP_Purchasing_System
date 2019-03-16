@@ -72,7 +72,7 @@
             and levelThird=#{productLevelThird}
         </if>
         <if test="supplierName != null">
-            and supplierId in (select id from tb_supplier where name like '%#{supplierName}%')
+            and supplierId in (select id from tb_supplier where name like '%'+ #{supplierName} +'%')
         </if>
         <if test="salesAreaType != null">
             and supplierId in (select id from tb_supplier where salesAreaType=#{salesAreaType})

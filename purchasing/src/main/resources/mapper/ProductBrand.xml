@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.purchasing.mapper.ProductBrandDao">
+
+	<resultMap id="BaseResultMap" type="com.team.purchasing.bean.ProductBrand">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="chinesePhonetic" property="chinesePhonetic" />
+        <result column="logo" property="logo" />
+        <result column="brandIntroduction" property="brandIntroduction" />
+        <result column="isValid" property="isValid" />
+        <result column="createTime" property="createTime" />
+        <result column="createUserId" property="createUserId" />
+        <result column="updateTime" property="updateTime" />
+        <result column="updateUserId" property="updateUserId" />
+    </resultMap>
+
+    <select id="queryProductBrandList" resultMap="BaseResultMap">
+    	select o.id,
+    	o.name,
+    	o.chinesePhonetic,
+    	o.logo,
+    	o.brandIntroduction,
+    	o.isValid,
+    	o.createTime,
+    	o.createUserId,
+    	o.modifyTime,
+    	o.modifyUserId
+    	from
+        (select row_number() over(order by modifyTime desc) as rownumber, * from
+        ( select * from tb_shopcar
+          <where>
+              <if test="name != null">
+                'name' like '%' + #{name} + '%'
+              </if>
+          </where>
+
+          order by convert(chinesePhonetic using gbk) asc <!--chinesePhonetic collate Chinese_PRC_CI_AS -->
+         ) as oo  )
+        as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
+    </select>
+
+</mapper>
