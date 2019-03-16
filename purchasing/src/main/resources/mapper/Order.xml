@@ -25,9 +25,7 @@
 
     <select id="queryOrderCount" resultType="java.lang.Integer">
         select count(*) from
-        (select row_number() over(order by modifyTime desc) as rownumber, * from
-        ( select * from tb_order <include refid="baseQuery" /> ) as oo  )
-        as o where rownumber > #{order.page.rowNumber}
+        (select * from tb_order <include refid="baseQuery" />) t
     </select>
 
     <select id="queryOrderList" resultMap="baseMap">
@@ -51,13 +49,13 @@
         o.modifyUserId
 
      from
-     (select row_number() over(order by modifyTime asc) as rownumber, * from
+     (select row_number() over(order by modifyTime desc) as rownumber, * from
      ( select * from tb_order <include refid="baseQuery" />) as oo  )
      as o where rownumber > #{order.page.rowNumber}
     </select>
 
     <sql id="baseQuery">
-      where 1=1
+      where 1=1 and datediff(month,modifytime,getdate()) <= 6
       <if test="order.orderStatus != null">
         and orderStatus=#{order.orderStatus}
       </if>
@@ -67,6 +65,7 @@
       <if test="order.createTime != null">
         and createTime=cast(#{order.createTime} as datetime) <!--  to_date(#{order.createTime}, 'YYYY-MM-DD') -->
       </if>
+      
     </sql>
 
 </mapper>

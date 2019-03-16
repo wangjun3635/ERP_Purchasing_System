@@ -133,7 +133,7 @@
         ( select * from tb_product
           <where>
               <include refid="baseQuery" />
-          </where>) as oo  )
+          </where> order by unitPrice) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 

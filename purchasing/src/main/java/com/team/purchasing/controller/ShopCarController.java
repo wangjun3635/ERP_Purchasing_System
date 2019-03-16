@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 /**
@@ -51,6 +53,19 @@ public class ShopCarController {
         shopCarResponse.getMessageInfo().setKey(String.valueOf(result));
 
         return shopCarResponse;
+    }
+    
+    @PostMapping("/queryShopCarListById")
+    @ApiOperation(value="删除购物车商品", notes = "删除购物车商品")
+    public ShopCarResponse queryShopCarListById(@RequestBody ShopCarRequest shopCarRequest){
+    	
+    	ShopCar shopCar = shopCarRequest.getShopCar();
+    	List<ShopCar> shopCarList = shopCarService.queryShopCarList(shopCar);
+    	
+    	ShopCarResponse shopCarResponse = new ShopCarResponse();
+    	shopCarResponse.setShopCars(shopCarList);
+    	
+    	return shopCarResponse;
     }
 
 }

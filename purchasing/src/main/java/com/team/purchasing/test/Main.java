@@ -1,4 +1,4 @@
-package com.team.purchasing;
+package com.team.purchasing.test;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

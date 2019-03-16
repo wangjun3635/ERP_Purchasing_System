@@ -7,6 +7,7 @@
         <result column="title" property="title" />
         <result column="attachmentImg" property="attachmentImg" />
         <result column="content" property="content" />
+        <result column="isvalid" property="isvalid" />
         <result column="createTime" property="createTime" />
         <result column="createUserId" property="createUserId" />
         <result column="modifyTime" property="updateTime" />
@@ -18,6 +19,7 @@
         o.title,
         o.attachmentImg,
         o.content,
+        o.isvalid,
         o.createTime,
         o.createUserId,
         o.modifyTime,
@@ -35,6 +37,7 @@
       title,
       attachmentImg,
       content,
+      isvalid,
       createTime,
       createUserId,
       modifyTime,
@@ -42,6 +45,7 @@
        #{title},
        #{attachmentImg},
        #{content},
+       #{isvalid},
        GETDATE(),
        #{createUserId},
        GETDATE(),

@@ -26,6 +26,9 @@ public class Promotion implements Serializable {
 
     @ApiModelProperty(value = "促销内容")
     private String content;
+    
+    @ApiModelProperty(value = "是否有效,0无效,1有效")
+    private Integer isvalid;
 
     @ApiModelProperty(value = "创建时间")
     private String createTime;
