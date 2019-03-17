@@ -1,33 +1,51 @@
 package com.team.purchasing.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.team.purchasing.bean.Bargain;
 import com.team.purchasing.bean.BargainComment;
 import com.team.purchasing.common.GeneralResponse;
 import com.team.purchasing.controller.request.BargainCommentCmd;
+import com.team.purchasing.controller.request.OperateBargainCmd;
 import com.team.purchasing.controller.request.QueryBargainCommentListRequest;
 import com.team.purchasing.controller.request.QueryBargainListRequest;
 import com.team.purchasing.controller.response.QueryBargainCommentListResponse;
 import com.team.purchasing.controller.response.QueryBargainListResponse;
 import com.team.purchasing.service.BargainService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.team.purchasing.utils.Page;
 
-import java.util.List;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 
+@RestController
+@RequestMapping("/bargain")
+@Api(tags="询价接口")
+@Slf4j
 public class BargainController {
 	
 	@Autowired
 	private BargainService bargainService;
 	
-	public GeneralResponse createBargain(Bargain bargain) {
+	@ApiOperation(value="创建询价接口")
+	@PostMapping("/createBargain")
+	public GeneralResponse createBargain(OperateBargainCmd cmd) {
 		
 		GeneralResponse response = new GeneralResponse();
 		
-		Long id = bargainService.createBargain(bargain);
+		Long id = bargainService.createBargain(cmd);
 		response.getMessageInfo().setKey(id+"");
 		
 		return response;
 	}
 	
+	@ApiOperation(value="查询询价接口")
+	@PostMapping("/queryBargainList")
 	public QueryBargainListResponse queryBargainList(QueryBargainListRequest request) {
 		
 		QueryBargainListResponse response = new QueryBargainListResponse();
@@ -35,10 +53,16 @@ public class BargainController {
 		List<Bargain> bargainList = bargainService.queryBargainList(request);
 		Long count = bargainService.countBargainList(request);
 		
+		Page page = request.getPage();
+		page.setTotal(Integer.valueOf(count.toString()));
+		
 		response.setBargainList(bargainList);
+		response.setPage(page);
 		return response;
 	}
 	
+	@ApiOperation(value="创建询价回复接口")
+	@PostMapping("/createBargainComment")
 	public GeneralResponse createBargainComment(BargainCommentCmd cmd) {
 		
 		GeneralResponse response = new GeneralResponse();
@@ -49,6 +73,8 @@ public class BargainController {
 		return response;
 	}
 	
+	@ApiOperation(value="查询询价回复接口")
+	@PostMapping("/queryBargainCommentList")
 	public QueryBargainCommentListResponse queryBargainCommentList(QueryBargainCommentListRequest request) {
 		
 		QueryBargainCommentListResponse response = new QueryBargainCommentListResponse();

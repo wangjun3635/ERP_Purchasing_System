@@ -20,20 +20,78 @@
 		updateUserId
 	</sql>
 
-	<sql id = "where_queryBiddingList">
-		
-	</sql>
-
 	<select id="queryBiddingList" 
 		parameterType="com.team.purchasing.controller.request.QueryBiddingListRequest"
 		resultType="com.team.purchasing.bean.Bidding">
+		
 		select 
-		<include refid="sql_queryBiddingList" ></include>
-		from tb_bidding
-		where 1=1
+			top (#{page.currentNum}),
+			t.*
+		from 
+			(
+			select 
+				SELECT ROW_NUMBER() OVER ( tb_bargain.createTime DESC ) AS rownum ,
+				<include refid="sql_queryBiddingList"/>
+			from tb_bidding
+			where t.hcId = #{hcId}
+			) t
+		where t.rownumber <![CDATA[ > ]]> #{page.rowNumber}
+	</select>
+	
+	<select id="countBiddingList"
+	 parameterType="com.team.purchasing.controller.request.QueryBiddingListRequest"
+	 resultType="java.lang.Integer">
+	 	select count(*) from tb_bidding
+	 	where t.t.hcId = #{hcId}
 	</select>
    
-   <insert id="createBidding" parameterType="com.team.purchasing.bean.Bidding">
+    <select id="queryBiddingListForSupplier"
+    	parameterType="com.team.purchasing.controller.request.QueryBiddingListRequest"
+		resultType="com.team.purchasing.bean.Bidding">
+    
+    	select 
+    		top (#{page.currentNum}),
+    		t4.*
+       from(
+    	select 
+    		SELECT ROW_NUMBER() OVER ( tb_bargain.createTime DESC ) AS rownum ,
+    		<include refid="sql_queryBiddingList"/>
+    	from tb_bidding
+    	  where EXISTS (
+    	  				select t3.*
+	    	  			(select t.categoryid 
+	    	  			 from tb_bidding_supplier_category t 
+	    	  			  where t.biddingid = id
+	    	  			InterSect
+	    	  			select t1.categoryid
+	    	  			 from tb_supplier_category t1
+	    	  			 where t1.supplierid = #{supplierId}
+	    	  			 ) t3
+    	  				)
+       	) t4
+       	where t4.rownumber <![CDATA[ > ]]> #{page.rowNumber}
+    </select>
+   
+   <select id = "countBiddingListForSupplier"
+   	 parameterType="com.team.purchasing.controller.request.QueryBiddingListRequest"
+	 resultType="java.lang.Integer">
+	 select count(*) 
+	 	from tb_bidding
+	 where EXISTS (
+   	  				select t3.*
+    	  			(select t.categoryid 
+    	  			 from tb_bidding_supplier_category t 
+    	  			  where t.biddingid = id
+    	  			InterSect
+    	  			select t1.categoryid
+    	  			 from tb_supplier_category t1
+    	  			 where t1.supplierid = #{supplierId}
+    	  			 ) t3
+    	  			)
+   </select>
+   
+   <insert id="createBidding" 
+   		parameterType="com.team.purchasing.bean.Bidding">
    		insert into tb_bidding(
    			userId,
 			hcId,
@@ -48,18 +106,38 @@
 			createTime,
 			createUserId
    		)values (
-   			#{userId},
-   			#{hcId},
-   			#{drugName},
-   			#{unit},
-   			#{quantity},
-   			#{supplierCategory},
-   			#{expireDay},
-   			#{remark},
+   			#{bidding.userId},
+   			#{bidding.hcId},
+   			#{bidding.drugName},
+   			#{bidding.unit},
+   			#{bidding.quantity},
+   			#{bidding.supplierCategory},
+   			#{bidding.expireDay},
+   			#{bidding.remark},
    			getdate(),
-   			#{createUserId}
+   			#{baseUserInfo.userId}
    		)
-   		
+   </insert>
+   
+   <insert id="createBiddingComment"
+   	parameterType="com.team.purchasing.bean.BiddingComment">
+   		insert into tb_bidding_comment(
+			biddingId,
+			supplierId,
+			unitPrice,
+			remark,
+			isSelected,
+			createTime,
+			createUserId
+   		)values(
+   			#{biddingComment.biddingId},
+   			#{biddingComment.supplierId},
+   			#{biddingComment.unitPrice},
+   			#{biddingComment.remark},
+   			#{biddingComment.isSelected},
+			getdate(),
+			#{baseUserInfo.userId}
+   		)
    </insert>
    
 </mapper>

@@ -19,19 +19,19 @@
 			createTime,
 			createUserId
    		) values(
-   			#{productId},
-   			#{userId},
-   			#{hcId},
-			#{productId},
-			#{supplierId},
-			#{unitPrice},
-			#{quantity},
-			#{supplierCategory},
-			#{expireDay},
-			#{AuditStatus},
-			#{remark},
+   			#{bargain.productId},
+   			#{bargain.userId},
+   			#{bargain.hcId},
+			#{bargain.productId},
+			#{bargain.supplierId},
+			#{bargain.unitPrice},
+			#{bargain.quantity},
+			#{bargain.supplierCategory},
+			#{bargain.expireDay},
+			#{bargain.AuditStatus},
+			#{bargain.remark},
 			GETDATE(),
-			#{createUserId}
+			#{baseUserInfo.userId}
    		) 
    </insert>
    
@@ -63,20 +63,26 @@
 		 and t.supplierId = #{supplierId}
 		</if>
    </sql>
-   
-   <select id="queryBargainList">
-   		select * from (
-   			select 
-   			 SELECT ROW_NUMBER() OVER ( tb_bargain.createTime DESC ) AS rownum ,
+  
+   <select id="queryBargainList" 
+   	resultMap="com.team.purchasing.bean.Bargain"
+ 	parameterType="com.team.purchasing.controller.request.QueryBargainListRequest">
+   		select 
+   			top (#{page.currentNum}),
+   			t.*
+   		from 
+   			(select 
+   			aSELECT ROW_NUMBER() OVER ( tb_bargain.createTime DESC ) AS rownum ,
    			<include refid="sql_queryBargainList"></include>
-   			from tb_bargain	
-   		) t
-   		where 1=1
-   			<include refid="where_queryBargainList"></include>
-   			and t.rownum BETWEEN  #{start} AND #{end}
+   			from tb_bargain
+   			) t
+   		where t.rownumber <![CDATA[ > ]]> #{page.rowNumber}
+
    </select>
    
-   <select id="countBargainList"> 
+   <select id="countBargainList"
+   	resultMap="java.lang.Long"
+ 	parameterType="com.team.purchasing.controller.request.QueryBargainListRequest"> 
    		select count(*)
    			from tb_bargain t
 		where 1=1

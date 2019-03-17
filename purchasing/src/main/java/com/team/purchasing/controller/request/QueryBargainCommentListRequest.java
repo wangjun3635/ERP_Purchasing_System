@@ -1,11 +1,12 @@
 package com.team.purchasing.controller.request;
 
 import com.team.purchasing.common.GeneralRequest;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@ApiModel(description = "议价回复查询请求实体列")
+@ApiModel(description = "查询询价回复请求实体类")
 @Data
 public class QueryBargainCommentListRequest extends GeneralRequest{
 

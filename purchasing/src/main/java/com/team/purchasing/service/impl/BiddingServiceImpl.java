@@ -2,6 +2,7 @@ package com.team.purchasing.service.impl;
 
 import com.team.purchasing.bean.Bidding;
 import com.team.purchasing.controller.request.OperateBiddingCmd;
+import com.team.purchasing.controller.request.OperateBiddingCommentCmd;
 import com.team.purchasing.controller.request.QueryBiddingListRequest;
 import com.team.purchasing.mapper.BiddingDao;
 import com.team.purchasing.service.BiddingService;
@@ -26,9 +27,31 @@ public class BiddingServiceImpl implements BiddingService {
 
 	@Override
 	public Long createBidding(OperateBiddingCmd cmd) {
-		// 
-		Long id = bidingDao.createBidding(cmd.getBidding());
+		Long id = bidingDao.createBidding(cmd);
 		return id;
+	}
+	
+	@Override
+	public Integer countBiddingList(QueryBiddingListRequest request) {
+		Integer count = bidingDao.countBiddingList(request);
+		return count;
+	}
+	
+	@Override
+	public Integer countBiddingListForSupplier(QueryBiddingListRequest request) {
+		Integer count = bidingDao.countBiddingListForSupplier(request);
+		return count;
+	}
+	
+	@Override
+	public List<Bidding> queryBiddingListForSupplier(QueryBiddingListRequest request) {
+		List<Bidding> biddingList = bidingDao.queryBiddingListForSupplier(request);
+		return biddingList;
+	}
+	
+	@Override
+	public void createBiddingComment(OperateBiddingCommentCmd cmd) {
+		bidingDao.createBiddingComment(cmd);
 	}
 
 }

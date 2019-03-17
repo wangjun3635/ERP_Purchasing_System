@@ -7,7 +7,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-@ApiModel
+@ApiModel(description = "询价实体类")
 public class Bargain {
 
 	@ApiModelProperty(value = "主键id")
@@ -40,16 +40,4 @@ public class Bargain {
 	@ApiModelProperty(value = "备注")
 	private String remark;
 	
-	@ApiModelProperty(value = "创建时间")
-	private String createTime;
-	
-	@ApiModelProperty(value = "创建人id")
-	private Long createUserId;
-	
-	@ApiModelProperty(value = "修改时间")
-	private String updateTime;
-	
-	@ApiModelProperty(value = "修改人")
-	private Long updateUserId;
-
 }

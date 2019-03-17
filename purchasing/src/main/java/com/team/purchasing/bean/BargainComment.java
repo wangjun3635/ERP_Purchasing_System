@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-@ApiModel(description = "议价回复实体类")
+@ApiModel(description = "询价回复实体类")
 @Data
 public class BargainComment {
 
