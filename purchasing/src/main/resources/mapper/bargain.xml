@@ -65,23 +65,23 @@
    </sql>
   
    <select id="queryBargainList" 
-   	resultMap="com.team.purchasing.bean.Bargain"
+   	resultType="com.team.purchasing.bean.Bargain"
  	parameterType="com.team.purchasing.controller.request.QueryBargainListRequest">
    		select 
    			top (#{page.currentNum}),
    			t.*
    		from 
    			(select 
-   			aSELECT ROW_NUMBER() OVER ( tb_bargain.createTime DESC ) AS rownum ,
+   			aSELECT ROW_NUMBER() OVER (order by createTime DESC ) AS rownum ,
    			<include refid="sql_queryBargainList"></include>
    			from tb_bargain
    			) t
-   		where t.rownumber <![CDATA[ > ]]> #{page.rowNumber}
+   		where t.rownum <![CDATA[ > ]]> #{page.rowNumber}
 
    </select>
    
    <select id="countBargainList"
-   	resultMap="java.lang.Long"
+   	resultType="java.lang.Long"
  	parameterType="com.team.purchasing.controller.request.QueryBargainListRequest"> 
    		select count(*)
    			from tb_bargain t

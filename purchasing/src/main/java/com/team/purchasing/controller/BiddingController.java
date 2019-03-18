@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team.purchasing.bean.Bidding;
+import com.team.purchasing.bean.BiddingComment;
 import com.team.purchasing.common.GeneralResponse;
 import com.team.purchasing.controller.request.OperateBiddingCmd;
 import com.team.purchasing.controller.request.OperateBiddingCommentCmd;
+import com.team.purchasing.controller.request.QueryBiddingCommentRequest;
 import com.team.purchasing.controller.request.QueryBiddingListRequest;
+import com.team.purchasing.controller.response.QueryBiddingCommentResponse;
 import com.team.purchasing.controller.response.QueryBiddingListResponse;
 import com.team.purchasing.service.BiddingService;
 import com.team.purchasing.utils.Page;
@@ -84,6 +87,38 @@ public class BiddingController {
 		GeneralResponse response = new GeneralResponse();
 		
 		biddingService.createBiddingComment(cmd);
+		
+		return response;
+	}
+	
+	@ApiOperation(value="查询竞价回复接口")
+	@PostMapping("/queryBiddingCommentList")
+	public QueryBiddingCommentResponse queryBiddingCommentList(QueryBiddingCommentRequest request) {
+		
+		
+		List<BiddingComment> list = new ArrayList<>();
+		
+		Integer count = biddingService.countBiddingCommentList(request);
+		if(count > 0) {
+			list = biddingService.queryBiddingCommentList(request);
+		}
+		
+		Page page = request.getPage();
+		page.setTotal(count);
+		
+		QueryBiddingCommentResponse response = new QueryBiddingCommentResponse();
+		response.setBiddingCommentList(list);
+		response.setPage(page);
+		
+		return response;
+	}
+	
+	@ApiOperation(value="选中竞价回复")
+	@PostMapping("/updateBiddingComment")
+	public GeneralResponse updateBiddingComment(OperateBiddingCommentCmd cmd) {
+		GeneralResponse response = new GeneralResponse();
+		
+		biddingService.updateBiddingComment(cmd);
 		
 		return response;
 	}

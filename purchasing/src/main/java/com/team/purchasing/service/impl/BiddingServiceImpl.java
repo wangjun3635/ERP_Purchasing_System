@@ -1,8 +1,10 @@
 package com.team.purchasing.service.impl;
 
 import com.team.purchasing.bean.Bidding;
+import com.team.purchasing.bean.BiddingComment;
 import com.team.purchasing.controller.request.OperateBiddingCmd;
 import com.team.purchasing.controller.request.OperateBiddingCommentCmd;
+import com.team.purchasing.controller.request.QueryBiddingCommentRequest;
 import com.team.purchasing.controller.request.QueryBiddingListRequest;
 import com.team.purchasing.mapper.BiddingDao;
 import com.team.purchasing.service.BiddingService;
@@ -54,4 +56,28 @@ public class BiddingServiceImpl implements BiddingService {
 		bidingDao.createBiddingComment(cmd);
 	}
 
+	@Override
+	public List<BiddingComment> queryBiddingCommentList(QueryBiddingCommentRequest request) {
+		
+		List<BiddingComment> list = bidingDao.queryBiddingCommentList(request);
+		
+		return list;
+	}
+
+	@Override
+	public Integer countBiddingCommentList(QueryBiddingCommentRequest request) {
+		
+		Integer count = bidingDao.countBiddingCommentList(request);
+		
+		return count;
+	}
+	
+	@Override
+	public void updateBiddingComment(OperateBiddingCommentCmd cmd) {
+		
+		bidingDao.updateBiddingCommentSelected(cmd);
+		bidingDao.updateBiddingCommentSelected(cmd);
+		
+	}
+	
 }

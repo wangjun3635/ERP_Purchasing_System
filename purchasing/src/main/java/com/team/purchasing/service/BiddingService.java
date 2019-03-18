@@ -1,8 +1,10 @@
 package com.team.purchasing.service;
 
 import com.team.purchasing.bean.Bidding;
+import com.team.purchasing.bean.BiddingComment;
 import com.team.purchasing.controller.request.OperateBiddingCmd;
 import com.team.purchasing.controller.request.OperateBiddingCommentCmd;
+import com.team.purchasing.controller.request.QueryBiddingCommentRequest;
 import com.team.purchasing.controller.request.QueryBiddingListRequest;
 
 import java.util.List;
@@ -20,4 +22,10 @@ public interface BiddingService {
 	Integer countBiddingListForSupplier(QueryBiddingListRequest request);
 	
 	void createBiddingComment(OperateBiddingCommentCmd cmd);
+	
+	List<BiddingComment> queryBiddingCommentList(QueryBiddingCommentRequest request);
+	
+	Integer countBiddingCommentList(QueryBiddingCommentRequest request);
+	
+	void updateBiddingComment(OperateBiddingCommentCmd cmd);
 }

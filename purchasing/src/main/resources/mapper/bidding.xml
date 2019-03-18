@@ -30,12 +30,12 @@
 		from 
 			(
 			select 
-				SELECT ROW_NUMBER() OVER ( tb_bargain.createTime DESC ) AS rownum ,
+				SELECT ROW_NUMBER() OVER (order by createTime DESC ) AS rownum ,
 				<include refid="sql_queryBiddingList"/>
 			from tb_bidding
 			where t.hcId = #{hcId}
 			) t
-		where t.rownumber <![CDATA[ > ]]> #{page.rowNumber}
+		where t.rownum <![CDATA[ > ]]> #{page.rowNumber}
 	</select>
 	
 	<select id="countBiddingList"
@@ -54,7 +54,7 @@
     		t4.*
        from(
     	select 
-    		SELECT ROW_NUMBER() OVER ( tb_bargain.createTime DESC ) AS rownum ,
+    		SELECT ROW_NUMBER() OVER (order by createTime DESC ) AS rownum ,
     		<include refid="sql_queryBiddingList"/>
     	from tb_bidding
     	  where EXISTS (
@@ -69,7 +69,7 @@
 	    	  			 ) t3
     	  				)
        	) t4
-       	where t4.rownumber <![CDATA[ > ]]> #{page.rowNumber}
+       	where t4.rownum <![CDATA[ > ]]> #{page.rowNumber}
     </select>
    
    <select id = "countBiddingListForSupplier"
@@ -139,5 +139,56 @@
 			#{baseUserInfo.userId}
    		)
    </insert>
+   
+   <select id="queryBiddingCommentList" 
+     resultType="com.team.purchasing.bean.BiddingComment"
+     parameterType="com.team.purchasing.controller.request.QueryBiddingCommentRequest">
+   		select 
+    		top (#{page.currentNum}),
+    		t2.*
+       from
+   		(select 
+   		       SELECT ROW_NUMBER() OVER (order by createTime DESC ) AS rownum ,
+   			   t.id,
+   			   t.biddingId,
+			   t.supplierId,
+			   t1.name supplierName,
+			   t.unitPrice,
+			   t.remark,
+			   t.isSelected,
+			   t.createTime,
+			   t.createUserId
+		from tb_bidding_comment t
+		left join tb_supplier t1
+		on t.supplierId = t1.id
+		where t.biddingId = #{biddingId}
+		) t2
+		where t2.rownum <![CDATA[ > ]]> #{page.rowNumber}
+   </select>
+   
+   <select id="countBiddingCommentList"
+   	 resultType="java.lang.Integer"
+     parameterType="com.team.purchasing.controller.request.QueryBiddingCommentRequest">
+     
+     	select 
+   		   count(*)
+		from tb_bidding_comment t
+		where t.biddingId = #{biddingId}
+   
+   </select>
+   
+   <update id="updateBiddingCommentSelected">
+   		update tb_bidding_comment 
+   			set isSelected = 1
+   		where id = #{id}
+   		and biddingId = #{biddingId}
+   </update>
+   
+   <update id="updateBiddingCommentNotSelected">
+   		update tb_bidding_comment 
+   			set isSelected = 0
+   		where id <![CDATA[ <> ]]> #{id}
+   		and biddingId = #{biddingId}
+   </update>
    
 </mapper>
