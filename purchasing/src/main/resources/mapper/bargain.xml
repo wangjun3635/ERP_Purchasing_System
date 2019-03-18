@@ -4,7 +4,7 @@
 
    
    <insert id="createBargain" 
-   		parameterType="com.team.purchasing.bean.Bargain">
+   		parameterType="com.team.purchasing.controller.request.OperateBargainCmd">
    		insert into tb_bargain (
    			productId,
    			userId,
