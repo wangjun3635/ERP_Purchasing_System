@@ -129,11 +129,11 @@
         o.modifyTime,
         o.modifyUserId
         from
-        (select row_number() over(order by modifyTime desc) as rownumber, * from
+        (select row_number() over(order by modifyTime desc, unitPrice desc ) as rownumber, * from
         ( select * from tb_product
           <where>
               <include refid="baseQuery" />
-          </where> order by unitPrice) as oo  )
+          </where> ) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 
