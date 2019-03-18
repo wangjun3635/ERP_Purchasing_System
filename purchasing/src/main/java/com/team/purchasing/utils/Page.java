@@ -20,11 +20,13 @@ public class Page {
 
     //当前是第几页
     @Getter
+    @Setter
     @ApiModelProperty(value = "当前第几页")
     private Integer currentPage;
 
     //当前一页显示多少数据
     @Getter
+    @Setter
     @ApiModelProperty(value = "当前一页显示多少数据")
     private Integer currentNum;
 

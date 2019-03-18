@@ -23,7 +23,7 @@ public class Bargain {
 	private Long userId;
 	
 	@ApiModelProperty(value = "医院学校id")
-	private Long hsId;
+	private Long hcId;
 	
 	@ApiModelProperty(value = "单价")
 	private BigDecimal unitPrice;

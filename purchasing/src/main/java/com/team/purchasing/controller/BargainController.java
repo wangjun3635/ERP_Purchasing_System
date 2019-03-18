@@ -1,5 +1,6 @@
 package com.team.purchasing.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +49,18 @@ public class BargainController {
 	@PostMapping("/queryBargainList")
 	public QueryBargainListResponse queryBargainList(QueryBargainListRequest request) {
 		
-		QueryBargainListResponse response = new QueryBargainListResponse();
+		request.getPage().setRowNumber();
 		
-		List<Bargain> bargainList = bargainService.queryBargainList(request);
+		List<Bargain> bargainList = new ArrayList<>();
 		Long count = bargainService.countBargainList(request);
+		if(count > 0){
+			bargainList = bargainService.queryBargainList(request);
+		}
 		
 		Page page = request.getPage();
 		page.setTotal(Integer.valueOf(count.toString()));
 		
+		QueryBargainListResponse response = new QueryBargainListResponse();
 		response.setBargainList(bargainList);
 		response.setPage(page);
 		return response;

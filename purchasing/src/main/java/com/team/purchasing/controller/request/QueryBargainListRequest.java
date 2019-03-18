@@ -15,7 +15,7 @@ public class QueryBargainListRequest extends GeneralRequest {
 	private Long supplierId;
 	
 	@ApiModelProperty(value = "医院学校id")
-	private Long hsId;
+	private Long hcId;
 	
 	@ApiModelProperty(value = "用户id")
 	private Long userId;

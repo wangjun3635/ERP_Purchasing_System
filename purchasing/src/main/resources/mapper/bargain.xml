@@ -13,7 +13,6 @@
 			unitPrice,
 			quantity,
 			expireDay,
-			AuditStatus,
 			remark,
 			createTime,
 			createUserId
@@ -21,12 +20,10 @@
    			#{bargain.productId},
    			#{bargain.userId},
    			#{bargain.hcId},
-			#{bargain.productId},
 			#{bargain.supplierId},
 			#{bargain.unitPrice},
 			#{bargain.quantity},
 			#{bargain.expireDay},
-			#{bargain.AuditStatus},
 			#{bargain.remark},
 			GETDATE(),
 			#{baseUserInfo.userId}
@@ -43,21 +40,22 @@
 		quantity,
 		expireDay,
 		remark,
-		CreateTime,
-		CreateUserId,
-		UpdateTime,
-		UpdateUserId	
+		createTime,
+		createUserId,
+	 	modifytime, 
+	 	modifyuserid	
    </sql>
    
    <sql id="where_queryBargainList">
+   		where 1=1
 	   	<if test="userId != null">
-		 and t.userId = #{userId}
+		 and userId = #{userId}
 		</if>
 		<if test="hcId != null">
-		 and t.hcId = #{hcId}
+		 and hcId = #{hcId}
 		</if>
 		<if test="supplierId != null">
-		 and t.supplierId = #{supplierId}
+		 and supplierId = #{supplierId}
 		</if>
    </sql>
   
@@ -65,13 +63,14 @@
    	resultType="com.team.purchasing.bean.Bargain"
  	parameterType="com.team.purchasing.controller.request.QueryBargainListRequest">
    		select 
-   			top (#{page.currentNum}),
+   			top (#{page.currentNum})
    			t.*
    		from 
    			(select 
-   			aSELECT ROW_NUMBER() OVER (order by createTime DESC ) AS rownum ,
+   			(SELECT ROW_NUMBER() OVER (order by createTime DESC )) AS rownum ,
    			<include refid="sql_queryBargainList"></include>
    			from tb_bargain
+   			<include refid="where_queryBargainList"></include>
    			) t
    		where t.rownum <![CDATA[ > ]]> #{page.rowNumber}
 
@@ -81,8 +80,7 @@
    	resultType="java.lang.Long"
  	parameterType="com.team.purchasing.controller.request.QueryBargainListRequest"> 
    		select count(*)
-   			from tb_bargain t
-		where 1=1
+   			from tb_bargain 
 		<include refid="where_queryBargainList"></include>   			
    </select>
    
