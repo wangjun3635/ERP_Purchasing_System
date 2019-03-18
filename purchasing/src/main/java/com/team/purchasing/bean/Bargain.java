@@ -31,9 +31,6 @@ public class Bargain {
 	@ApiModelProperty(value = "数量")
 	private Integer quantity;
 	
-	@ApiModelProperty(value = "供应商类型")
-	private Integer supplierCategory;
-	
 	@ApiModelProperty(value = "过期天数")
 	private Integer expireDay;
 	
