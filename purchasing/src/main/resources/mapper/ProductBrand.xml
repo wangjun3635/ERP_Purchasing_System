@@ -41,13 +41,12 @@
     	o.modifyTime,
     	o.modifyUserId
     	from
-        (select row_number() over(order by modifyTime desc) as rownumber, * from
+        (select row_number() over(order by modifyTime desc, chinesePhonetic asc) as rownumber, * from
         ( select * from tb_brand
           <where>
               <include refid="baseQuery" />
           </where>
-
-          order by chinesePhonetic asc <!--chinesePhonetic collate Chinese_PRC_CI_AS -->
+          <!--chinesePhonetic collate Chinese_PRC_CI_AS -->
          ) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
