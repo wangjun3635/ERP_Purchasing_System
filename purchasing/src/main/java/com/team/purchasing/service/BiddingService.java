@@ -21,7 +21,7 @@ public interface BiddingService {
 	
 	Integer countBiddingListForSupplier(QueryBiddingListRequest request);
 	
-	void createBiddingComment(OperateBiddingCommentCmd cmd);
+	Long createBiddingComment(OperateBiddingCommentCmd cmd);
 	
 	List<BiddingComment> queryBiddingCommentList(QueryBiddingCommentRequest request);
 	

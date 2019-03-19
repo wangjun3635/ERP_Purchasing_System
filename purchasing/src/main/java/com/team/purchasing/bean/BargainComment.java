@@ -27,12 +27,6 @@ public class BargainComment {
 	private String createTime;
 	
 	@ApiModelProperty(value = "创建人")
-	private String createUserId;
-	
-	@ApiModelProperty(value = "修改时间")
-	private String updateTime;
-	
-	@ApiModelProperty(value = "修改人")
-	private String updateUserId;	
+	private Long createUserId;
 	
 }

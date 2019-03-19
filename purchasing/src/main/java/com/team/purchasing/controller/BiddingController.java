@@ -37,15 +37,18 @@ public class BiddingController {
 	@PostMapping("/queryBiddingList")
 	public QueryBiddingListResponse queryBiddingList(QueryBiddingListRequest request) {
 		
-		QueryBiddingListResponse response = new QueryBiddingListResponse();
+		request.getPage().setRowNumber();
 		
 		Integer count = biddingService.countBiddingList(request);
 		List<Bidding> biddingList = new ArrayList<>();
 		if(count > 0) {
 			biddingList = biddingService.queryBiddingList(request);
 		}
+		
 		Page page = request.getPage();
 		page.setTotal(count);
+		
+		QueryBiddingListResponse response = new QueryBiddingListResponse();
 		response.setBiddingList(biddingList);
 		response.setPage(page);
 		

@@ -3,21 +3,17 @@
 <mapper namespace="com.team.purchasing.mapper.BiddingDao">
 
 	<sql id = "sql_queryBiddingList">
-		id,
-		userId,
-		hcId,
-		brandName,
-		drugName,
-		unit,
-		quantity,
-		supplierCategory,
-		expireDay,
-		auditStatus,
-		remark,
-		createTime,
-		createUserId,
-		updateTime,
-		updateUserId
+		t.id,
+		t.hcId,
+		t.brandName,
+		t.drugName,
+		t.unit,
+		t.quantity,
+		t.expireDay,
+		t.auditStatus,
+		t.remark,
+		t.createTime,
+		t.createUserId
 	</sql>
 
 	<select id="queryBiddingList" 
@@ -26,23 +22,23 @@
 		
 		select 
 			top (#{page.currentNum}),
-			t.*
+			t1.*
 		from 
 			(
 			select 
-				SELECT ROW_NUMBER() OVER (order by createTime DESC ) AS rownum ,
+				(SELECT ROW_NUMBER() OVER (order by createTime DESC)) AS rownum,
 				<include refid="sql_queryBiddingList"/>
-			from tb_bidding
+			from tb_bidding t
 			where t.hcId = #{hcId}
-			) t
-		where t.rownum <![CDATA[ > ]]> #{page.rowNumber}
+			) t1
+		where t1.rownum <![CDATA[ > ]]> #{page.rowNumber}
 	</select>
 	
 	<select id="countBiddingList"
 	 parameterType="com.team.purchasing.controller.request.QueryBiddingListRequest"
 	 resultType="java.lang.Integer">
-	 	select count(*) from tb_bidding
-	 	where t.t.hcId = #{hcId}
+	 	select count(*) from tb_bidding t
+	 	where t.hcId = #{hcId}
 	</select>
    
     <select id="queryBiddingListForSupplier"
@@ -54,19 +50,19 @@
     		t4.*
        from(
     	select 
-    		SELECT ROW_NUMBER() OVER (order by createTime DESC ) AS rownum ,
+    		(SELECT ROW_NUMBER() OVER (order by createTime DESC)) AS rownum,
     		<include refid="sql_queryBiddingList"/>
-    	from tb_bidding
+    	from tb_bidding t
     	  where EXISTS (
     	  				select t3.*
-	    	  			(select t.categoryid 
-	    	  			 from tb_bidding_supplier_category t 
-	    	  			  where t.biddingid = id
-	    	  			InterSect
-	    	  			select t1.categoryid
-	    	  			 from tb_supplier_category t1
-	    	  			 where t1.supplierid = #{supplierId}
-	    	  			 ) t3
+	    	  			(select t1.categoryid 
+	    	  			  from tb_bidding_supplier_category t1 
+	    	  			  where t1.biddingid = t.id
+	    	  			 InterSect
+	    	  			 select t2.categoryid
+	    	  			  from tb_supplier_category t2
+	    	  			  where t2.supplierid = #{supplierId}
+	    	  			 )t3
     	  				)
        	) t4
        	where t4.rownum <![CDATA[ > ]]> #{page.rowNumber}
@@ -76,42 +72,39 @@
    	 parameterType="com.team.purchasing.controller.request.QueryBiddingListRequest"
 	 resultType="java.lang.Integer">
 	 select count(*) 
-	 	from tb_bidding
+	 	from tb_bidding t
 	 where EXISTS (
    	  				select t3.*
-    	  			(select t.categoryid 
-    	  			 from tb_bidding_supplier_category t 
-    	  			  where t.biddingid = id
-    	  			InterSect
-    	  			select t1.categoryid
-    	  			 from tb_supplier_category t1
-    	  			 where t1.supplierid = #{supplierId}
+    	  			(select t1.categoryid 
+    	  			  from tb_bidding_supplier_category t1 
+    	  			   where t1.biddingid = t.id
+    	  			 InterSect
+    	  			 select t2.categoryid
+    	  			  from tb_supplier_category t2
+    	  			   where t2.supplierid = #{supplierId}
     	  			 ) t3
     	  			)
    </select>
    
    <insert id="createBidding" 
-   		parameterType="com.team.purchasing.bean.Bidding">
+   		parameterType="com.team.purchasing.controller.request.OperateBiddingCmd">
    		insert into tb_bidding(
-   			userId,
 			hcId,
 			brandName,
 			drugName,
 			unit,
 			quantity,
-			supplierCategory,
 			expireDay,
 			auditStatus,
 			remark,
 			createTime,
 			createUserId
    		)values (
-   			#{bidding.userId},
    			#{bidding.hcId},
+   			#{bidding.brandName},
    			#{bidding.drugName},
    			#{bidding.unit},
    			#{bidding.quantity},
-   			#{bidding.supplierCategory},
    			#{bidding.expireDay},
    			#{bidding.remark},
    			getdate(),
@@ -119,8 +112,24 @@
    		)
    </insert>
    
+   <insert id="createBiddingSupplierCategory"
+   	parameterType="com.team.purchasing.bean.BiddingSupplierCategory">
+   		insert into tb_bidding_supplier_category(
+   			biddingid,
+			categoryid,
+			createtime
+   		)values
+   		<foreach collection="categoryIdList" item="categoryId" 
+   			index="index" separator=",">
+   			#{biddingId},
+   			#{categoryId},
+   			getdate()
+   		</foreach>
+   
+   </insert>
+   
    <insert id="createBiddingComment"
-   	parameterType="com.team.purchasing.bean.BiddingComment">
+   	parameterType="com.team.purchasing.controller.request.OperateBiddingCommentCmd">
    		insert into tb_bidding_comment(
 			biddingId,
 			supplierId,
@@ -148,7 +157,7 @@
     		t2.*
        from
    		(select 
-   		       SELECT ROW_NUMBER() OVER (order by createTime DESC ) AS rownum ,
+   		       (SELECT ROW_NUMBER() OVER (order by createTime DESC)) AS rownum ,
    			   t.id,
    			   t.biddingId,
 			   t.supplierId,

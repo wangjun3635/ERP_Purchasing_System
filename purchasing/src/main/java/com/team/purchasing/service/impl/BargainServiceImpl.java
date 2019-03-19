@@ -41,7 +41,7 @@ public class BargainServiceImpl implements BargainService {
 	@Override
 	public Long createBargainComment(BargainCommentCmd cmd) {
 		
-		Long id = bargainDao.createBargainComment(cmd.getBargainComment());
+		Long id = bargainDao.createBargainComment(cmd);
 		return id;
 	}
 	

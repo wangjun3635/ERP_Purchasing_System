@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -12,9 +13,6 @@ public class Bidding {
 
 	@ApiModelProperty(value = "主键id")
 	private Long id;
-	
-	@ApiModelProperty(value = "用户id")
-	private Long userId;
 	
 	@ApiModelProperty(value = "院校id")
 	private Long hcId;
@@ -26,7 +24,7 @@ public class Bidding {
 	private String drugName;
 	
 	@ApiModelProperty(value = "单价")
-	private String unit;
+	private BigDecimal unit;
 	
 	@ApiModelProperty(value = "数量")
 	private Integer quantity;
@@ -44,15 +42,15 @@ public class Bidding {
 	private String remark;
 	
 	@ApiModelProperty(value = "创建时间")
-	private String CreateTime;
+	private String createTime;
 	
 	@ApiModelProperty(value = "创建人")
 	private Long createUserId;
 	
-	@ApiModelProperty(value = "修改时间")
-	private String updateTime;
-	
-	@ApiModelProperty(value = "修改人")
-	private String updateUserId;
+//	@ApiModelProperty(value = "修改时间")
+//	private String updateTime;
+//	
+//	@ApiModelProperty(value = "修改人")
+//	private String updateUserId;
 
 }

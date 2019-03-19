@@ -85,7 +85,7 @@
    </select>
    
    <insert id="createBargainComment"
-   	parameterType="com.team.purchasing.bean.BargainComment">
+   	parameterType="com.team.purchasing.controller.request.BargainCommentCmd">
    		insert into tb_bargain_comment (
 			bargainId,
 			supplierId,
@@ -94,12 +94,12 @@
 			createTime,
 			createUserId 
    		)values (
-   			#{bargainId},
-   			#{supplierId},
-   			#{expireDay},
-   			#{remark},
+   			#{bargainComment.bargainId},
+   			#{bargainComment.supplierId},
+   			#{bargainComment.expireDay},
+   			#{bargainComment.remark},
    			GETDATE(),
-   			#{createUserId}
+   			#{baseUserInfo.userId}
    		)
    </insert>
    
@@ -115,10 +115,10 @@
    
    <sql id="where_queryBargainComment">
    		<if test="supplierId != null">
-			supplierId = #{supplierId}
+			and supplierId = #{supplierId}
 		</if>
 		<if test="bargainId != null">
-			bargainId = #{bargainId}
+			and bargainId = #{bargainId}
 		</if>
    </sql>
    

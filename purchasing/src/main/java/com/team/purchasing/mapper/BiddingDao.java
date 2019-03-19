@@ -2,6 +2,7 @@ package com.team.purchasing.mapper;
 
 import com.team.purchasing.bean.Bidding;
 import com.team.purchasing.bean.BiddingComment;
+import com.team.purchasing.bean.BiddingSupplierCategory;
 import com.team.purchasing.controller.request.OperateBiddingCmd;
 import com.team.purchasing.controller.request.OperateBiddingCommentCmd;
 import com.team.purchasing.controller.request.QueryBiddingCommentRequest;
@@ -9,11 +10,16 @@ import com.team.purchasing.controller.request.QueryBiddingListRequest;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
 public interface BiddingDao {
 
 	List<Bidding> queryBiddingList(QueryBiddingListRequest request);
 	
 	Long createBidding(OperateBiddingCmd cmd);
+	
+	void createBiddingSupplierCategory(BiddingSupplierCategory biddingSupplierCategory);
 	
 	Integer countBiddingList(QueryBiddingListRequest request);
 	
@@ -21,7 +27,7 @@ public interface BiddingDao {
 	
 	Integer countBiddingListForSupplier(QueryBiddingListRequest request);
 	
-	void createBiddingComment(OperateBiddingCommentCmd cmd);
+	Long createBiddingComment(OperateBiddingCommentCmd cmd);
 	
 	List<BiddingComment> queryBiddingCommentList(QueryBiddingCommentRequest request);
 	
