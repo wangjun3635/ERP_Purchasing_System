@@ -125,14 +125,15 @@
    <select id="queryBargainCommentList" 
    		resultType="com.team.purchasing.bean.BargainComment"
    		parameterType="com.team.purchasing.controller.request.QueryBargainCommentListRequest">
-   		select top 1 * 
+   		select top 1 
+   			   t.* 
    		from(
    			select 
    			<include refid="sql_queryBargainCommentList"></include>
    			from tb_bargain_comment
    			where 1=1
    			<include refid="where_queryBargainComment"></include>
-   		)
+   		) t
    			
    </select>
    
