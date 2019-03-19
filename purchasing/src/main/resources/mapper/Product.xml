@@ -82,6 +82,9 @@
             and supplierId in (select id from tb_supplier where salesProvince=#{salesProvince})
         </if>
 
+		<if test="brandId != null">
+			and brandId=#{brandId}
+		</if>
 
     </sql>
 
