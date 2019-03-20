@@ -19,9 +19,8 @@
 	<select id="queryBiddingList" 
 		parameterType="com.team.purchasing.controller.request.QueryBiddingListRequest"
 		resultType="com.team.purchasing.bean.Bidding">
-		
 		select 
-			top (#{page.currentNum}),
+			top (#{page.currentNum})
 			t1.*
 		from 
 			(
@@ -44,9 +43,8 @@
     <select id="queryBiddingListForSupplier"
     	parameterType="com.team.purchasing.controller.request.QueryBiddingListRequest"
 		resultType="com.team.purchasing.bean.Bidding">
-    
     	select 
-    		top (#{page.currentNum}),
+    		top (#{page.currentNum})
     		t4.*
        from(
     	select 
@@ -55,6 +53,7 @@
     	from tb_bidding t
     	  where EXISTS (
     	  				select t3.*
+    	  				from
 	    	  			(select t1.categoryid 
 	    	  			  from tb_bidding_supplier_category t1 
 	    	  			  where t1.biddingid = t.id
@@ -75,6 +74,7 @@
 	 	from tb_bidding t
 	 where EXISTS (
    	  				select t3.*
+   	  				from
     	  			(select t1.categoryid 
     	  			  from tb_bidding_supplier_category t1 
     	  			   where t1.biddingid = t.id
@@ -99,17 +99,17 @@
 			remark,
 			createTime,
 			createUserId
-   		)values (
+   		)values(
    			#{bidding.hcId},
    			#{bidding.brandName},
    			#{bidding.drugName},
    			#{bidding.unit},
    			#{bidding.quantity},
    			#{bidding.expireDay},
+   			0,
    			#{bidding.remark},
    			getdate(),
-   			#{baseUserInfo.userId}
-   		)
+   			#{baseUserInfo.userId})
    </insert>
    
    <insert id="createBiddingSupplierCategory"
@@ -119,14 +119,23 @@
 			categoryid,
 			createtime
    		)values
-   		<foreach collection="categoryIdList" item="categoryId" 
-   			index="index" separator=",">
+   		<foreach collection="categoryIdList" item="categoryId" index="index" separator=",">
+   		(	
    			#{biddingId},
    			#{categoryId},
    			getdate()
+   		)
    		</foreach>
-   
    </insert>
+   
+   <select id="queryBiddingSupplierCategory"
+   	parameterType="com.team.purchasing.bean.BiddingSupplierCategory">
+   		select
+   			biddingid, 
+   			categoryid
+   		from tb_bidding_supplier_category
+   		where biddingId = #{biddingId}
+   </select>
    
    <insert id="createBiddingComment"
    	parameterType="com.team.purchasing.controller.request.OperateBiddingCommentCmd">
@@ -143,7 +152,7 @@
    			#{biddingComment.supplierId},
    			#{biddingComment.unitPrice},
    			#{biddingComment.remark},
-   			#{biddingComment.isSelected},
+   			0,
 			getdate(),
 			#{baseUserInfo.userId}
    		)
@@ -153,11 +162,11 @@
      resultType="com.team.purchasing.bean.BiddingComment"
      parameterType="com.team.purchasing.controller.request.QueryBiddingCommentRequest">
    		select 
-    		top (#{page.currentNum}),
+    		top (#{page.currentNum})
     		t2.*
        from
    		(select 
-   		       (SELECT ROW_NUMBER() OVER (order by createTime DESC)) AS rownum ,
+   		       (SELECT ROW_NUMBER() OVER (order by t.createTime DESC)) AS rownum ,
    			   t.id,
    			   t.biddingId,
 			   t.supplierId,
@@ -186,18 +195,20 @@
    
    </select>
    
-   <update id="updateBiddingCommentSelected">
+   <update id="updateBiddingCommentSelected"
+   		parameterType="com.team.purchasing.controller.request.OperateBiddingCommentCmd">
    		update tb_bidding_comment 
    			set isSelected = 1
-   		where id = #{id}
-   		and biddingId = #{biddingId}
+   		where id = #{biddingComment.id}
+   		and biddingId = #{biddingComment.biddingId}
    </update>
    
-   <update id="updateBiddingCommentNotSelected">
+   <update id="updateBiddingCommentNotSelected"
+   		parameterType="com.team.purchasing.controller.request.OperateBiddingCommentCmd">
    		update tb_bidding_comment 
    			set isSelected = 0
-   		where id <![CDATA[ <> ]]> #{id}
-   		and biddingId = #{biddingId}
+   		where id <![CDATA[ <> ]]> #{biddingComment.id}
+   		and biddingId = #{biddingComment.biddingId}
    </update>
    
 </mapper>

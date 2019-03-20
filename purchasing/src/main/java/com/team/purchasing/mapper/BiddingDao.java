@@ -37,5 +37,5 @@ public interface BiddingDao {
 	
 	void updateBiddingCommentNotSelected(OperateBiddingCommentCmd cmd);
 	
-	
+	List<BiddingSupplierCategory> queryBiddingSupplierCategory(Long biddingId);
 }

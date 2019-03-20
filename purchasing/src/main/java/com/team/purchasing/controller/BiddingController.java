@@ -87,6 +87,7 @@ public class BiddingController {
 	@ApiOperation(value="创建竞价回复接口")
 	@PostMapping("/createBiddingComment")
 	public GeneralResponse createBiddingComment(OperateBiddingCommentCmd cmd) {
+		
 		GeneralResponse response = new GeneralResponse();
 		
 		biddingService.createBiddingComment(cmd);
@@ -98,7 +99,7 @@ public class BiddingController {
 	@PostMapping("/queryBiddingCommentList")
 	public QueryBiddingCommentResponse queryBiddingCommentList(QueryBiddingCommentRequest request) {
 		
-		
+		request.getPage().setRowNumber();
 		List<BiddingComment> list = new ArrayList<>();
 		
 		Integer count = biddingService.countBiddingCommentList(request);
