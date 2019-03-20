@@ -79,7 +79,9 @@
         </if>
 
         <if test="salesProvince != null">
-            and supplierId in (select id from tb_supplier where salesProvince=#{salesProvince})
+            and supplierId in (select tssp.id from tb_supplier_sales_province tssp left join tb_supplier ts
+            on tssp.supplierid = ts.id
+            where tssp.provinceid=#{salesProvince})
         </if>
 
 		<if test="brandId != null">
