@@ -21,7 +21,7 @@ public class BaseUserInfo {
 	private String nickUserName;
 	
 	@ApiModelProperty(value = "医院学校供应商id")
-	private Long  hscId;
+	private Long  hcId;
 	
 	@ApiModelProperty(value = "用户访问的ip地址")
 	private String ip;
