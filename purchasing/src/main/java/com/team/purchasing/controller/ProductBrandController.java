@@ -33,7 +33,7 @@ public class ProductBrandController {
     private ProductBrandService productBrandService;
 
     @PostMapping("/queryProductBrandList")
-    @ApiOperation(value="产品信息查询", notes = "产品信息查询")
+    @ApiOperation(value="品牌信息查询", notes = "品牌信息查询")
     public ProductBrandResponse queryProductBrandList(@RequestBody ProductBrandRequest request) {
 
         ProductBrand productBrand = request.getProductBrand();
