@@ -84,8 +84,9 @@
             where tssp.provinceid=#{salesProvince})
         </if>
 
-		<if test="brandId != null">
-			and brandId=#{brandId}
+		<if test="brandName != null">
+			<!--and brandId=#{brandId} -->
+            and brandId in (select id from tb_brand where name=#{brandName})
 		</if>
 
     </sql>
