@@ -1,7 +1,10 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.ProductCategory;
+import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.ProductCategoryRequest;
+import com.team.purchasing.controller.response.ProclamationResponse;
+import com.team.purchasing.controller.response.ProductCategoryResponse;
 import com.team.purchasing.service.ProductCategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,10 +31,22 @@ public class ProductCategoryController {
 
     @PostMapping("/updateProductCategory")
     @ApiOperation(value="产品类型数据更新", notes = "产品类型数据更新")
-    public int updateProductCategory(@RequestBody ProductCategoryRequest request){
+    public ProductCategoryResponse updateProductCategory(@RequestBody ProductCategoryRequest request){
 
         ProductCategory productCategory = request.getProductCategory();
 
-        return productCategoryService.updateProductCategory(productCategory);
+        int result = productCategoryService.updateProductCategory(productCategory);
+
+        ProductCategoryResponse productCategoryResponse = new ProductCategoryResponse();
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setCode("200");
+        if(result == 1) {
+            messageInfo.setMessageText("新增成功!");
+        }else {
+            messageInfo.setMessageText("新增失败!");
+        }
+        productCategoryResponse.setMessageInfo(messageInfo);
+
+        return productCategoryResponse;
     }
 }
