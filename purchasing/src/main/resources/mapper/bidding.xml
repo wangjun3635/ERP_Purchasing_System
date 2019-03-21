@@ -35,7 +35,7 @@
       
       <select id="queryBiddingSupplerCategory" 
       	parameterType="java.lang.Long"
-      	resultType="java.util.List">
+      	resultType="java.lang.Integer">
       	select categoryid
       	from tb_bidding_supplier_category
       	where biddingid = #{id}
