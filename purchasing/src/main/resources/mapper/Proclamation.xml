@@ -30,7 +30,7 @@
         (select row_number() over(order by modifyTime desc) as rownumber, * from
         (select * from tb_proclamation
          <where>
-             <if test="auditStatus != 0">
+             <if test="auditStatus != 0 and auditStatus != null">
                  auditStatus = #{auditStatus}
              </if>
          </where>) as oo  ) as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
@@ -39,7 +39,7 @@
     <select id="queryProclamationCount" resultType="java.lang.Integer">
         select count(*) from  tb_proclamation
         <where>
-            <if test="auditStatus != 0">
+            <if test="auditStatus != 0 and auditStatus != null">
                 auditStatus = #{auditStatus}
             </if>
         </where>
