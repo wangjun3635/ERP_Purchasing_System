@@ -3,8 +3,6 @@ package com.team.purchasing.utils;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * @Auther:ynhuang
  * @Date:23/2/19 下午5:18
@@ -18,8 +16,7 @@ public class Page {
 
     //当前是第几页
     @Getter
-    @NotNull
-    @ApiModelProperty(value = "当前为第几页，前台需传")
+    @ApiModelProperty(value = "当前为第几页，前台需传,不传后台有固定值1")
     private Integer currentPage;
 
     //当前一页显示多少数据
@@ -48,8 +45,12 @@ public class Page {
             this.total = 0;
         }
 
+        if(currentNum == null || currentNum == 0){
+            this.currentNum = 20;
+        }
+        
         if(currentPage == null || currentPage == 0){
-            this.currentPage = 20;
+        	this.currentPage = 1;
         }
 
         this.rowNumber = this.currentNum * (currentPage - 1);
