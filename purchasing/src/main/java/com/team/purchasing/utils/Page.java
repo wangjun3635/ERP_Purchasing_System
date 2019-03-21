@@ -13,8 +13,6 @@ import lombok.Setter;
 public class Page {
 
     //总数据
-    @Getter
-    @Setter
     @ApiModelProperty(value = "记录总数")
     private Integer total;
 
@@ -24,11 +22,16 @@ public class Page {
     @ApiModelProperty(value = "当前第几页")
     private Integer currentPage;
 
-    //当前一页显示多少数据
+	//当前一页显示多少数据
     @Getter
     @Setter
     @ApiModelProperty(value = "当前一页显示多少数据")
     private Integer currentNum;
+    
+    @Getter
+    @Setter
+    @ApiModelProperty(value = "总页数")
+    private Integer totalPage;
 
     //数据库分页所取到的数据
     @Getter
@@ -52,6 +55,16 @@ public class Page {
         }
 
         this.rowNumber = this.currentNum * (currentPage - 1);
+        this.totalPage = total/currentNum + 1;
     }
+    
+    public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+		this.totalPage = total/this.currentNum + 1;
+	}
 
 }
