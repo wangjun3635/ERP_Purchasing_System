@@ -16,9 +16,34 @@
 		t.createUserId
 	</sql>
 
+	<resultMap id="queryBiddingListMap" type="com.team.purchasing.bean.Bidding" >
+        <result column="id" property="id"/>
+        <result column="hcId" property="hcId"/>
+        <result column="brandName" property="brandName"/>
+        <result column="drugName" property="drugName"/>
+        <result column="unit" property="unit"/>
+        <result column="quantity" property="quantity"/>
+        <result column="expireDay" property="expireDay"/>
+        <result column="auditStatus" property="auditStatus"/>
+        <result column="remark" property="remark"/>
+        <result column="createTime" property="createTime"/>
+        
+      	<collection property="supplierCategoryList" ofType="java.util.List"
+      		select="com.team.purchasing.mapper.BiddingDao.queryBiddingSupplerCategory"
+      		column="id"></collection>
+      </resultMap>
+      
+      <select id="queryBiddingSupplerCategory" 
+      	parameterType="java.lang.Long"
+      	resultType="java.util.List">
+      	select categoryid
+      	from tb_bidding_supplier_category
+      	where biddingid = #{id}
+      </select>
+
 	<select id="queryBiddingList" 
 		parameterType="com.team.purchasing.controller.request.QueryBiddingListRequest"
-		resultType="com.team.purchasing.bean.Bidding">
+		resultMap="queryBiddingListMap">
 		select 
 			top (#{page.currentNum})
 			t1.*
