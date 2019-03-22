@@ -48,6 +48,7 @@ public class ProclamationController {
 
         ProclamationResponse proclamationResponse = new ProclamationResponse();
         proclamationResponse.setProclamationList(proclamations);
+        proclamationResponse.setPage(proclamation.getPage());
 
         return proclamationResponse;
     }

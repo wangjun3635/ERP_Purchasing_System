@@ -49,6 +49,7 @@ public class ProductBrandController {
         //4 拼接参数
         ProductBrandResponse productBrandResponse = new ProductBrandResponse();
         productBrandResponse.setProductBrands(productBrands);
+        productBrandResponse.setPage(productBrand.getPage());
 
         return productBrandResponse;
     }

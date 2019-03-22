@@ -43,6 +43,7 @@ public class OrderController {
         //参数拼接
         OrderResponse orderResponse = new OrderResponse();
         orderResponse.setOrders(orders);
+        orderResponse.setPage(order.getPage());
 
         return orderResponse;
     }

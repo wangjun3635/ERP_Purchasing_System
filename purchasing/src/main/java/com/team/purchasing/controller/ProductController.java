@@ -46,6 +46,7 @@ public class ProductController {
         //4 拼接参数
         ProductSupplierResponse productSupplierResponse = new ProductSupplierResponse();
         productSupplierResponse.setProductList(products);
+        productSupplierResponse.setPage(productSupplierRelation.getPage());
 
         return productSupplierResponse;
     }

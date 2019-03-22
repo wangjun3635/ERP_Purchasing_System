@@ -45,6 +45,7 @@ public class PromotionController {
         //参数拼接
         PromotionResponse promotionResponse = new PromotionResponse();
         promotionResponse.setPromotionList(promotions);
+        promotionResponse.setPage(promotion.getPage());
 
         return promotionResponse;
     }

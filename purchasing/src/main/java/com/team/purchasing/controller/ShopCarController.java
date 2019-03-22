@@ -64,6 +64,7 @@ public class ShopCarController {
     	
     	ShopCarResponse shopCarResponse = new ShopCarResponse();
     	shopCarResponse.setShopCars(shopCarList);
+        shopCarResponse.setPage(shopCar.getPage());
     	
     	return shopCarResponse;
     }
