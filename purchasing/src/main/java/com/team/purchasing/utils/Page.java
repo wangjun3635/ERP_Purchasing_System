@@ -14,6 +14,7 @@ public class Page {
 
     //总数据
     @ApiModelProperty(value = "记录总数")
+    @Getter
     private Integer total;
 
     //当前是第几页
@@ -55,16 +56,16 @@ public class Page {
         }
 
         this.rowNumber = this.currentNum * (currentPage - 1);
-        this.totalPage = total/currentNum + 1;
+        this.totalPage = total % currentNum == 0 ? total / currentNum : total / currentNum + 1;
     }
     
-    public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
-		this.totalPage = total/this.currentNum + 1;
-	}
+//    public Integer getTotal() {
+//		return total;
+//	}
+//
+//	public void setTotal(Integer total) {
+//		this.total = total;
+//		this.totalPage = total/this.currentNum + 1;
+//	}
 
 }
