@@ -15,8 +15,22 @@
         <result column="updateUserId" property="updateUserId" />
     </resultMap>
 
+    <sql id="baseQuery">
+        <if test="name != null">
+            'name' like '%' + #{name} + '%'
+        </if>
+    </sql>
+
+    <select id="queryProductBrandCount" resultType="java.lang.Integer">
+        select count(*) from
+        (select * from tb_brand
+        <where>
+          <include refid="baseQuery" />
+        </where>) t
+    </select>
+
     <select id="queryProductBrandList" resultMap="BaseResultMap">
-    	select o.id,
+    	select top (#{page.currentNum}) o.id,
     	o.name,
     	o.chinesePhonetic,
     	o.logo,
@@ -27,15 +41,12 @@
     	o.modifyTime,
     	o.modifyUserId
     	from
-        (select row_number() over(order by modifyTime desc) as rownumber, * from
-        ( select * from tb_shopcar
+        (select row_number() over(order by modifyTime desc, chinesePhonetic asc) as rownumber, * from
+        ( select * from tb_brand
           <where>
-              <if test="name != null">
-                'name' like '%' + #{name} + '%'
-              </if>
+              <include refid="baseQuery" />
           </where>
-
-          order by convert(chinesePhonetic using gbk) asc <!--chinesePhonetic collate Chinese_PRC_CI_AS -->
+          <!--chinesePhonetic collate Chinese_PRC_CI_AS -->
          ) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>

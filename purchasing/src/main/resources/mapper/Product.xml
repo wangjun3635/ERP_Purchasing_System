@@ -79,9 +79,15 @@
         </if>
 
         <if test="salesProvince != null">
-            and supplierId in (select id from tb_supplier where salesProvince=#{salesProvince})
+            and supplierId in (select tssp.id from tb_supplier_sales_province tssp left join tb_supplier ts
+            on tssp.supplierid = ts.id
+            where tssp.provinceid=#{salesProvince})
         </if>
 
+		<if test="brandName != null">
+			<!--and brandId=#{brandId} -->
+            and brandId in (select id from tb_brand where name=#{brandName})
+		</if>
 
     </sql>
 
@@ -129,11 +135,11 @@
         o.modifyTime,
         o.modifyUserId
         from
-        (select row_number() over(order by modifyTime desc) as rownumber, * from
+        (select row_number() over(order by modifyTime desc, unitPrice desc ) as rownumber, * from
         ( select * from tb_product
           <where>
               <include refid="baseQuery" />
-          </where> order by unitPrice) as oo  )
+          </where> ) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 
