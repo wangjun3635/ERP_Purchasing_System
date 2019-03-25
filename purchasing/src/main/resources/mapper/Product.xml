@@ -72,18 +72,18 @@
             and thirdlevel=#{productLevelThird}
         </if>
         <if test="supplierName != null">
-            and supplierId exists (select id from tb_supplier where name like '%#{supplierName}%')
+            and supplierId in (select id from tb_supplier where name like '%#{supplierName}%')
         </if>
         <if test="salesAreaType != null">
-            and supplierId exists (select id from tb_supplier where salesAreaType=#{salesAreaType})
+            and supplierId in (select id from tb_supplier where salesAreaType=#{salesAreaType})
         </if>
         <if test="salesProvince != null">
-            and supplierId exists (select tssp.id from tb_supplier_sales_province tssp left join tb_supplier ts
+            and supplierId in (select tssp.id from tb_supplier_sales_province tssp left join tb_supplier ts
             on tssp.supplierid = ts.id
             where tssp.provinceid=#{salesProvince})
         </if>
 		<if test="brandName != null">
-            and brandId exists (select id from tb_brand where name=#{brandName})
+            and brandId in (select id from tb_brand where name=#{brandName})
 		</if>
 
     </sql>
