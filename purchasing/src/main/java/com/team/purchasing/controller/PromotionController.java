@@ -1,6 +1,7 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.Promotion;
+import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.PromotionRequest;
 import com.team.purchasing.controller.response.PromotionResponse;
 import com.team.purchasing.service.PromotionService;
@@ -44,6 +45,7 @@ public class PromotionController {
         //参数拼接
         PromotionResponse promotionResponse = new PromotionResponse();
         promotionResponse.setPromotionList(promotions);
+        promotionResponse.setPage(promotion.getPage());
 
         return promotionResponse;
     }
@@ -52,12 +54,22 @@ public class PromotionController {
     // TODO: 1/3/19 图片存储考虑使用websocket做文件上传 
     @PostMapping("/addProclamation")
     @ApiOperation(value="促销信息添加,促销不需要审核，创建好后直接在商城展示", notes = "促销信息添加")
-    public int addProclamation(@RequestBody PromotionRequest request){
+    public PromotionResponse addProclamation(@RequestBody PromotionRequest request){
 
         Promotion promotion = request.getPromotion();
         int result = promotionService.addPromotion(promotion);
 
-        return result;
+        PromotionResponse promotionResponse = new PromotionResponse();
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setCode("200");
+        if(result == 1) {
+            messageInfo.setMessageText("新增成功!");
+        }else {
+            messageInfo.setMessageText("新增失败!");
+        }
+        promotionResponse.setMessageInfo(messageInfo);
+
+        return promotionResponse;
     }
 
     

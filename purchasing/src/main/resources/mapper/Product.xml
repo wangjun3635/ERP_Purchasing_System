@@ -14,7 +14,7 @@
         <result column="specs" property="specs" />
         <result column="unit" property="unit" />
         <result column="unitPrice" property="unitPrice" />
-        <result column="deliveryTime" property="deliveryTime" />
+        <result column="deliveryType" property="deliveryType" />
         <result column="firstLevel" property="productLevelFirst" />
         <result column="secondLevel" property="productLevelSecond" />
         <result column="thirdLevel" property="productLevelThird" />
@@ -48,7 +48,7 @@
 
     <sql id="baseQuery">
         <if test="productName != null">
-            and 'name' like '%#{productName}%'
+            'name' like '%#{productName}%'
         </if>
         <if test="barCode != null">
             and barCode like '%#{barCode}%'
@@ -59,29 +59,32 @@
         <if test="unitPrice != null">
             and unitPrice=#{unitPrice}
         </if>
-        <if test="deliveryTime != null">
-            and deliveryTime=#{deliveryTime}
+        <if test="deliveryType != null">
+            and deliveryType=#{deliveryType}
         </if>
         <if test="productLevelFirst != null">
-            and levelFirst=#{productLevelFirst}
+            and firstlevel=#{productLevelFirst}
         </if>
         <if test="productLevelSecond != null">
-            and levelSecond=#{productLevelSecond}
+            and secondlevel=#{productLevelSecond}
         </if>
         <if test="productLevelThird != null">
-            and levelThird=#{productLevelThird}
+            and thirdlevel=#{productLevelThird}
         </if>
         <if test="supplierName != null">
-            and supplierId in (select id from tb_supplier where name like '%'+ #{supplierName} +'%')
+            and supplierId in (select id from tb_supplier where name like '%#{supplierName, jdbcType = VARCHAR}%')
         </if>
         <if test="salesAreaType != null">
-            and supplierId in (select id from tb_supplier where salesAreaType=#{salesAreaType})
+            and supplierId in (select id from tb_supplier where salesAreaType=#{salesAreaType, jdbcType = VARCHAR})
         </if>
-
         <if test="salesProvince != null">
-            and supplierId in (select id from tb_supplier where salesProvince=#{salesProvince})
+            and supplierId in (select tssp.id from tb_supplier_sales_province tssp left join tb_supplier ts
+            on tssp.supplierid = ts.id
+            where tssp.provinceid=#{salesProvince, jdbcType = VARCHAR})
         </if>
-
+		<if test="brandName != null">
+            and brandId in (select id from tb_brand where name=#{brandName, jdbcType = VARCHAR})
+		</if>
 
     </sql>
 
@@ -98,10 +101,10 @@
         o.specs,
         o.unit,
         o.unitPrice,
-        o.deliveryTime,
-        o.firstLevel,
-        o.secondLevel,
-        o.thirdLevel,
+        o.deliveryType,
+        o.firstlevel,
+        o.secondlevel,
+        o.thirdlevel,
         o.manufacturer,
         o.components,
         o.purpose,
@@ -129,15 +132,15 @@
         o.modifyTime,
         o.modifyUserId
         from
-        (select row_number() over(order by modifyTime desc) as rownumber, * from
+        (select row_number() over(order by modifyTime desc, unitPrice desc ) as rownumber, * from
         ( select * from tb_product
           <where>
               <include refid="baseQuery" />
-          </where> order by unitPrice) as oo  )
+          </where> ) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 
-    <select id="queryProductCount" parameterType="com.team.purchasing.bean.ProductSupplierRelation" resultType="java.lang.Integer" >
+    <select id="queryProductCount" resultType="java.lang.Integer" >
         select
         count(*)
         from (select * from tb_product

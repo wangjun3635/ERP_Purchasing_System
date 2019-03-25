@@ -1,6 +1,7 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.Proclamation;
+import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.ProclamationRequest;
 import com.team.purchasing.controller.response.ProclamationResponse;
 import com.team.purchasing.service.ProclamationService;
@@ -47,18 +48,30 @@ public class ProclamationController {
 
         ProclamationResponse proclamationResponse = new ProclamationResponse();
         proclamationResponse.setProclamationList(proclamations);
+        proclamationResponse.setPage(proclamation.getPage());
 
         return proclamationResponse;
     }
 
     @PostMapping("/addProclamation")
     @ApiOperation(value="公告信息添加", notes = "公告信息添加")
-    public int addProclamation(@RequestBody ProclamationRequest request){
+    public ProclamationResponse addProclamation(@RequestBody ProclamationRequest request){
 
         Proclamation proclamation = request.getProclamation();
 
         int result = proclamationService.addProclamation(proclamation);
-        return result;
+
+        ProclamationResponse proclamationResponse = new ProclamationResponse();
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setCode("200");
+        if(result == 1) {
+            messageInfo.setMessageText("新增成功!");
+        }else {
+            messageInfo.setMessageText("新增失败!");
+        }
+        proclamationResponse.setMessageInfo(messageInfo);
+
+        return proclamationResponse;
     }
 
 }

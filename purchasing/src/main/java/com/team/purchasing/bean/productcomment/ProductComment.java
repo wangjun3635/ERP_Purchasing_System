@@ -1,5 +1,6 @@
 package com.team.purchasing.bean.productcomment;
 
+import com.team.purchasing.utils.Page;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -42,6 +43,8 @@ public class ProductComment {
 
     @ApiModelProperty(value = "最近更新人")
     private int updateUserId;
+
+    private Page page;
 
 
 

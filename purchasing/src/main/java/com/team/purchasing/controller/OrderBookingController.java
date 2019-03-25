@@ -1,6 +1,7 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.booking.OrderBooking;
+import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.booking.OrderBookingRequest;
 import com.team.purchasing.controller.response.booking.OrderBookingResponse;
 import com.team.purchasing.service.OrderBookingService;
@@ -39,7 +40,14 @@ public class OrderBookingController {
         int bookingOrderId = orderBookingService.createBookingOrder(orderBooking);
 
         OrderBookingResponse orderBookingResponse = new OrderBookingResponse();
-        orderBookingResponse.getMessageInfo().setKey(String.valueOf(bookingOrderId));
+        MessageInfo messageInfo = new MessageInfo();
+        if(bookingOrderId != 0){
+            messageInfo.setMessageText("下单成功,预定订单id为:" + bookingOrderId + ",订单编号为:" + orderBooking.getOrderNumber());
+        }else {
+            messageInfo.setMessageText("下单失败");
+        }
+        messageInfo.setCode("200");
+        orderBookingResponse.setMessageInfo(messageInfo);
 
         return orderBookingResponse;
     }
@@ -52,7 +60,14 @@ public class OrderBookingController {
         int bookingOrder = orderBookingService.cancelBookingOrder(orderBooking);
 
         OrderBookingResponse orderBookingResponse = new OrderBookingResponse();
-        orderBookingResponse.getMessageInfo().setKey(String.valueOf(bookingOrder));
+        MessageInfo messageInfo = new MessageInfo();
+        if(bookingOrder != 0) {
+            messageInfo.setMessageText("取消订单成功");
+        }else {
+            messageInfo.setMessageText("取消订单失败");
+        }
+        messageInfo.setCode("200");
+        orderBookingResponse.setMessageInfo(messageInfo);
 
         return orderBookingResponse;
     }
@@ -65,7 +80,14 @@ public class OrderBookingController {
         int bookingOrder = orderBookingService.updateBookingOrder(orderBooking);
 
         OrderBookingResponse orderBookingResponse = new OrderBookingResponse();
-        orderBookingResponse.getMessageInfo().setKey(String.valueOf(bookingOrder));
+        MessageInfo messageInfo = new MessageInfo();
+        if(bookingOrder != 0) {
+            messageInfo.setMessageText("更新订单成功");
+        }else {
+            messageInfo.setMessageText("更新订单失败");
+        }
+        messageInfo.setCode("200");
+        orderBookingResponse.setMessageInfo(messageInfo);
 
         return orderBookingResponse;
     }

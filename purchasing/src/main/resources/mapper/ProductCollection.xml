@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.purchasing.mapper.ProductCollectionDao">
+
+	<resultMap id="BaseResultMap" type="com.team.purchasing.bean.ProductCollection">
+        <result column="id" property="id" />
+        <result column="productId" property="productId" />
+        <result column="hcId" property="hcId" />
+        <result column="userId" property="userId" />
+        <result column="isValid" property="isValid" />
+        <result column="createTime" property="createTime" />
+        <result column="createUserId" property="createUserId" />
+        <result column="modifyTime" property="modifyTime" />
+        <result column="modifyUserId" property="modifyUserId" />
+    </resultMap>
+
+    <delete id="deleteProductCollection">
+        delete from tb_collection where id=#{id}
+    </delete>
+
+    <insert id="addProductCollection">
+        insert into tb_collection(productId,
+         hcId,
+         userId,
+         isValid,
+         createTime,
+         createUserId,
+         modifyTime,
+         modifyUserId) values(#{productId},
+          #{hcId},
+          #{userId},
+          #{isValid},
+          GETDATE(),
+          #{createUserId},
+          GETDATE(),
+          #{modifyUserId});
+    </insert>
+    
+    <select id="queryProductCollectionList" resultMap="BaseResultMap">
+    	select o.id,
+    	o.productId,
+    	o.hcId,
+    	o.userId,
+    	o.isValid,
+    	o.createTime,
+    	o.createUserId,
+    	o.modifyTime,
+    	o.modifyUserId
+    	from
+        (select row_number() over(order by modifyTime desc) as rownumber, * from
+        ( select * from tb_collection ) as oo  )
+        as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
+    </select>
+
+    <update id="updateProductCollection">
+        update tb_collection set productId=#{productId},
+         hcId=#{hcId},
+         userId=#{userId},
+         isValid=#{isValid},
+         modifyTime=GETDATE(),
+         modifyUserId=#{modifyUserId} where id=#{id}
+    </update>
+
+</mapper>

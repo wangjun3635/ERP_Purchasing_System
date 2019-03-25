@@ -1,7 +1,9 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.productcomment.ProductComment;
+import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.productcomment.ProductCommentRequest;
+import com.team.purchasing.controller.response.PromotionResponse;
 import com.team.purchasing.controller.response.productcomment.ProductCommentResponse;
 import com.team.purchasing.service.ProductCommentService;
 import io.swagger.annotations.Api;
@@ -29,11 +31,23 @@ public class ProductCommentController {
 
     @PostMapping("/addProductComment")
     @ApiOperation(value="添加评价数据", notes = "添加评价数据")
-    public int updateProductCategory(@RequestBody ProductCommentRequest request){
+    public ProductCommentResponse addProductCategory(@RequestBody ProductCommentRequest request){
 
         ProductComment productComment = request.getProductComment();
 
-        return productCommentService.addComment(productComment);
+        int result = productCommentService.addComment(productComment);
+
+        ProductCommentResponse productCommentResponse = new ProductCommentResponse();
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setCode("200");
+        if(result == 1) {
+            messageInfo.setMessageText("新增成功!");
+        }else {
+            messageInfo.setMessageText("新增失败!");
+        }
+        productCommentResponse.setMessageInfo(messageInfo);
+
+        return productCommentResponse;
     }
 
     @PostMapping("/queryProductComment")
@@ -44,6 +58,7 @@ public class ProductCommentController {
 
         ProductCommentResponse productCommentResponse = new ProductCommentResponse();
         productCommentResponse.setProductComment(productCommentService.queryProductComment(productComment.getProductId()));
+        productCommentResponse.setPage(productComment.getPage());
 
         return productCommentResponse;
     }

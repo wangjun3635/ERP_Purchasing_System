@@ -56,7 +56,7 @@ public class ShopCarController {
     }
     
     @PostMapping("/queryShopCarListById")
-    @ApiOperation(value="删除购物车商品", notes = "删除购物车商品")
+    @ApiOperation(value="查询购物车商品", notes = "删除购物车商品")
     public ShopCarResponse queryShopCarListById(@RequestBody ShopCarRequest shopCarRequest){
     	
     	ShopCar shopCar = shopCarRequest.getShopCar();
@@ -64,6 +64,7 @@ public class ShopCarController {
     	
     	ShopCarResponse shopCarResponse = new ShopCarResponse();
     	shopCarResponse.setShopCars(shopCarList);
+        shopCarResponse.setPage(shopCar.getPage());
     	
     	return shopCarResponse;
     }

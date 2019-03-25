@@ -28,11 +28,21 @@
         o.modifyTime,
         o.modifyUserId from
         (select row_number() over(order by modifyTime desc) as rownumber, * from
-        (select * from tb_proclamation where auditStatus = 1) as oo  ) as o where rownumber > #{page.rowNumber}
+        (select * from tb_proclamation
+         <where>
+             <if test="auditStatus != 0 and auditStatus != null">
+                 auditStatus = #{auditStatus}
+             </if>
+         </where>) as oo  ) as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 
     <select id="queryProclamationCount" resultType="java.lang.Integer">
-        select count(*) from  tb_proclamation;
+        select count(*) from  tb_proclamation
+        <where>
+            <if test="auditStatus != 0 and auditStatus != null">
+                auditStatus = #{auditStatus}
+            </if>
+        </where>
     </select>
 
     <insert id="addProclamation" parameterType="com.team.purchasing.bean.Proclamation">
