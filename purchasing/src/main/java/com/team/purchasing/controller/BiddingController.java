@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team.purchasing.bean.Bidding;
@@ -35,7 +37,7 @@ public class BiddingController {
 	
 	@ApiOperation(value="查询竞价接口")
 	@PostMapping("/queryBiddingList")
-	public QueryBiddingListResponse queryBiddingList(QueryBiddingListRequest request) {
+	public @ResponseBody QueryBiddingListResponse queryBiddingList(@RequestBody QueryBiddingListRequest request) {
 		
 		request.getPage().setRowNumber();
 		
@@ -57,7 +59,7 @@ public class BiddingController {
 	
 	@ApiOperation(value="供应商查询竞价接口")
 	@PostMapping("/queryBiddingListForSupplier")
-	public QueryBiddingListResponse queryBiddingListForSupplier(QueryBiddingListRequest request) {
+	public @ResponseBody QueryBiddingListResponse queryBiddingListForSupplier(@RequestBody QueryBiddingListRequest request) {
 		QueryBiddingListResponse response = new QueryBiddingListResponse();
 		
 		Integer count = biddingService.countBiddingListForSupplier(request);
@@ -75,7 +77,7 @@ public class BiddingController {
 	
 	@ApiOperation(value="创建竞价接口")
 	@PostMapping("/createBidding")
-	public GeneralResponse createBidding(OperateBiddingCmd cmd) {
+	public @ResponseBody GeneralResponse createBidding(@RequestBody OperateBiddingCmd cmd) {
 		GeneralResponse response = new GeneralResponse();
 		
 		Long id = biddingService.createBidding(cmd);
@@ -86,7 +88,7 @@ public class BiddingController {
 	
 	@ApiOperation(value="创建竞价回复接口")
 	@PostMapping("/createBiddingComment")
-	public GeneralResponse createBiddingComment(OperateBiddingCommentCmd cmd) {
+	public @ResponseBody GeneralResponse createBiddingComment(@RequestBody OperateBiddingCommentCmd cmd) {
 		
 		GeneralResponse response = new GeneralResponse();
 		
@@ -97,7 +99,7 @@ public class BiddingController {
 	
 	@ApiOperation(value="查询竞价回复接口")
 	@PostMapping("/queryBiddingCommentList")
-	public QueryBiddingCommentResponse queryBiddingCommentList(QueryBiddingCommentRequest request) {
+	public @ResponseBody QueryBiddingCommentResponse queryBiddingCommentList(@RequestBody QueryBiddingCommentRequest request) {
 		
 		request.getPage().setRowNumber();
 		List<BiddingComment> list = new ArrayList<>();
@@ -119,7 +121,7 @@ public class BiddingController {
 	
 	@ApiOperation(value="选中竞价回复")
 	@PostMapping("/updateBiddingComment")
-	public GeneralResponse updateBiddingComment(OperateBiddingCommentCmd cmd) {
+	public @ResponseBody GeneralResponse updateBiddingComment(@RequestBody OperateBiddingCommentCmd cmd) {
 		GeneralResponse response = new GeneralResponse();
 		
 		biddingService.updateBiddingComment(cmd);

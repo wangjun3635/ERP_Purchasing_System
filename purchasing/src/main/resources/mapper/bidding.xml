@@ -125,7 +125,7 @@
 			createTime,
 			createUserId
    		)values(
-   			#{bidding.hcId},
+   			#{baseUserInfo.hcId},
    			#{bidding.brandName},
    			#{bidding.drugName},
    			#{bidding.unit},

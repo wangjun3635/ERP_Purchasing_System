@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team.purchasing.bean.Bargain;
@@ -35,7 +37,7 @@ public class BargainController {
 	
 	@ApiOperation(value="创建询价接口")
 	@PostMapping("/createBargain")
-	public GeneralResponse createBargain(OperateBargainCmd cmd) {
+	public @ResponseBody GeneralResponse createBargain(@RequestBody OperateBargainCmd cmd) {
 		
 		GeneralResponse response = new GeneralResponse();
 		
@@ -47,7 +49,7 @@ public class BargainController {
 	
 	@ApiOperation(value="查询询价接口")
 	@PostMapping("/queryBargainList")
-	public QueryBargainListResponse queryBargainList(QueryBargainListRequest request) {
+	public @ResponseBody QueryBargainListResponse queryBargainList(@RequestBody QueryBargainListRequest request) {
 		
 		request.getPage().setRowNumber();
 		
@@ -68,7 +70,7 @@ public class BargainController {
 	
 	@ApiOperation(value="创建询价回复接口")
 	@PostMapping("/createBargainComment")
-	public GeneralResponse createBargainComment(BargainCommentCmd cmd) {
+	public @ResponseBody GeneralResponse createBargainComment(@RequestBody BargainCommentCmd cmd) {
 		
 		GeneralResponse response = new GeneralResponse();
 		
@@ -80,7 +82,7 @@ public class BargainController {
 	
 	@ApiOperation(value="查询询价回复接口")
 	@PostMapping("/queryBargainCommentList")
-	public QueryBargainCommentListResponse queryBargainCommentList(QueryBargainCommentListRequest request) {
+	public @ResponseBody QueryBargainCommentListResponse queryBargainCommentList(@RequestBody QueryBargainCommentListRequest request) {
 		
 		QueryBargainCommentListResponse response = new QueryBargainCommentListResponse();
 		
