@@ -14,7 +14,7 @@
         <result column="specs" property="specs" />
         <result column="unit" property="unit" />
         <result column="unitPrice" property="unitPrice" />
-        <result column="deliveryTime" property="deliveryTime" />
+        <result column="deliveryType" property="deliveryType" />
         <result column="firstLevel" property="productLevelFirst" />
         <result column="secondLevel" property="productLevelSecond" />
         <result column="thirdLevel" property="productLevelThird" />
@@ -59,8 +59,8 @@
         <if test="unitPrice != null">
             and unitPrice=#{unitPrice}
         </if>
-        <if test="deliveryTime != null">
-            and deliveryTime=#{deliveryTime}
+        <if test="deliveryType != null">
+            and deliveryType=#{deliveryType}
         </if>
         <if test="productLevelFirst != null">
             and levelFirst=#{productLevelFirst}
@@ -104,7 +104,7 @@
         o.specs,
         o.unit,
         o.unitPrice,
-        o.deliveryTime,
+        o.deliveryType,
         o.firstLevel,
         o.secondLevel,
         o.thirdLevel,

@@ -38,7 +38,7 @@ public class ProductSupplierRelation {
 
     //货期  1:现货2：期货
     @ApiModelProperty(value = "期货：1:现货2：期货")
-    private Integer deliveryTime;
+    private Integer deliveryType;
 
     //产品类别，一级、二级、三级
     @ApiModelProperty(value = "产品类别：一级")
