@@ -48,7 +48,7 @@
 
     <sql id="baseQuery">
         <if test="productName != null">
-            and 'name' like '%#{productName}%'
+            'name' like '%#{productName}%'
         </if>
         <if test="barCode != null">
             and barCode like '%#{barCode}%'
@@ -63,30 +63,27 @@
             and deliveryType=#{deliveryType}
         </if>
         <if test="productLevelFirst != null">
-            and levelFirst=#{productLevelFirst}
+            and firstlevel=#{productLevelFirst}
         </if>
         <if test="productLevelSecond != null">
-            and levelSecond=#{productLevelSecond}
+            and secondlevel=#{productLevelSecond}
         </if>
         <if test="productLevelThird != null">
-            and levelThird=#{productLevelThird}
+            and thirdlevel=#{productLevelThird}
         </if>
         <if test="supplierName != null">
-            and supplierId in (select id from tb_supplier where name like '%'+ #{supplierName} +'%')
+            and supplierId exists (select id from tb_supplier where name like '%#{supplierName}%')
         </if>
         <if test="salesAreaType != null">
-            and supplierId in (select id from tb_supplier where salesAreaType=#{salesAreaType})
+            and supplierId exists (select id from tb_supplier where salesAreaType=#{salesAreaType})
         </if>
-
         <if test="salesProvince != null">
-            and supplierId in (select tssp.id from tb_supplier_sales_province tssp left join tb_supplier ts
+            and supplierId exists (select tssp.id from tb_supplier_sales_province tssp left join tb_supplier ts
             on tssp.supplierid = ts.id
             where tssp.provinceid=#{salesProvince})
         </if>
-
 		<if test="brandName != null">
-			<!--and brandId=#{brandId} -->
-            and brandId in (select id from tb_brand where name=#{brandName})
+            and brandId exists (select id from tb_brand where name=#{brandName})
 		</if>
 
     </sql>
@@ -105,9 +102,9 @@
         o.unit,
         o.unitPrice,
         o.deliveryType,
-        o.firstLevel,
-        o.secondLevel,
-        o.thirdLevel,
+        o.firstlevel,
+        o.secondlevel,
+        o.thirdlevel,
         o.manufacturer,
         o.components,
         o.purpose,
@@ -143,7 +140,7 @@
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 
-    <select id="queryProductCount" parameterType="com.team.purchasing.bean.ProductSupplierRelation" resultType="java.lang.Integer" >
+    <select id="queryProductCount" resultType="java.lang.Integer" >
         select
         count(*)
         from (select * from tb_product
