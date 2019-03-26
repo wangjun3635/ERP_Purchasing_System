@@ -39,17 +39,16 @@ public class BiddingController {
 	@PostMapping("/queryBiddingList")
 	public @ResponseBody QueryBiddingListResponse queryBiddingList(@RequestBody QueryBiddingListRequest request) {
 		
-		request.getPage().setRowNumber();
 		
 		Integer count = biddingService.countBiddingList(request);
 		List<Bidding> biddingList = new ArrayList<>();
 		if(count > 0) {
+			request.getPage().init(count);
+			
 			biddingList = biddingService.queryBiddingList(request);
 		}
 		
 		Page page = request.getPage();
-		page.setTotal(count);
-		
 		QueryBiddingListResponse response = new QueryBiddingListResponse();
 		response.setBiddingList(biddingList);
 		response.setPage(page);
@@ -60,15 +59,16 @@ public class BiddingController {
 	@ApiOperation(value="供应商查询竞价接口")
 	@PostMapping("/queryBiddingListForSupplier")
 	public @ResponseBody QueryBiddingListResponse queryBiddingListForSupplier(@RequestBody QueryBiddingListRequest request) {
-		QueryBiddingListResponse response = new QueryBiddingListResponse();
 		
 		Integer count = biddingService.countBiddingListForSupplier(request);
 		List<Bidding> biddingList = new ArrayList<>();
 		if(count > 0) {
+			request.getPage().init(count);
 			biddingList = biddingService.queryBiddingListForSupplier(request);
 		}
+		
+		QueryBiddingListResponse response = new QueryBiddingListResponse();
 		Page page = request.getPage();
-		page.setTotal(count);
 		response.setBiddingList(biddingList);
 		response.setPage(page);
 		
@@ -101,17 +101,15 @@ public class BiddingController {
 	@PostMapping("/queryBiddingCommentList")
 	public @ResponseBody QueryBiddingCommentResponse queryBiddingCommentList(@RequestBody QueryBiddingCommentRequest request) {
 		
-		request.getPage().setRowNumber();
 		List<BiddingComment> list = new ArrayList<>();
 		
 		Integer count = biddingService.countBiddingCommentList(request);
 		if(count > 0) {
+			request.getPage().init(count);;
 			list = biddingService.queryBiddingCommentList(request);
 		}
 		
 		Page page = request.getPage();
-		page.setTotal(count);
-		
 		QueryBiddingCommentResponse response = new QueryBiddingCommentResponse();
 		response.setBiddingCommentList(list);
 		response.setPage(page);

@@ -51,17 +51,15 @@ public class BargainController {
 	@PostMapping("/queryBargainList")
 	public @ResponseBody QueryBargainListResponse queryBargainList(@RequestBody QueryBargainListRequest request) {
 		
-		request.getPage().setRowNumber();
-		
 		List<Bargain> bargainList = new ArrayList<>();
 		Long count = bargainService.countBargainList(request);
 		if(count > 0){
+			request.getPage().init(Integer.valueOf(count.toString()));
+			
 			bargainList = bargainService.queryBargainList(request);
 		}
 		
 		Page page = request.getPage();
-		page.setTotal(Integer.valueOf(count.toString()));
-		
 		QueryBargainListResponse response = new QueryBargainListResponse();
 		response.setBargainList(bargainList);
 		response.setPage(page);
