@@ -35,8 +35,9 @@
       
       <select id="queryBiddingSupplerCategory" 
       	parameterType="java.lang.Long"
-      	resultType="java.lang.Integer">
-      	select categoryid
+      	resultType="com.team.purchasing.bean.SupplierCategory">
+      	select categoryid as id,
+      		   categoryname as name
       	from tb_bidding_supplier_category
       	where biddingid = #{id}
       </select>
@@ -142,12 +143,14 @@
    		insert into tb_bidding_supplier_category(
    			biddingid,
 			categoryid,
+			categoryname,
 			createtime
    		)values
-   		<foreach collection="categoryIdList" item="categoryId" index="index" separator=",">
+   		<foreach collection="supplierCategoryList" item="supplierCategory" index="index" separator=",">
    		(	
    			#{biddingId},
-   			#{categoryId},
+   			#{supplierCategory.id},
+   			#{supplierCategory.name},
    			getdate()
    		)
    		</foreach>

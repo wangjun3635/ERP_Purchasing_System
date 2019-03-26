@@ -20,7 +20,7 @@ public class BiddingSupplierCategory {
 	/**
 	 * 分类id
 	 */
-	private List<Integer> categoryIdList;
+	private List<SupplierCategory> supplierCategoryList;
 	
 	/**
 	 * 分类名称

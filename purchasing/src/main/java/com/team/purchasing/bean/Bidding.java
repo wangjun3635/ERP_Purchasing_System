@@ -30,7 +30,7 @@ public class Bidding {
 	private Integer quantity;
 	
 	@ApiModelProperty(value = "供应商类型类表")
-	private List<Integer> supplierCategoryList;
+	private List<SupplierCategory> supplierCategoryList;
 	
 	@ApiModelProperty(value = "供应商回复有效天数")
 	private Integer expireDay;
