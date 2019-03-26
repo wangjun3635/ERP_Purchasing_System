@@ -48,42 +48,40 @@
 
     <sql id="baseQuery">
         <if test="productName != null">
-            'name' like '%#{productName}%'
+            and tp.name like '%${productName}%'
         </if>
         <if test="barCode != null">
-            and barCode like '%#{barCode}%'
+            and tp.barCode like '%${barCode}%'
         </if>
         <if test="unit != null">
-            and unit=#{unit}
+            and tp.unit='${unit}'
         </if>
         <if test="unitPrice != null">
-            and unitPrice=#{unitPrice}
+            and tp.unitPrice=${unitPrice}
         </if>
         <if test="deliveryType != null">
-            and deliveryType=#{deliveryType}
+            and tp.deliveryType=${deliveryType}
         </if>
         <if test="productLevelFirst != null">
-            and firstlevel=#{productLevelFirst}
+            and tp.firstlevel=${productLevelFirst}
         </if>
         <if test="productLevelSecond != null">
-            and secondlevel=#{productLevelSecond}
+            and tp.secondlevel=${productLevelSecond}
         </if>
         <if test="productLevelThird != null">
-            and thirdlevel=#{productLevelThird}
+            and tp.thirdlevel=${productLevelThird}
         </if>
         <if test="supplierName != null">
-            and supplierId in (select id from tb_supplier where name like '%#{supplierName, jdbcType = VARCHAR}%')
+            and ts.name like '%${supplierName}%'
         </if>
         <if test="salesAreaType != null">
-            and supplierId in (select id from tb_supplier where salesAreaType=#{salesAreaType, jdbcType = VARCHAR})
+            and ts.salesAreaType=${salesAreaType}
         </if>
         <if test="salesProvince != null">
-            and supplierId in (select tssp.id from tb_supplier_sales_province tssp left join tb_supplier ts
-            on tssp.supplierid = ts.id
-            where tssp.provinceid=#{salesProvince, jdbcType = VARCHAR})
+            and tssp.provinceid=${salesProvince}
         </if>
 		<if test="brandName != null">
-            and brandId in (select id from tb_brand where name=#{brandName, jdbcType = VARCHAR})
+            and tb.name='${brandName}'
 		</if>
 
     </sql>
@@ -133,7 +131,10 @@
         o.modifyUserId
         from
         (select row_number() over(order by modifyTime desc, unitPrice desc ) as rownumber, * from
-        ( select * from tb_product
+        ( select tp.* from tb_product tp
+        left join tb_supplier ts on tp.supplierId = ts.id
+        left join tb_supplier_sales_province tssp on ts.id =  tssp.supplierid
+        left join tb_brand tb on tp.brandId = tb.id
           <where>
               <include refid="baseQuery" />
           </where> ) as oo  )
@@ -143,7 +144,10 @@
     <select id="queryProductCount" resultType="java.lang.Integer" >
         select
         count(*)
-        from (select * from tb_product
+        from (select tp.* from tb_product tp
+        left join tb_supplier ts on tp.supplierId = ts.id
+        left join tb_supplier_sales_province tssp on ts.id =  tssp.supplierid
+        left join tb_brand tb on tp.brandId = tb.id
         <where>
             <include refid="baseQuery"/>
         </where>) t
