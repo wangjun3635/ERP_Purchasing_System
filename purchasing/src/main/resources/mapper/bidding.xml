@@ -113,7 +113,8 @@
    </select>
    
    <insert id="createBidding" 
-   		parameterType="com.team.purchasing.controller.request.OperateBiddingCmd">
+   		parameterType="com.team.purchasing.controller.request.OperateBiddingCmd"
+   		 useGeneratedKeys="true" keyProperty="bidding.id">
    		insert into tb_bidding(
 			hcId,
 			brandName,

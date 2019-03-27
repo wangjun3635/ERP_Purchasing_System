@@ -34,7 +34,7 @@ public class BiddingServiceImpl implements BiddingService {
 		
 		BiddingSupplierCategory biddingSupplierCategory = new BiddingSupplierCategory();
 		
-		biddingSupplierCategory.setBiddingId(id);
+		biddingSupplierCategory.setBiddingId(cmd.getBidding().getId());
 		biddingSupplierCategory.setSupplierCategoryList(cmd.getBidding().getSupplierCategoryList());
 		bidingDao.createBiddingSupplierCategory(biddingSupplierCategory);
 		
