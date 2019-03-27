@@ -67,10 +67,34 @@
    			t.*
    		from 
    			(select 
-   			(SELECT ROW_NUMBER() OVER (order by createTime DESC )) AS rownum ,
-   			<include refid="sql_queryBargainList"></include>
-   			from tb_bargain
-   			<include refid="where_queryBargainList"></include>
+   			(SELECT ROW_NUMBER() OVER (order by b.createTime DESC )) AS rownum ,
+   		        b.id,
+				b.productId,
+				p.name as productName,
+				b.supplierId,
+				b.userId,
+				b.hcId,
+				b.unitPrice,
+				b.quantity,
+				b.expireDay,
+				b.remark,
+				b.createTime,
+				b.createUserId,
+			 	b.modifytime, 
+			 	b.modifyuserid
+   			from tb_bargain b
+   			left join tb_product p
+   			on b.productId = p.id
+   			where 1=1
+		   	<if test="userId != null">
+			 and b.userId = #{userId}
+			</if>
+			<if test="hcId != null">
+			 and b.hcId = #{hcId}
+			</if>
+			<if test="supplierId != null">
+			 and b.supplierId = #{supplierId}
+			</if>
    			) t
    		where t.rownum <![CDATA[ > ]]> #{page.rowNumber}
 

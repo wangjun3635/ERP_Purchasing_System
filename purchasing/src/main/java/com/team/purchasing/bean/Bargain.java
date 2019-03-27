@@ -16,6 +16,9 @@ public class Bargain {
 	@ApiModelProperty(value = "产品id")
 	private Long productId;
 	
+	@ApiModelProperty(value = "产品名称")
+	private String productName;
+	
 	@ApiModelProperty(value = "供应商id")
 	private Long supplierId;
 	
