@@ -50,6 +50,6 @@ public class BargainServiceImpl implements BargainService {
 		
 		List<BargainComment> list = bargainDao.queryBargainCommentList(request);
 		
-		return null;
+		return list;
 	}
 }
