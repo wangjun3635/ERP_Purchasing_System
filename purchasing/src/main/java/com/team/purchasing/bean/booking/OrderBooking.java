@@ -19,9 +19,9 @@ public class OrderBooking {
     @ApiModelProperty(value = "订单预定id")
     private int id;
 
-    /** 商品id **/
-    @ApiModelProperty(value = "商品id")
-    private List<Integer> productIds;
+    /** 商品快照 **/
+    @ApiModelProperty(value = "商品快照")
+    private List<ProductStamp> productStamp;
 
     /** 用户id **/
     @ApiModelProperty(value = "用户id")

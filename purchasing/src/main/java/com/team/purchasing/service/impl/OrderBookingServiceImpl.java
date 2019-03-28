@@ -1,6 +1,8 @@
 package com.team.purchasing.service.impl;
 
+import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.booking.OrderBooking;
+import com.team.purchasing.bean.booking.ProductStamp;
 import com.team.purchasing.bean.orderproduct.OrderProduct;
 import com.team.purchasing.mapper.booking.OrderBookingDao;
 import com.team.purchasing.mapper.orderproduct.OrderProductDao;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -35,23 +38,37 @@ public class OrderBookingServiceImpl implements OrderBookingService {
     public int createBookingOrder(OrderBooking orderBooking) {
 
         try {
+
+            //获取产品快照信息
+            List<ProductStamp> productStampList = orderBooking.getProductStamp();
+
+            //计算总金额
+            BigDecimal totalAmount = productStampList.stream()
+                    .map(productStamp -> productStamp.getProductPrice()
+                            .multiply(new BigDecimal(productStamp.getProductQuantity())))
+                    // 使用reduce聚合函数,实现累加器
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+            orderBooking.setTotalAmount(totalAmount);
+
             int result = orderBookingDao.createBookingOrder(orderBooking);
             int bookingOrderId = orderBooking.getId();
 
             //生成订单商品快照订单
-            List<Integer> productIds = orderBooking.getProductIds();
             OrderProduct orderProduct = new OrderProduct();
 
             //初始化orderProduct快照信息
             orderProduct.setOrderId(bookingOrderId);
             orderProduct.setOrderNumber(orderBooking.getOrderNumber());
 
-            // TODO: 4/3/19 订单商品快照 
-            productIds.stream()
-                    .filter(x -> x != null)
-                    .forEach(x -> {
+            // TODO: 4/3/19 订单商品快照
+            productStampList.stream()
+                    .filter(productStamp -> productStamp != null)
+                    .forEach(productStamp -> {
                         try {
-                            orderProduct.setProductId(x);
+                            orderProduct.setProductId(productStamp.getProductId());
+                            orderProduct.setProductPrice(productStamp.getProductPrice());
+                            orderProduct.setProductQuantity(productStamp.getProductQuantity());
                             orderProductDao.addOrderProduct(orderProduct);
                         }catch (Exception e) {
                             log.error("快照数据生成失败,orderId为：{}, productId为:{}", bookingOrderId, x , e);
