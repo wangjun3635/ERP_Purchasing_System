@@ -66,7 +66,7 @@
         and Convert(date,createTime,23)=cast(#{order.createTime} as datetime) <!--  to_date(#{order.createTime}, 'YYYY-MM-DD') -->
       </if>
       <!-- 默认查询最近6个月订单信息 -->
-      <if test="order.orderStatus != null or order.orderNumber != null or order.createTime != null">
+      <if test="order.orderStatus == null and order.orderNumber == null and order.createTime != null">
         and datediff(month,modifytime,getdate()) <![CDATA[ <= ]]> 6
       </if>
       
