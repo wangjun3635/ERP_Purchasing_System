@@ -55,7 +55,7 @@
     </select>
 
     <sql id="baseQuery">
-      where 1=1 and datediff(month,modifytime,getdate()) <![CDATA[ <= ]]> 6
+      where 1=1
       <if test="order.orderStatus != null">
         and orderStatus=#{order.orderStatus}
       </if>
@@ -63,7 +63,11 @@
         and orderNumber=#{order.orderNumber}
       </if>
       <if test="order.createTime != null">
-        and createTime=cast(#{order.createTime} as datetime) <!--  to_date(#{order.createTime}, 'YYYY-MM-DD') -->
+        and Convert(date,createTime,23)=cast(#{order.createTime} as datetime) <!--  to_date(#{order.createTime}, 'YYYY-MM-DD') -->
+      </if>
+      <!-- 默认查询最近6个月订单信息 -->
+      <if test="order.orderStatus != null or order.orderNumber != null or order.createTime != null">
+        and datediff(month,modifytime,getdate()) <![CDATA[ <= ]]> 6
       </if>
       
     </sql>
