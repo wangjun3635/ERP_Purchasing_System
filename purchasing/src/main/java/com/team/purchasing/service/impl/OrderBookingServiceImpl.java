@@ -1,13 +1,11 @@
 package com.team.purchasing.service.impl;
 
-import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.booking.OrderBooking;
 import com.team.purchasing.bean.booking.ProductStamp;
 import com.team.purchasing.bean.orderproduct.OrderProduct;
 import com.team.purchasing.mapper.booking.OrderBookingDao;
 import com.team.purchasing.mapper.orderproduct.OrderProductDao;
 import com.team.purchasing.service.OrderBookingService;
-import com.team.purchasing.service.OrderProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,9 +27,6 @@ public class OrderBookingServiceImpl implements OrderBookingService {
     
     @Resource
     private OrderProductDao orderProductDao;
-
-    @Resource
-    private OrderProductService orderProductService;
 
     @Override
     @Transactional

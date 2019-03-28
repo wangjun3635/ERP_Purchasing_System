@@ -17,7 +17,7 @@
 
     <sql id="baseQuery">
         <if test="name != null">
-            'name' like '%' + #{name} + '%'
+            dbo.f_GetPy(name) like '#{name}%'
         </if>
     </sql>
 
@@ -41,7 +41,7 @@
     	o.modifyTime,
     	o.modifyUserId
     	from
-        (select row_number() over(order by modifyTime desc, chinesePhonetic asc) as rownumber, * from
+        (select row_number() over(order by chinesePhonetic asc) as rownumber, * from
         ( select * from tb_brand
           <where>
               <include refid="baseQuery" />
