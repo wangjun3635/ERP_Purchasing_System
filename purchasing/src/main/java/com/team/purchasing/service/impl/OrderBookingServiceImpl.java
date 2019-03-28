@@ -67,6 +67,7 @@ public class OrderBookingServiceImpl implements OrderBookingService {
                     .forEach(productStamp -> {
                         try {
                             orderProduct.setProductId(productStamp.getProductId());
+                            orderProduct.setProductName(productStamp.getProductName());
                             orderProduct.setProductPrice(productStamp.getProductPrice());
                             orderProduct.setProductQuantity(productStamp.getProductQuantity());
                             orderProductDao.addOrderProduct(orderProduct);
