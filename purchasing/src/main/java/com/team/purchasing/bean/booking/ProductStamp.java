@@ -29,6 +29,6 @@ public class ProductStamp implements Serializable {
     private BigDecimal productPrice;
 
     @ApiModelProperty(value = "购买数量")
-    private int productQuantity;
+    private Integer productQuantity;
 
 }

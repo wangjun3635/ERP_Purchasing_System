@@ -16,15 +16,15 @@ import java.math.BigDecimal;
 public class Order {
 
     @ApiModelProperty(value = "订单id")
-    private int id;
+    private Integer id;
 
     /** 用户id **/
     @ApiModelProperty(value = "用户id")
-    private int userId;
+    private Integer userId;
 
     /** 医院或者院校id **/
     @ApiModelProperty(value = "医院或者院校id")
-    private int HCId;
+    private Integer HCId;
 
     /** 订单编号 **/
     @ApiModelProperty(value = "订单编号")
@@ -36,7 +36,7 @@ public class Order {
 
     /** 订单状态 1：预订单 2：科研处已审核 3：采购处已审核 **/
     @ApiModelProperty(value = "订单状态 1：预订单 2：科研处已审核 3：采购处已审核")
-    private int orderStatus;
+    private Integer orderStatus;
 
     /** 订单备注 **/
     @ApiModelProperty(value = "订单备注")
@@ -76,7 +76,7 @@ public class Order {
 
     /** 创建用户id **/
     @ApiModelProperty(value = "创建用户id")
-    private int createUserId;
+    private Integer createUserId;
 
     /** 最近一次修改时间 **/
     @ApiModelProperty(value = "最近一次修改时间")
@@ -84,7 +84,7 @@ public class Order {
 
     /** 最近修改用户id **/
     @ApiModelProperty(value = "最近修改用户id")
-    private int updateUserId;
+    private Integer updateUserId;
 
     @ApiModelProperty(value = "分页")
     private Page page;

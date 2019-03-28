@@ -15,19 +15,19 @@ import lombok.Data;
 public class ProductComment {
 
     @ApiModelProperty(value = "产品评价id")
-    private int id;
+    private Integer id;
 
     @ApiModelProperty(value = "商品id")
-    private int productId;
+    private Integer productId;
 
     @ApiModelProperty(value = "用户id")
-    private int userId;
+    private Integer userId;
 
     @ApiModelProperty(value = "用户别名")
     private String userNickName;
 
     @ApiModelProperty(value = "评价星数：0->5")
-    private int star;
+    private Integer star;
 
     @ApiModelProperty(value = "评价内容")
     private String comment;
@@ -36,13 +36,13 @@ public class ProductComment {
     private String createTime;
 
     @ApiModelProperty(value = "创建人")
-    private int createUserId;
+    private Integer createUserId;
 
     @ApiModelProperty(value = "最近更新时间")
     private String updateTime;
 
     @ApiModelProperty(value = "最近更新人")
-    private int updateUserId;
+    private Integer updateUserId;
 
     private Page page;
 

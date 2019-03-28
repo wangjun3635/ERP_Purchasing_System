@@ -15,27 +15,27 @@ import lombok.Data;
 public class ShopCar {
 
     @ApiModelProperty(value = "购物车id")
-    private int id;
+    private Integer id;
 
     /** 商品Id **/
     @ApiModelProperty(value = "产品id")
-    private int productId;
+    private Integer productId;
 
     /** 医院学校供应商id **/
     @ApiModelProperty(value = "医院学校供应商id")
-    private int HSCId;
+    private Integer HSCId;
 
     /** 用户id **/
     @ApiModelProperty(value = "用户id")
-    private int userId;
+    private Integer userId;
 
     /** 数量 **/
     @ApiModelProperty(value = "数量")
-    private int quantity;
+    private Integer quantity;
 
     /** 删除标志（0未删除，1删除） **/
     @ApiModelProperty(value = "删除标志（0未删除，1删除")
-    private int isValid;
+    private Integer isValid;
 
     /** 创建时间 **/
     @ApiModelProperty(value = "创建时间")
@@ -43,7 +43,7 @@ public class ShopCar {
 
     /** 创建人 **/
     @ApiModelProperty(value = "创建人")
-    private int createUserId;
+    private Integer createUserId;
 
     /** 最近更新时间 **/
     @ApiModelProperty(value = "最近更新时间")
@@ -51,7 +51,7 @@ public class ShopCar {
 
     /** 最近更新人id **/
     @ApiModelProperty(value = "最近更新人id")
-    private int updateUserId;
+    private Integer updateUserId;
 
     @ApiModelProperty(value = "分页")
     private Page page;

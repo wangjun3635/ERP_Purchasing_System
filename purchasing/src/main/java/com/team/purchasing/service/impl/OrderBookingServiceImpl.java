@@ -72,7 +72,7 @@ public class OrderBookingServiceImpl implements OrderBookingService {
                         }
                     });
            
-            return result;
+            return bookingOrderId;
         }catch (Exception e){
             log.error("创建订单失败, 订单对象为:{}", orderBooking, e);
             throw new RuntimeException("创建预订单失败...");

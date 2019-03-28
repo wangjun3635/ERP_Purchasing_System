@@ -15,19 +15,19 @@ import java.math.BigDecimal;
 public class OrderProduct {
 
     @ApiModelProperty(value = "订单产品id")
-    private int id;
+    private Integer id;
 
     @ApiModelProperty(value = "订单id")
-    private int orderId;
+    private Integer orderId;
 
     @ApiModelProperty(value = "订单编号")
     private String orderNumber;
 
     @ApiModelProperty(value = "产品id")
-    private int productId;
+    private Integer productId;
 
     @ApiModelProperty(value = "品牌id")
-    private int brandId;
+    private Integer brandId;
 
     @ApiModelProperty(value = "产品名称")
     private String productName;
@@ -36,18 +36,18 @@ public class OrderProduct {
     private BigDecimal productPrice;
 
     @ApiModelProperty(value = "购买数量")
-    private int productQuantity;
+    private Integer productQuantity;
 
     @ApiModelProperty(value = "创建时间")
     private String createTime;
 
     @ApiModelProperty(value = "创建人")
-    private int createUserId;
+    private Integer createUserId;
 
     @ApiModelProperty(value = "最近更新时间")
     private String updateTime;
 
     @ApiModelProperty(value = "最近更新人")
-    private int updateUserId;
+    private Integer updateUserId;
 
 }

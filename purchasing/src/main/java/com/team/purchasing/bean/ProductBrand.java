@@ -14,7 +14,7 @@ import lombok.Data;
 public class ProductBrand {
 
     @ApiModelProperty(value = "产品品牌id")
-    private int id;
+    private Integer id;
 
     @ApiModelProperty(value = "产品品牌name")
     private String name;
@@ -29,19 +29,19 @@ public class ProductBrand {
     private String brandIntroduction;
 
     @ApiModelProperty(value = "删除标志（0未删除，1删除）")
-    private int isValid;
+    private Integer isValid;
 
     @ApiModelProperty(value = "创建时间")
     private String createTime;
 
     @ApiModelProperty(value = "创建人")
-    private int createUserId;
+    private Integer createUserId;
 
     @ApiModelProperty(value = "最近更新时间")
     private String updateTime;
 
     @ApiModelProperty(value = "最近更新人")
-    private int updateUserId;
+    private Integer updateUserId;
 
     private Page page;
 
