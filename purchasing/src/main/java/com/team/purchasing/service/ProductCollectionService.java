@@ -19,4 +19,6 @@ public interface ProductCollectionService {
 
     public int addProductCollection(ProductCollection productCollection);
 
+    public int queryProductCollectionCount(ProductCollection productCollection);
+
 }

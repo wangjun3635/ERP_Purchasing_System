@@ -130,7 +130,7 @@
         o.modifyTime,
         o.modifyUserId
         from
-        (select row_number() over(order by modifyTime desc, unitPrice desc ) as rownumber, * from
+        (select row_number() over(order by unitPrice desc ) as rownumber, * from
         ( select tp.* from tb_product tp
         left join tb_supplier ts on tp.supplierId = ts.id
         left join tb_supplier_sales_province tssp on ts.id =  tssp.supplierid

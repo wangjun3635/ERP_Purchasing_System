@@ -34,6 +34,11 @@ public class ProductCollectionController {
 
         ProductCollection productCollection = request.getProductCollection();
 
+        //1 更新page
+        Integer count = productCollectionService.queryProductCollectionCount(productCollection);
+
+        productCollection.getPage().init(count);
+
         List<ProductCollection> productCollections = productCollectionService.queryProductCollectionList(productCollection);
 
         ProductCollectionResponse productCollectionResponse = new ProductCollectionResponse();

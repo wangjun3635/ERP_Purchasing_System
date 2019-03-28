@@ -20,7 +20,7 @@
         insert into tb_product_comment(
          productId,
          userId,
-         userNickName
+         userNickName,
          star,
          comment,
          createTime,
@@ -28,7 +28,7 @@
          modifyTime,
          modifyUserId) values(#{productComment.productId},
           #{productComment.userId},
-          #{productComment.userNickName}
+          #{productComment.userNickName},
           #{productComment.star},
           #{productComment.comment},
           GETDATE(),

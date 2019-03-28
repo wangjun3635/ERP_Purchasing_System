@@ -19,4 +19,5 @@ public interface ProductCollectionDao {
 
     public int addProductCollection(ProductCollection productCollection);
 
+    public int queryProductCollectionCount(ProductCollection productCollection);
 }

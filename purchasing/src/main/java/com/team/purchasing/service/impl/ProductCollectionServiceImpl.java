@@ -82,4 +82,17 @@ public class ProductCollectionServiceImpl implements ProductCollectionService {
             throw new RuntimeException("收藏夹添加失败");
         }
     }
+
+    @Override
+    public int queryProductCollectionCount(ProductCollection productCollection) {
+
+        try {
+            int result = productCollectionDao.queryProductCollectionCount(productCollection);
+            return result;
+        }catch (Exception e) {
+            log.error("收藏夹查询count失败");
+            throw new RuntimeException("收藏夹查询count失败");
+        }
+
+    }
 }

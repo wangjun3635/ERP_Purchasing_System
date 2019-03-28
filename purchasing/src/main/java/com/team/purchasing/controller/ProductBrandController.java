@@ -1,12 +1,8 @@
 package com.team.purchasing.controller;
 
-import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.ProductBrand;
-import com.team.purchasing.bean.ProductSupplierRelation;
 import com.team.purchasing.controller.request.ProductBrandRequest;
-import com.team.purchasing.controller.request.ProductSupplierRequest;
 import com.team.purchasing.controller.response.ProductBrandResponse;
-import com.team.purchasing.controller.response.ProductSupplierResponse;
 import com.team.purchasing.service.ProductBrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

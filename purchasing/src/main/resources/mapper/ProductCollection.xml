@@ -48,8 +48,29 @@
     	o.modifyUserId
     	from
         (select row_number() over(order by modifyTime desc) as rownumber, * from
-        ( select * from tb_collection ) as oo  )
+        ( select * from tb_collection
+        <where>
+            <if test="hcId != null">
+                and hcId=#{hcId}
+            </if>
+            <if test="userId != null">
+                and userId=#{userId}
+            </if>
+        </where>) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
+    </select>
+
+    <select id="queryProductCollectionCount" resultType="java.lang.Integer">
+        select count(*) from (select * from tb_collection
+          <where>
+              <if test="hcId != null">
+                  and hcId=#{hcId}
+              </if>
+              <if test="userId != null">
+                  and userId=#{userId}
+              </if>
+          </where>
+        )
     </select>
 
     <update id="updateProductCollection">
