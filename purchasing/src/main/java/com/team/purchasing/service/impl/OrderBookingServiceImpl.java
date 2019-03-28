@@ -71,7 +71,7 @@ public class OrderBookingServiceImpl implements OrderBookingService {
                             orderProduct.setProductQuantity(productStamp.getProductQuantity());
                             orderProductDao.addOrderProduct(orderProduct);
                         }catch (Exception e) {
-                            log.error("快照数据生成失败,orderId为：{}, productId为:{}", bookingOrderId, x , e);
+                            log.error("快照数据生成失败,orderId为：{}, productId为:{}", bookingOrderId, productStamp , e);
                             throw new RuntimeException("订单产品信息快照数据生成失败");
                         }
                     });
