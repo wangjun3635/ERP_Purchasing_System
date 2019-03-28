@@ -91,4 +91,7 @@ public class OrderBooking {
     @ApiModelProperty(value = "最近修改用户id")
     private Integer updateUserId;
 
+    @ApiModelProperty(value = "下单来源")
+    private Integer orderFrom;
+
 }

@@ -69,7 +69,8 @@
          createTime,
          createUserId,
          modifyTime,
-         modifyUserId) values(
+         modifyUserId,
+         orderFrom) values(
           #{userId},
           #{HCId},
           #{orderNumber},
@@ -86,7 +87,8 @@
           GETDATE(),
           #{createUserId},
           GETDATE(),
-          #{updateUserId});
+          #{updateUserId},
+          #{orderFrom});
     </insert>
 
 </mapper>

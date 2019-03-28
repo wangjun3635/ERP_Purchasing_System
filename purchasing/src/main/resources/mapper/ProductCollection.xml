@@ -70,7 +70,7 @@
                   and userId=#{userId}
               </if>
           </where>
-        )
+        )t
     </select>
 
     <update id="updateProductCollection">
