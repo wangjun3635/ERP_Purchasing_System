@@ -11,6 +11,9 @@ import lombok.Data;
 @Data
 public class QueryBargainListRequest extends GeneralRequest {
 
+	@ApiModelProperty(value = "询价id")
+	private Long id;
+	
 	@ApiModelProperty(value = "供应商id")
 	private Long supplierId;
 	
