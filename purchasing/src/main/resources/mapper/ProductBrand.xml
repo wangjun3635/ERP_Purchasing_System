@@ -17,7 +17,7 @@
 
     <sql id="baseQuery">
         <if test="name != null">
-            dbo.f_GetPy(name) like '#{name}%'
+            dbo.f_GetPy(name) like '${name}%'
         </if>
     </sql>
 
