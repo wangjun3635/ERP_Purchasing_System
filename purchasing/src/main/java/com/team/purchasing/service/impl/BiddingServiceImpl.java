@@ -61,8 +61,8 @@ public class BiddingServiceImpl implements BiddingService {
 	
 	@Override
 	public Long createBiddingComment(OperateBiddingCommentCmd cmd) {
-		Long id = bidingDao.createBiddingComment(cmd);
-		return id;
+		bidingDao.createBiddingComment(cmd);
+		return cmd.getBiddingComment().getId();
 	}
 
 	@Override

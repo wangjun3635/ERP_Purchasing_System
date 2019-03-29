@@ -4,7 +4,8 @@
 
    
    <insert id="createBargain" 
-   		parameterType="com.team.purchasing.controller.request.OperateBargainCmd">
+   		parameterType="com.team.purchasing.controller.request.OperateBargainCmd"
+   		useGeneratedKeys="true" keyProperty="bargain.id">
    		insert into tb_bargain (
    			productId,
    			userId,
@@ -40,9 +41,9 @@
 		quantity,
 		expireDay,
 		remark,
-		createTime,
+		CONVERT(CHAR(19), createTime, 20) as createTime,
 		createUserId,
-	 	modifytime, 
+	 	CONVERT(CHAR(19), modifyTime, 20) as modifyTime, 
 	 	modifyuserid	
    </sql>
    
@@ -56,6 +57,9 @@
 		</if>
 		<if test="supplierId != null">
 		 and supplierId = #{supplierId}
+		</if>
+		<if test="id != null">
+		 and id = #{id}
 		</if>
    </sql>
   
@@ -78,9 +82,9 @@
 				b.quantity,
 				b.expireDay,
 				b.remark,
-				b.createTime,
+				CONVERT(CHAR(19), b.createTime, 20) as createTime,
 				b.createUserId,
-			 	b.modifytime, 
+			 	CONVERT(CHAR(19), b.modifytime, 20) as modifytime, 
 			 	b.modifyuserid
    			from tb_bargain b
    			left join tb_product p
@@ -94,6 +98,9 @@
 			</if>
 			<if test="supplierId != null">
 			 and b.supplierId = #{supplierId}
+			</if>
+			<if test="id != null">
+			 and b.id = #{id}
 			</if>
    			) t
    		where t.rownum <![CDATA[ > ]]> #{page.rowNumber}
@@ -109,13 +116,14 @@
    </select>
    
    <insert id="createBargainComment"
-   	parameterType="com.team.purchasing.controller.request.BargainCommentCmd">
+   	parameterType="com.team.purchasing.controller.request.BargainCommentCmd"
+   	 useGeneratedKeys="true" keyProperty="bargainComment.id">
    		insert into tb_bargain_comment (
 			bargainId,
 			supplierId,
 			expireDay,
 			remark,
-			createTime,
+			CONVERT(CHAR(19), createTime, 20) as createTime,
 			createUserId 
    		)values (
    			#{bargainComment.bargainId},
@@ -133,7 +141,7 @@
 		supplierId,
 		expireDay,
 		remark,
-		createTime,
+		CONVERT(CHAR(19), createTime, 20) as createTime,
 		createUserId 
    </sql>
    

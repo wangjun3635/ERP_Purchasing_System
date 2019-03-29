@@ -40,4 +40,10 @@ public class Bargain {
 	@ApiModelProperty(value = "备注")
 	private String remark;
 	
+	@ApiModelProperty(value = "创建时间")
+	private String createTime;
+	
+	@ApiModelProperty(value = "创建人id")
+	private Long createUserId;
+	
 }

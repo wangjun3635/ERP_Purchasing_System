@@ -22,8 +22,8 @@ public class BargainServiceImpl implements BargainService {
 	
 	@Override
 	public Long createBargain(OperateBargainCmd cmd) {
-		Long id = bargainDao.createBargain(cmd);
-		return id;
+		bargainDao.createBargain(cmd);
+		return cmd.getBargain().getId();
 	}
 
 	@Override
@@ -41,13 +41,13 @@ public class BargainServiceImpl implements BargainService {
 	@Override
 	public Long createBargainComment(BargainCommentCmd cmd) {
 		
-		Long id = bargainDao.createBargainComment(cmd);
-		return id;
+		bargainDao.createBargainComment(cmd);
+		return cmd.getBargainComment().getId();
 	}
 	
 	@Override
 	public List<BargainComment> queryBargainCommentList(QueryBargainCommentListRequest request) {
-		
+		 
 		List<BargainComment> list = bargainDao.queryBargainCommentList(request);
 		
 		return list;

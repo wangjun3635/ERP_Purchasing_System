@@ -12,7 +12,7 @@
 		t.expireDay,
 		t.auditStatus,
 		t.remark,
-		t.createTime,
+		CONVERT(CHAR(19), t.createTime, 20) as t.createTime,
 		t.createUserId
 	</sql>
 
@@ -124,7 +124,7 @@
 			expireDay,
 			auditStatus,
 			remark,
-			createTime,
+			CONVERT(CHAR(19), createTime, 20) as createTime,
 			createUserId
    		)values(
    			#{baseUserInfo.hcId},
@@ -167,14 +167,15 @@
    </select>
    
    <insert id="createBiddingComment"
-   	parameterType="com.team.purchasing.controller.request.OperateBiddingCommentCmd">
+   	parameterType="com.team.purchasing.controller.request.OperateBiddingCommentCmd"
+   	 useGeneratedKeys="true" keyProperty="biddingComment.id">
    		insert into tb_bidding_comment(
 			biddingId,
 			supplierId,
 			unitPrice,
 			remark,
 			isSelected,
-			createTime,
+			CONVERT(CHAR(19), createTime, 20) as createTime,
 			createUserId
    		)values(
    			#{biddingComment.biddingId},
@@ -203,7 +204,7 @@
 			   t.unitPrice,
 			   t.remark,
 			   t.isSelected,
-			   t.createTime,
+			   CONVERT(CHAR(19), t.createTime, 20) as createTime,
 			   t.createUserId
 		from tb_bidding_comment t
 		left join tb_supplier t1

@@ -20,6 +20,13 @@ public class BargainComment {
 	@ApiModelProperty(value = "有效天数")
 	private Integer expireDay;
 	
+	/*
+	 * 用户是否可以进行下一步操作，
+	 * 当用户的操作大于供应商给定的有效期时，就不能进行下一步操作    此时值为：isContine:0
+	 */
+	@ApiModelProperty
+	private Integer isContine;
+	
 	@ApiModelProperty(value = "备注")
 	private String remark;
 	

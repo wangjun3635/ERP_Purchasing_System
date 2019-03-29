@@ -1,5 +1,7 @@
 package com.team.purchasing.controller.request;
 
+import javax.validation.constraints.NotNull;
+
 import com.team.purchasing.bean.BargainComment;
 import com.team.purchasing.common.GeneralRequest;
 
@@ -11,6 +13,7 @@ import lombok.Data;
 @Data
 public class BargainCommentCmd extends GeneralRequest{
 
+	@NotNull
 	@ApiModelProperty
 	private BargainComment bargainComment;
 }
