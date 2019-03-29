@@ -18,11 +18,11 @@
     <delete id="deleteShopCarProduct">
         delete from tb_shopcar
         <where>
-            <if test="userId != null">
-                and userId=#{userId}
+            <if test="shopCar.userId != null">
+                and userId=#{shopCar.userId}
             </if>
-            <if test="HSCId != null">
-                and HSCId=#{HSCId}
+            <if test="shopCar.HSCId != null">
+                and HSCId=#{shopCar.HSCId}
             </if>
         </where>
     </delete>
@@ -62,11 +62,11 @@
         (select row_number() over(order by modifyTime desc) as rownumber, * from
         ( select * from tb_shopcar
         <where>
-            <if test="userId != null">
-                and userId=#{userId}
+            <if test="shopCar.userId != null">
+                and userId=#{shopCar.userId}
             </if>
-            <if test="HSCId != null">
-                and HSCId=#{HSCId}
+            <if test="shopCar.HSCId != null">
+                and HSCId=#{shopCar.HSCId}
             </if>
         </where> ) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{shopCar.page.rowNumber}

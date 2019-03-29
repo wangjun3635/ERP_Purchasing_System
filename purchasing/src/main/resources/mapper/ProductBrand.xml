@@ -51,7 +51,7 @@
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 
-    <select id="queryProductBrandNameList" resultType="java.util.List">
+    <select id="queryProductBrandNameList" resultType="java.lang.String">
         select name from tb_brand group by name
     </select>
 

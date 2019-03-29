@@ -15,8 +15,8 @@
         <!--<result column="updateUserId" property="updateUserId" />-->
     <!--</resultMap>-->
 
-    <select id="getSupplierName" resultType="java.util.List">
-        select name from tb_supplier group by name;
+    <select id="getSupplierName" resultType="java.lang.String">
+        select name from tb_supplier group by name
     </select>
 
 </mapper>

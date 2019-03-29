@@ -161,7 +161,7 @@
         </where>) t
     </select>
 
-    <select id="queryProductTypeName" resultType="java.util.List">
+    <select id="queryProductTypeName" resultType="java.lang.String">
         select t.name from
           (select tpc.name as name from tb_product tp
           left join tb_product_category tpc on tp.firstlevel = tpc.id) t
