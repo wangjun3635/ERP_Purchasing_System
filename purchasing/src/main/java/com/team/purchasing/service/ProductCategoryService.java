@@ -10,4 +10,6 @@ public interface ProductCategoryService {
 
     public int updateProductCategory(ProductCategory productCategory);
 
+    public int addProductCategory(ProductCategory productCategory);
+
 }

@@ -15,4 +15,6 @@ public interface ProductBrandDao {
 
     public int queryProductBrandCount(ProductBrand productBrand);
 
+    public List<String> queryProductBrandNameList();
+
 }

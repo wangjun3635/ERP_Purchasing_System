@@ -5,7 +5,7 @@
     <update id="updateProductCategory">
         update tb_product_category set
          name=#{name},
-         level=#{level},
+         catelevel=#{level},
          parentid=#{parentid},
          isdeleted=#{isDeleted},
          <!-- createtime=GETDATE(),
@@ -14,5 +14,24 @@
          modifyUserId=#{updateUserId}
          where id=#{id}
     </update>
+
+    <insert id="addProductCategory">
+        insert into tb_product_category(name,
+         catelevel,
+         parentid,
+         isdeleted,
+         createtime,
+         createuserId,
+         modifyTime,
+         modifyUserId) values
+          (#{name},
+          #{level},
+          #{parentid},
+          #{isdeleted},
+          GETDATE(),
+          #{createuserId},
+          GETDATE(),
+          #{modifyUserId})
+    </insert>
 
 </mapper>

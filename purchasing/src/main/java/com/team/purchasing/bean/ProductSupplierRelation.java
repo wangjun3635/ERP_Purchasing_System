@@ -41,6 +41,9 @@ public class ProductSupplierRelation {
     private Integer deliveryType;
 
     //产品类别，一级、二级、三级
+    @ApiModelProperty("产品类型名称")
+    private String productTypeName;
+
     @ApiModelProperty(value = "产品类别：一级")
     private Integer productLevelFirst;
 

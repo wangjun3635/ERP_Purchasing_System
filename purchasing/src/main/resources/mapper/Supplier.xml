@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.purchasing.mapper.SupplierDao">
+
+    <!--<resultMap id="BaseResultMap" type="com.team.purchasing.bean.Supplier">-->
+        <!--<result column="id" property="id" />-->
+        <!--<result column="productId" property="productId" />-->
+        <!--<result column="HSCId" property="HSCId" />-->
+        <!--<result column="userId" property="userId" />-->
+        <!--<result column="quantity" property="quantity" />-->
+        <!--<result column="isValid" property="isValid" />-->
+        <!--<result column="createTime" property="createTime" />-->
+        <!--<result column="createUserId" property="createUserId" />-->
+        <!--<result column="updateTime" property="updateTime" />-->
+        <!--<result column="updateUserId" property="updateUserId" />-->
+    <!--</resultMap>-->
+
+    <select id="getSupplierName" resultType="java.util.List">
+        select name from tb_supplier group by name;
+    </select>
+
+</mapper>

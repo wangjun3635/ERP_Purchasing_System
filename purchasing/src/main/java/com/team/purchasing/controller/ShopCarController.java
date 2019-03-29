@@ -1,6 +1,7 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.shopcar.ShopCar;
+import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.shopcar.ShopCarRequest;
 import com.team.purchasing.controller.response.shopcar.ShopCarResponse;
 import com.team.purchasing.service.ShopCarService;
@@ -38,7 +39,14 @@ public class ShopCarController {
         int result = shopCarService.addShopCarProduct(shopCar);
 
         ShopCarResponse shopCarResponse = new ShopCarResponse();
-        shopCarResponse.getMessageInfo().setKey(String.valueOf(result));
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setCode("200");
+        if(result == 1) {
+            messageInfo.setMessageText("添加成功!");
+        }else {
+            messageInfo.setMessageText("添加失败!");
+        }
+        shopCarResponse.setMessageInfo(messageInfo);
 
         return shopCarResponse;
     }
@@ -51,7 +59,14 @@ public class ShopCarController {
         int result = shopCarService.deleteShopCarProduct(shopCar);
 
         ShopCarResponse shopCarResponse = new ShopCarResponse();
-        shopCarResponse.getMessageInfo().setKey(String.valueOf(result));
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setCode("200");
+        if(result == 1) {
+            messageInfo.setMessageText("删除成功!");
+        }else {
+            messageInfo.setMessageText("删除失败!");
+        }
+        shopCarResponse.setMessageInfo(messageInfo);
 
         return shopCarResponse;
     }

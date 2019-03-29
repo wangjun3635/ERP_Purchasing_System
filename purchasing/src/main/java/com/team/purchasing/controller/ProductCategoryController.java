@@ -43,9 +43,30 @@ public class ProductCategoryController {
         MessageInfo messageInfo = new MessageInfo();
         messageInfo.setCode("200");
         if(result == 1) {
-            messageInfo.setMessageText("新增成功!");
+            messageInfo.setMessageText("更新成功!");
         }else {
-            messageInfo.setMessageText("新增失败!");
+            messageInfo.setMessageText("更新失败!");
+        }
+        productCategoryResponse.setMessageInfo(messageInfo);
+
+        return productCategoryResponse;
+    }
+
+    @PostMapping("/addProductCategory")
+    @ApiOperation(value="产品类型数据新增", notes = "产品类型数据新增")
+    public ProductCategoryResponse addProductCategory(@RequestBody ProductCategoryRequest request){
+
+        ProductCategory productCategory = buildUserInfo(request);
+
+        int result = productCategoryService.addProductCategory(productCategory);
+
+        ProductCategoryResponse productCategoryResponse = new ProductCategoryResponse();
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setCode("200");
+        if(result == 1) {
+            messageInfo.setMessageText("更新成功!");
+        }else {
+            messageInfo.setMessageText("更新失败!");
         }
         productCategoryResponse.setMessageInfo(messageInfo);
 

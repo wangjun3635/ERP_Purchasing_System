@@ -63,7 +63,7 @@
             and tp.deliveryType=${deliveryType}
         </if>
         <if test="productLevelFirst != null">
-            and tp.firstlevel=${productLevelFirst}
+            and tpc.name=${productLevelFirst}
         </if>
         <if test="productLevelSecond != null">
             and tp.secondlevel=${productLevelSecond}
@@ -85,6 +85,9 @@
         </if>
         <if test="brandId != null">
             and tb.id=#{brandId}
+        </if>
+        <if test="productTypeName != null">
+            and tpc.name = #{productTypeName}
         </if>
 
     </sql>
@@ -138,6 +141,7 @@
         left join tb_supplier ts on tp.supplierId = ts.id
         left join tb_supplier_sales_province tssp on ts.id =  tssp.supplierid
         left join tb_brand tb on tp.brandId = tb.id
+        left join tb_product_category tpc on tp.firstlevel = tpc.id
         <where>
             <include refid="baseQuery" />
         </where> ) as oo  )
@@ -151,9 +155,17 @@
         left join tb_supplier ts on tp.supplierId = ts.id
         left join tb_supplier_sales_province tssp on ts.id =  tssp.supplierid
         left join tb_brand tb on tp.brandId = tb.id
+        left join tb_product_category tpc on tp.firstlevel = tpc.id
         <where>
             <include refid="baseQuery"/>
         </where>) t
+    </select>
+
+    <select id="queryProductTypeName" resultType="java.util.List">
+        select t.name from
+          (select tpc.name as name from tb_product tp
+          left join tb_product_category tpc on tp.firstlevel = tpc.id) t
+        group by name;
     </select>
 
 </mapper>

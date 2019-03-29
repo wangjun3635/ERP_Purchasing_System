@@ -31,4 +31,17 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
             throw new RuntimeException("产品类型更新出现错误..");
         }
     }
+
+    @Override
+    @Transactional
+    public int addProductCategory(ProductCategory productCategory) {
+
+        try {
+            int result = productCategoryDao.addProductCategory(productCategory);
+            return result;
+        }catch (Exception e) {
+            log.error("产品类型添加出现错误, 信息为：{}", productCategory, e);
+            throw new RuntimeException("产品类型添加出现错误..");
+        }
+    }
 }

@@ -15,4 +15,6 @@ public interface ProductDao {
 
     public int queryProductCount(ProductSupplierRelation productSupplierRelation);
 
+    public List<String> queryProductTypeName();
+
 }
