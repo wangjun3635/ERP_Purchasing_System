@@ -80,9 +80,12 @@
         <if test="salesProvince != null">
             and tssp.provinceid=${salesProvince}
         </if>
-		<if test="brandName != null">
+        <if test="brandName != null">
             and tb.name='${brandName}'
-		</if>
+        </if>
+        <if test="brandId != null">
+            and tb.id=#{brandId}
+        </if>
 
     </sql>
 
@@ -135,9 +138,9 @@
         left join tb_supplier ts on tp.supplierId = ts.id
         left join tb_supplier_sales_province tssp on ts.id =  tssp.supplierid
         left join tb_brand tb on tp.brandId = tb.id
-          <where>
-              <include refid="baseQuery" />
-          </where> ) as oo  )
+        <where>
+            <include refid="baseQuery" />
+        </where> ) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 

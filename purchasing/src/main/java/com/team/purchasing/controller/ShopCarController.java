@@ -33,7 +33,8 @@ public class ShopCarController {
     @ApiOperation(value="添加购物车商品", notes = "添加购物车商品")
     public ShopCarResponse addShopCarProduct(@RequestBody ShopCarRequest shopCarRequest){
 
-        ShopCar shopCar = shopCarRequest.getShopCar();
+        ShopCar shopCar = buildUserInfo(shopCarRequest);
+        
         int result = shopCarService.addShopCarProduct(shopCar);
 
         ShopCarResponse shopCarResponse = new ShopCarResponse();
@@ -46,7 +47,7 @@ public class ShopCarController {
     @ApiOperation(value="删除购物车商品", notes = "删除购物车商品")
     public ShopCarResponse deleteShopCarProduct(@RequestBody ShopCarRequest shopCarRequest){
 
-        ShopCar shopCar = shopCarRequest.getShopCar();
+        ShopCar shopCar = buildUserInfo(shopCarRequest);
         int result = shopCarService.deleteShopCarProduct(shopCar);
 
         ShopCarResponse shopCarResponse = new ShopCarResponse();
@@ -59,7 +60,7 @@ public class ShopCarController {
     @ApiOperation(value="查询购物车商品", notes = "查询购物车商品")
     public ShopCarResponse queryShopCarListById(@RequestBody ShopCarRequest shopCarRequest){
     	
-    	ShopCar shopCar = shopCarRequest.getShopCar();
+    	ShopCar shopCar = buildUserInfo(shopCarRequest);
     	List<ShopCar> shopCarList = shopCarService.queryShopCarList(shopCar);
     	
     	ShopCarResponse shopCarResponse = new ShopCarResponse();
@@ -67,6 +68,21 @@ public class ShopCarController {
         shopCarResponse.setPage(shopCar.getPage());
     	
     	return shopCarResponse;
+    }
+
+    private ShopCar buildUserInfo(ShopCarRequest shopCarRequest) {
+
+        ShopCar shopCar = shopCarRequest.getShopCar();
+
+        shopCar.setUserId(shopCarRequest.getBaseUserInfo().getUserId());
+        shopCar.setHSCId(shopCarRequest.getBaseUserInfo().getHcId());
+
+        shopCar.setCreateUserId(shopCarRequest.getBaseUserInfo().getUserId() == null
+                ? shopCarRequest.getBaseUserInfo().getHcId() : shopCarRequest.getBaseUserInfo().getUserId());
+        shopCar.setUpdateUserId(shopCarRequest.getBaseUserInfo().getUserId() == null
+                ? shopCarRequest.getBaseUserInfo().getHcId() : shopCarRequest.getBaseUserInfo().getUserId());
+
+        return shopCar;
     }
 
 }

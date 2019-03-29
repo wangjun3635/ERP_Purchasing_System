@@ -1,8 +1,10 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.Promotion;
+import com.team.purchasing.bean.shopcar.ShopCar;
 import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.PromotionRequest;
+import com.team.purchasing.controller.request.shopcar.ShopCarRequest;
 import com.team.purchasing.controller.response.PromotionResponse;
 import com.team.purchasing.service.PromotionService;
 import io.swagger.annotations.Api;
@@ -33,7 +35,7 @@ public class PromotionController {
     @ApiOperation(value="促销活动信息查询", notes = "促销活动信息查询")
     public PromotionResponse queryProclamationByPage(@RequestBody PromotionRequest request) {
 
-        Promotion promotion = request.getPromotion();
+        Promotion promotion = buildUserInfo(request);
 
         //更新page
         int count = promotionService.queryPromotionCount();
@@ -56,7 +58,7 @@ public class PromotionController {
     @ApiOperation(value="促销信息添加,促销不需要审核，创建好后直接在商城展示", notes = "促销信息添加")
     public PromotionResponse addProclamation(@RequestBody PromotionRequest request){
 
-        Promotion promotion = request.getPromotion();
+        Promotion promotion = buildUserInfo(request);
         int result = promotionService.addPromotion(promotion);
 
         PromotionResponse promotionResponse = new PromotionResponse();
@@ -70,6 +72,19 @@ public class PromotionController {
         promotionResponse.setMessageInfo(messageInfo);
 
         return promotionResponse;
+    }
+
+    private Promotion buildUserInfo(PromotionRequest promotionRequest) {
+
+        Promotion promotion = promotionRequest.getPromotion();
+
+        promotion.setCreateUserId(promotionRequest.getBaseUserInfo().getUserId() == null
+                ? promotionRequest.getBaseUserInfo().getHcId()
+                : promotionRequest.getBaseUserInfo().getUserId());
+        promotion.setUpdateUserId(promotionRequest.getBaseUserInfo().getUserId() == null
+                ? promotionRequest.getBaseUserInfo().getHcId()
+                : promotionRequest.getBaseUserInfo().getUserId());
+        return promotion;
     }
 
     

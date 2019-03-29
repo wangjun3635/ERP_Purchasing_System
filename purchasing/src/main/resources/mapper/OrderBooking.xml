@@ -30,8 +30,8 @@
 
     <update id="updateBookingOrder">
         update tb_order set
-         userId=#{orderBooking.userId},
-         HCId=#{orderBooking.HCId},
+--          userId=#{orderBooking.userId},
+--          HCId=#{orderBooking.HCId},
          orderNumber=#{orderBooking.orderNumber},
          totalAmount=#{orderBooking.totalAmount},
          orderstatus=#{orderBooking.orderstatus},

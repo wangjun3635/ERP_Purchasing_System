@@ -1,8 +1,10 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.ProductCategory;
+import com.team.purchasing.bean.ProductCollection;
 import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.ProductCategoryRequest;
+import com.team.purchasing.controller.request.ProductCollectionRequest;
 import com.team.purchasing.controller.response.ProclamationResponse;
 import com.team.purchasing.controller.response.ProductCategoryResponse;
 import com.team.purchasing.service.ProductCategoryService;
@@ -30,10 +32,10 @@ public class ProductCategoryController {
     private ProductCategoryService productCategoryService;
 
     @PostMapping("/updateProductCategory")
-    @ApiOperation(value="产品类型数据更新", notes = "产品类型数据更新")
+    @ApiOperation(value="产品类型数据更新,通过产品类型id", notes = "产品类型数据更新")
     public ProductCategoryResponse updateProductCategory(@RequestBody ProductCategoryRequest request){
 
-        ProductCategory productCategory = request.getProductCategory();
+        ProductCategory productCategory = buildUserInfo(request);
 
         int result = productCategoryService.updateProductCategory(productCategory);
 
@@ -48,5 +50,19 @@ public class ProductCategoryController {
         productCategoryResponse.setMessageInfo(messageInfo);
 
         return productCategoryResponse;
+    }
+
+    private ProductCategory buildUserInfo(ProductCategoryRequest productCategoryRequest) {
+
+        ProductCategory productCategory = productCategoryRequest.getProductCategory();
+
+        productCategory.setCreateUserId(productCategoryRequest.getBaseUserInfo().getUserId() == null
+                ? productCategoryRequest.getBaseUserInfo().getHcId()
+                : productCategoryRequest.getBaseUserInfo().getUserId());
+        productCategory.setUpdateUserId(productCategoryRequest.getBaseUserInfo().getUserId() == null
+                ? productCategoryRequest.getBaseUserInfo().getHcId()
+                : productCategoryRequest.getBaseUserInfo().getUserId());
+
+        return productCategory;
     }
 }

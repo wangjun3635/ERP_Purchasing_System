@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.team.purchasing.mapper.ShopCarDao">
 
-	<resultMap id="BaseResultMap" type="com.team.purchasing.bean.shopcar.ShopCar">
+    <resultMap id="BaseResultMap" type="com.team.purchasing.bean.shopcar.ShopCar">
         <result column="id" property="id" />
         <result column="productId" property="productId" />
         <result column="HSCId" property="HSCId" />
@@ -16,7 +16,15 @@
     </resultMap>
 
     <delete id="deleteShopCarProduct">
-        delete from tb_shopcar where id=#{shopCar.id}
+        delete from tb_shopcar
+        <where>
+            <if test="userId != null">
+                and userId=#{userId}
+            </if>
+            <if test="HSCId != null">
+                and HSCId=#{HSCId}
+            </if>
+        </where>
     </delete>
 
     <insert id="addShopCarProduct">
@@ -38,21 +46,29 @@
           GETDATE(),
           #{shopCar.updateUserId});
     </insert>
-    
+
     <select id="queryShopCarList" resultMap="BaseResultMap">
-    	select o.id,
-    	o.productId,
-    	o.HSCId,
-    	o.userId,
-    	o.quantity,
-    	o.isValid,
-    	o.createTime,
-    	o.createUserId,
-    	o.modifyTime,
-    	o.modifyUserId
-    	from
+        select o.id,
+        o.productId,
+        o.HSCId,
+        o.userId,
+        o.quantity,
+        o.isValid,
+        o.createTime,
+        o.createUserId,
+        o.modifyTime,
+        o.modifyUserId
+        from
         (select row_number() over(order by modifyTime desc) as rownumber, * from
-        ( select * from tb_shopcar where id=#{shopCar.id} ) as oo  )
+        ( select * from tb_shopcar
+        <where>
+            <if test="userId != null">
+                and userId=#{userId}
+            </if>
+            <if test="HSCId != null">
+                and HSCId=#{HSCId}
+            </if>
+        </where> ) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{shopCar.page.rowNumber}
     </select>
 

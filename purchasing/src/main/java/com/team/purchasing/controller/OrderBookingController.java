@@ -1,7 +1,9 @@
 package com.team.purchasing.controller;
 
+import com.team.purchasing.bean.Proclamation;
 import com.team.purchasing.bean.booking.OrderBooking;
 import com.team.purchasing.common.MessageInfo;
+import com.team.purchasing.controller.request.ProclamationRequest;
 import com.team.purchasing.controller.request.booking.OrderBookingRequest;
 import com.team.purchasing.controller.response.booking.OrderBookingResponse;
 import com.team.purchasing.service.OrderBookingService;
@@ -33,7 +35,7 @@ public class OrderBookingController {
     @ApiOperation(value="预定下单", notes = "预定下单")
     public OrderBookingResponse createOrderBooking(@RequestBody OrderBookingRequest orderBookingRequest){
 
-        OrderBooking orderBooking = orderBookingRequest.getOrderBooking();
+        OrderBooking orderBooking = buildUserInfo(orderBookingRequest);
         //订单编号自定义生成
         orderBooking.setOrderNumber(OrderIDUtil.getOrderId());
 
@@ -56,7 +58,7 @@ public class OrderBookingController {
     @ApiOperation(value="取消订单", notes = "取消订单")
     public OrderBookingResponse cancelOrderBooking(@RequestBody OrderBookingRequest orderBookingRequest){
 
-        OrderBooking orderBooking = orderBookingRequest.getOrderBooking();
+        OrderBooking orderBooking = buildUserInfo(orderBookingRequest);
         int bookingOrder = orderBookingService.cancelBookingOrder(orderBooking);
 
         OrderBookingResponse orderBookingResponse = new OrderBookingResponse();
@@ -76,7 +78,7 @@ public class OrderBookingController {
     @ApiOperation(value="更新下单信息", notes = "更新下单信息")
     public OrderBookingResponse updateOrderBooking(@RequestBody OrderBookingRequest orderBookingRequest){
 
-        OrderBooking orderBooking = orderBookingRequest.getOrderBooking();
+        OrderBooking orderBooking = buildUserInfo(orderBookingRequest);
         int bookingOrder = orderBookingService.updateBookingOrder(orderBooking);
 
         OrderBookingResponse orderBookingResponse = new OrderBookingResponse();
@@ -90,6 +92,19 @@ public class OrderBookingController {
         orderBookingResponse.setMessageInfo(messageInfo);
 
         return orderBookingResponse;
+    }
+
+    private OrderBooking buildUserInfo(OrderBookingRequest orderBookingRequest) {
+
+        OrderBooking orderBooking = orderBookingRequest.getOrderBooking();
+
+        orderBooking.setUserId(orderBookingRequest.getBaseUserInfo().getUserId());
+        orderBooking.setHCId(orderBookingRequest.getBaseUserInfo().getHcId());
+
+        orderBooking.setCreateUserId(orderBooking.getUserId() == null ? orderBooking.getHCId() : orderBooking.getUserId());
+        orderBooking.setUpdateUserId(orderBooking.getUserId() == null ? orderBooking.getHCId() : orderBooking.getUserId());
+
+        return orderBooking;
     }
 
 }

@@ -34,13 +34,13 @@ public class Promotion implements Serializable {
     private String createTime;
 
     @ApiModelProperty(value = "创建用户")
-    private Integer createUserId;
+    private Long createUserId;
 
     @ApiModelProperty(value = "更新时间")
     private String updateTime;
 
     @ApiModelProperty(value = "更新用户")
-    private Integer updateUserId;
+    private Long updateUserId;
 
     @ApiModelProperty(value = "分页")
     private Page page;

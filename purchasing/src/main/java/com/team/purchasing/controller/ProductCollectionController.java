@@ -1,8 +1,10 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.ProductCollection;
+import com.team.purchasing.bean.shopcar.ShopCar;
 import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.ProductCollectionRequest;
+import com.team.purchasing.controller.request.shopcar.ShopCarRequest;
 import com.team.purchasing.controller.response.ProductCollectionResponse;
 import com.team.purchasing.service.ProductCollectionService;
 import io.swagger.annotations.Api;
@@ -32,7 +34,7 @@ public class ProductCollectionController {
     @ApiOperation(value="产品收藏夹查询", notes = "产品收藏夹查询")
     public ProductCollectionResponse queryProductCollection(@RequestBody ProductCollectionRequest request){
 
-        ProductCollection productCollection = request.getProductCollection();
+        ProductCollection productCollection = buildUserInfo(request);
 
         //1 更新page
         Integer count = productCollectionService.queryProductCollectionCount(productCollection);
@@ -52,7 +54,7 @@ public class ProductCollectionController {
     @ApiOperation(value="产品收藏夹添加", notes = "产品收藏夹添加")
     public ProductCollectionResponse addProductCollection(@RequestBody ProductCollectionRequest request){
 
-        ProductCollection productCollection = request.getProductCollection();
+        ProductCollection productCollection = buildUserInfo(request);
 
         int result = productCollectionService.addProductCollection(productCollection);
 
@@ -74,7 +76,7 @@ public class ProductCollectionController {
     @ApiOperation(value="产品收藏夹更新", notes = "产品收藏夹更新")
     public ProductCollectionResponse updateProductCollection(@RequestBody ProductCollectionRequest request){
 
-        ProductCollection productCollection = request.getProductCollection();
+        ProductCollection productCollection = buildUserInfo(request);
 
         int result = productCollectionService.updateProductCollection(productCollection);
 
@@ -96,7 +98,7 @@ public class ProductCollectionController {
     @ApiOperation(value="产品收藏夹删除", notes = "产品收藏夹删除")
     public ProductCollectionResponse deleteProductCollection(@RequestBody ProductCollectionRequest request){
 
-        ProductCollection productCollection = request.getProductCollection();
+        ProductCollection productCollection = buildUserInfo(request);
 
         int result = productCollectionService.deleteProductCollection(productCollection);
 
@@ -112,6 +114,24 @@ public class ProductCollectionController {
         productCollectionResponse.setMessageInfo(messageInfo);
 
         return productCollectionResponse;
+    }
+
+
+    private ProductCollection buildUserInfo(ProductCollectionRequest productCollectionRequest) {
+
+        ProductCollection productCollection = productCollectionRequest.getProductCollection();
+
+        productCollection.setUserId(productCollectionRequest.getBaseUserInfo().getUserId());
+        productCollection.setHcId(productCollectionRequest.getBaseUserInfo().getHcId());
+
+        productCollection.setCreateUserId(productCollectionRequest.getBaseUserInfo().getUserId() == null
+                ? productCollectionRequest.getBaseUserInfo().getHcId()
+                : productCollectionRequest.getBaseUserInfo().getUserId());
+        productCollection.setModifyUserId(productCollectionRequest.getBaseUserInfo().getUserId() == null
+                ? productCollectionRequest.getBaseUserInfo().getHcId()
+                : productCollectionRequest.getBaseUserInfo().getUserId());
+
+        return productCollection;
     }
 
 }

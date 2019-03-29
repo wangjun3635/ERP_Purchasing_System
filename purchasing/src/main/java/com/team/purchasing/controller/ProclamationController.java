@@ -1,8 +1,10 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.Proclamation;
+import com.team.purchasing.bean.ProductCategory;
 import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.ProclamationRequest;
+import com.team.purchasing.controller.request.ProductCategoryRequest;
 import com.team.purchasing.controller.response.ProclamationResponse;
 import com.team.purchasing.service.ProclamationService;
 import io.swagger.annotations.Api;
@@ -57,7 +59,7 @@ public class ProclamationController {
     @ApiOperation(value="公告信息添加", notes = "公告信息添加")
     public ProclamationResponse addProclamation(@RequestBody ProclamationRequest request){
 
-        Proclamation proclamation = request.getProclamation();
+        Proclamation proclamation = buildUserInfo(request);
 
         int result = proclamationService.addProclamation(proclamation);
 
@@ -72,6 +74,20 @@ public class ProclamationController {
         proclamationResponse.setMessageInfo(messageInfo);
 
         return proclamationResponse;
+    }
+
+    private Proclamation buildUserInfo(ProclamationRequest proclamationRequest) {
+
+        Proclamation proclamation = proclamationRequest.getProclamation();
+
+        proclamation.setCreateUserId(proclamationRequest.getBaseUserInfo().getUserId() == null
+                ? proclamationRequest.getBaseUserInfo().getHcId()
+                : proclamationRequest.getBaseUserInfo().getUserId());
+        proclamation.setUpdateUserId(proclamationRequest.getBaseUserInfo().getUserId() == null
+                ? proclamationRequest.getBaseUserInfo().getHcId()
+                : proclamationRequest.getBaseUserInfo().getUserId());
+
+        return proclamation;
     }
 
 }

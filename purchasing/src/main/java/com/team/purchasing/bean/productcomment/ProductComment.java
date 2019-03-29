@@ -21,7 +21,7 @@ public class ProductComment {
     private Integer productId;
 
     @ApiModelProperty(value = "用户id")
-    private Integer userId;
+    private Long userId;
 
     @ApiModelProperty(value = "用户别名")
     private String userNickName;
@@ -36,13 +36,13 @@ public class ProductComment {
     private String createTime;
 
     @ApiModelProperty(value = "创建人")
-    private Integer createUserId;
+    private Long createUserId;
 
     @ApiModelProperty(value = "最近更新时间")
     private String updateTime;
 
     @ApiModelProperty(value = "最近更新人")
-    private Integer updateUserId;
+    private Long updateUserId;
 
     private Page page;
 

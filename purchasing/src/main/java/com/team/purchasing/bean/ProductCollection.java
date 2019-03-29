@@ -17,31 +17,31 @@ import java.io.Serializable;
 public class ProductCollection implements Serializable {
 
     @ApiModelProperty(value = "商品收藏夹id")
-    private int id;
+    private Integer id;
 
     @ApiModelProperty(value = "商品id")
-    private int productId;
+    private Integer productId;
 
     @ApiModelProperty(value = "医院或者院校id")
-    private int hcId;
+    private Long hcId;
 
     @ApiModelProperty(value = "用户id")
-    private int userId;
+    private Long userId;
 
     @ApiModelProperty(value = "删除标志（0未删除，1删除）")
-    private int isValid;
+    private Integer isValid;
 
     @ApiModelProperty(value = "创建时间")
     private String createTime;
 
     @ApiModelProperty(value = "创建用户id")
-    private int createUserId;
+    private Long createUserId;
 
     @ApiModelProperty(value = "更新时间")
     private String modifyTime;
 
     @ApiModelProperty(value = "更新用户id")
-    private int modifyUserId;
+    private Long modifyUserId;
 
     private Page page;
 }

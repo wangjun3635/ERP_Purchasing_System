@@ -23,11 +23,11 @@ public class ShopCar {
 
     /** 医院学校供应商id **/
     @ApiModelProperty(value = "医院学校供应商id")
-    private Integer HSCId;
+    private Long HSCId;
 
     /** 用户id **/
     @ApiModelProperty(value = "用户id")
-    private Integer userId;
+    private Long userId;
 
     /** 数量 **/
     @ApiModelProperty(value = "数量")
@@ -43,7 +43,7 @@ public class ShopCar {
 
     /** 创建人 **/
     @ApiModelProperty(value = "创建人")
-    private Integer createUserId;
+    private Long createUserId;
 
     /** 最近更新时间 **/
     @ApiModelProperty(value = "最近更新时间")
@@ -51,7 +51,7 @@ public class ShopCar {
 
     /** 最近更新人id **/
     @ApiModelProperty(value = "最近更新人id")
-    private Integer updateUserId;
+    private Long updateUserId;
 
     @ApiModelProperty(value = "分页")
     private Page page;
