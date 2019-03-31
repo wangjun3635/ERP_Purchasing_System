@@ -1,9 +1,12 @@
 package com.team.purchasing.controller;
 
+import com.team.purchasing.bean.Product;
+import com.team.purchasing.bean.ProductSupplierRelation;
 import com.team.purchasing.bean.shopcar.ShopCar;
 import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.shopcar.ShopCarRequest;
 import com.team.purchasing.controller.response.shopcar.ShopCarResponse;
+import com.team.purchasing.service.ProductService;
 import com.team.purchasing.service.ShopCarService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -29,6 +33,9 @@ public class ShopCarController {
 
     @Resource
     private ShopCarService shopCarService;
+    
+    @Resource
+    private ProductService productService;
 
     @PostMapping("/addShopCarProduct")
     @ApiOperation(value="添加购物车商品", notes = "添加购物车商品")
@@ -78,10 +85,23 @@ public class ShopCarController {
     	ShopCar shopCar = buildUserInfo(shopCarRequest);
     	List<ShopCar> shopCarList = shopCarService.queryShopCarList(shopCar);
 
+    	List<Product> productList = new ArrayList<>();
+
     	//通过产品id获取产品信息
+        shopCarList.stream()
+                .filter(shopCarBean -> shopCarBean != null)
+                .forEach(shopCarBean -> {
+                    Integer productId = shopCarBean.getProductId();
+                    ProductSupplierRelation productSupplierRelation = new ProductSupplierRelation();
+                    productSupplierRelation.setProductId(productId);
+                    //查询信息
+                    List<Product> products = productService.queryProductList(productSupplierRelation);
+                    productList.addAll(products);
+                });
     	
     	ShopCarResponse shopCarResponse = new ShopCarResponse();
     	shopCarResponse.setShopCars(shopCarList);
+    	shopCarResponse.setProducts(productList);
         shopCarResponse.setPage(shopCar.getPage());
     	
     	return shopCarResponse;

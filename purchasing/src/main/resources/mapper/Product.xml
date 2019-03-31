@@ -89,6 +89,9 @@
         <if test="productTypeName != null">
             and tpc.name = #{productTypeName}
         </if>
+        <if test="productId != null">
+            and tp.id=#{productId}
+        </if>
 
     </sql>
 

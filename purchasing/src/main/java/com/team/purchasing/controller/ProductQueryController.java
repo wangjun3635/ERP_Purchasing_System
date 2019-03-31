@@ -48,14 +48,15 @@ public class ProductQueryController {
         //1 货期信息返回
         List<Delivery> deliveryTypeList = new ArrayList<>();
 
-        Delivery delivery = new Delivery();
-        delivery.setKey("1");
-        delivery.setValues("现货");
-        deliveryTypeList.add(delivery);
+        Delivery deliveryX = new Delivery();
+        deliveryX.setKey("1");
+        deliveryX.setValues("现货");
+        deliveryTypeList.add(deliveryX);
 
-        delivery.setKey("2");
-        delivery.setValues("期货");
-        deliveryTypeList.add(delivery);
+        Delivery deliveryQ = new Delivery();
+        deliveryQ.setKey("2");
+        deliveryQ.setValues("期货");
+        deliveryTypeList.add(deliveryQ);
 
         //2 查询供应商数据集合
         List<SupplierName> supplierNameList = supplierDao.getSupplierName();

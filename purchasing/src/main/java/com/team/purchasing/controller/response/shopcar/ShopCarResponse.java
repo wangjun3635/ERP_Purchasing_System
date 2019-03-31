@@ -1,5 +1,6 @@
 package com.team.purchasing.controller.response.shopcar;
 
+import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.shopcar.ShopCar;
 import com.team.purchasing.common.GeneralResponse;
 import io.swagger.annotations.ApiModel;
@@ -18,5 +19,8 @@ public class ShopCarResponse extends GeneralResponse {
 
     @ApiModelProperty
     private List<ShopCar> shopCars;
+
+    @ApiModelProperty
+    private List<Product> products;
 
 }
