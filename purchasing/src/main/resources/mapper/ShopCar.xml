@@ -72,7 +72,7 @@
         as o where rownumber <![CDATA[ > ]]> #{shopCar.page.rowNumber}
     </select>
 
-    <select id="queryShopCatCount">
+    <select id="queryShopCatCount" resultType="java.lang.Integer">
         select count(*) from (select * from tb_shopcar
         <where>
             <if test="shopCar.userId != null">
@@ -81,7 +81,7 @@
             <if test="shopCar.HSCId != null">
                 and HSCId=#{shopCar.HSCId}
             </if>
-        </where>)
+        </where>)t
     </select>
 
 </mapper>

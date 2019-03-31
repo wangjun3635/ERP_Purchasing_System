@@ -9,6 +9,8 @@ import com.team.purchasing.controller.request.shopcar.ShopCarRequest;
 import com.team.purchasing.controller.response.shopcar.ShopCarResponse;
 import com.team.purchasing.service.ProductService;
 import com.team.purchasing.service.ShopCarService;
+import com.team.purchasing.utils.Page;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -100,11 +102,14 @@ public class ShopCarController {
 
     	//4 通过产品id获取产品信息
         shopCarList.stream()
-                .filter(shopCarBean -> shopCarBean != null)
+                .filter(shopCarBean -> shopCarBean.getProductId() != null)
                 .forEach(shopCarBean -> {
                     Integer productId = shopCarBean.getProductId();
                     ProductSupplierRelation productSupplierRelation = new ProductSupplierRelation();
                     productSupplierRelation.setProductId(productId);
+                    Page page = new Page();
+                    page.setCurrentNum(9999);
+                    productSupplierRelation.setPage(page);
                     //4.1 查询产品信息
                     List<Product> products = productService.queryProductList(productSupplierRelation);
 
