@@ -109,6 +109,7 @@ public class ShopCarController {
                     productSupplierRelation.setProductId(productId);
                     Page page = new Page();
                     page.setCurrentNum(9999);
+                    page.setRowNumber(0);
                     productSupplierRelation.setPage(page);
                     //4.1 查询产品信息
                     List<Product> products = productService.queryProductList(productSupplierRelation);

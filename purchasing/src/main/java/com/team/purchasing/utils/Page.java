@@ -37,12 +37,13 @@ public class Page {
 
     //数据库分页所取到的数据
     @Getter
+    @Setter
     @ApiModelProperty(value = "数据库分页所取到的数据")
     private Integer rowNumber;
 
-    public void setRowNumber(){
-        this.rowNumber = this.currentNum * (currentPage - 1);
-    }
+//    public void setRowNumber(){
+//        this.rowNumber = this.currentNum * (currentPage - 1);
+//    }
 
     /**
      * 初始化分页信息
