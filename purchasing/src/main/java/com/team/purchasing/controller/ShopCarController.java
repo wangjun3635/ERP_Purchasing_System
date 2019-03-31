@@ -77,6 +77,8 @@ public class ShopCarController {
     	
     	ShopCar shopCar = buildUserInfo(shopCarRequest);
     	List<ShopCar> shopCarList = shopCarService.queryShopCarList(shopCar);
+
+    	//通过产品id获取产品信息
     	
     	ShopCarResponse shopCarResponse = new ShopCarResponse();
     	shopCarResponse.setShopCars(shopCarList);

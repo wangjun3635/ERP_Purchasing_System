@@ -1,6 +1,6 @@
 package com.team.purchasing.controller;
 
-import com.team.purchasing.bean.ProductQuery;
+import com.team.purchasing.bean.productquery.*;
 import com.team.purchasing.controller.response.ProductQueryResponse;
 import com.team.purchasing.mapper.ProductBrandDao;
 import com.team.purchasing.mapper.ProductDao;
@@ -46,18 +46,25 @@ public class ProductQueryController {
     public ProductQueryResponse queryProductQuery(){
 
         //1 货期信息返回
-        List<Integer> deliveryTypeList = new ArrayList<>();
-        deliveryTypeList.add(1);
-        deliveryTypeList.add(2);
+        List<Delivery> deliveryTypeList = new ArrayList<>();
+
+        Delivery delivery = new Delivery();
+        delivery.setKey("1");
+        delivery.setValues("现货");
+        deliveryTypeList.add(delivery);
+
+        delivery.setKey("2");
+        delivery.setValues("期货");
+        deliveryTypeList.add(delivery);
 
         //2 查询供应商数据集合
-        List<String> supplierNameList = supplierDao.getSupplierName();
+        List<SupplierName> supplierNameList = supplierDao.getSupplierName();
 
         //3 品牌数据集合
-        List<String> brandNameList = productBrandDao.queryProductBrandNameList();
+        List<BrandName> brandNameList = productBrandDao.queryProductBrandNameList();
 
         //4 产品分类信息
-        List<String> productTypeNameList = productDao.queryProductTypeName();
+        List<ProductTypeName> productTypeNameList = productDao.queryProductTypeName();
 
         ProductQueryResponse productQueryResponse = new ProductQueryResponse();
 
@@ -67,7 +74,7 @@ public class ProductQueryController {
         productQuery.setBrandNameList(brandNameList);
         productQuery.setProductTypeNameList(productTypeNameList);
 
-        productQueryResponse.setProductQueryList(productQuery);
+        productQueryResponse.setProductQuery(productQuery);
 
         return productQueryResponse;
     }

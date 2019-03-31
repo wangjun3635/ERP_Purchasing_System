@@ -1,5 +1,7 @@
 package com.team.purchasing.mapper;
 
+import com.team.purchasing.bean.productquery.SupplierName;
+
 import java.util.List;
 
 /**
@@ -9,6 +11,6 @@ import java.util.List;
  */
 public interface SupplierDao {
 
-    public List<String> getSupplierName();
+    public List<SupplierName> getSupplierName();
 
 }

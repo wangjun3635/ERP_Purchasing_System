@@ -2,6 +2,7 @@ package com.team.purchasing.mapper;
 
 import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.ProductSupplierRelation;
+import com.team.purchasing.bean.productquery.ProductTypeName;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public interface ProductDao {
 
     public int queryProductCount(ProductSupplierRelation productSupplierRelation);
 
-    public List<String> queryProductTypeName();
+    public List<ProductTypeName> queryProductTypeName();
 
 }

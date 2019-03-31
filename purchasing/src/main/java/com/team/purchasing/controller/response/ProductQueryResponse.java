@@ -1,6 +1,6 @@
 package com.team.purchasing.controller.response;
 
-import com.team.purchasing.bean.ProductQuery;
+import com.team.purchasing.bean.productquery.ProductQuery;
 import com.team.purchasing.common.GeneralResponse;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,6 +15,6 @@ import lombok.Data;
 public class ProductQueryResponse extends GeneralResponse {
 
     @ApiModelProperty
-    private ProductQuery productQueryList;
+    private ProductQuery productQuery;
 
 }

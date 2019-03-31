@@ -161,11 +161,15 @@
         </where>) t
     </select>
 
-    <select id="queryProductTypeName" resultType="java.lang.String">
+    <select id="queryProductTypeName" resultMap="NameBase">
         select t.name from
           (select tpc.name as name from tb_product tp
           left join tb_product_category tpc on tp.firstlevel = tpc.id) t
         group by name;
     </select>
+
+    <resultMap id="NameBase" type="com.team.purchasing.bean.productquery.ProductTypeName">
+        <result column="name" property="name"></result>
+    </resultMap>
 
 </mapper>

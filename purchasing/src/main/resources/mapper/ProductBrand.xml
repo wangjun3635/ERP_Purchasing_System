@@ -51,8 +51,12 @@
         as o where rownumber <![CDATA[ > ]]> #{page.rowNumber}
     </select>
 
-    <select id="queryProductBrandNameList" resultType="java.lang.String">
+    <select id="queryProductBrandNameList" resultMap="NameBase">
         select name from tb_brand group by name
     </select>
+
+    <resultMap id="NameBase" type="com.team.purchasing.bean.productquery.BrandName">
+        <result property="name" column="name"></result>
+    </resultMap>
 
 </mapper>

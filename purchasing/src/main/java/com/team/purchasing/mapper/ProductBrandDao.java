@@ -1,6 +1,7 @@
 package com.team.purchasing.mapper;
 
 import com.team.purchasing.bean.ProductBrand;
+import com.team.purchasing.bean.productquery.BrandName;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public interface ProductBrandDao {
 
     public int queryProductBrandCount(ProductBrand productBrand);
 
-    public List<String> queryProductBrandNameList();
+    public List<BrandName> queryProductBrandNameList();
 
 }
