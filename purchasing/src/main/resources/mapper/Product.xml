@@ -74,6 +74,9 @@
         <if test="supplierName != null">
             and ts.name like '%${supplierName}%'
         </if>
+        <if test="supplierId != null">
+            and ts.id=#{supplierId}
+        </if>
         <if test="salesAreaType != null">
             and ts.salesAreaType=${salesAreaType}
         </if>

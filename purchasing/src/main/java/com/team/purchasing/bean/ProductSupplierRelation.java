@@ -61,6 +61,9 @@ public class ProductSupplierRelation {
     private String brandName;
 
     /** 供应商模块 **/
+    @ApiModelProperty(value = "供应商id")
+    private Integer supplierId;
+
     @ApiModelProperty(value = "供应商名称")
     private String supplierName;
 
