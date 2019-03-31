@@ -18,4 +18,6 @@ public interface ShopCarDao {
     
     public List<ShopCar> queryShopCarList(@Param("shopCar") ShopCar shopCar);
 
+    public int queryShopCatCount(@Param("shopCar") ShopCar shopCar);
+
 }

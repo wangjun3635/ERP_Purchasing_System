@@ -3,6 +3,7 @@ package com.team.purchasing.service;
 import java.util.List;
 
 import com.team.purchasing.bean.shopcar.ShopCar;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @Auther:ynhuang
@@ -15,5 +16,7 @@ public interface ShopCarService {
     public int deleteShopCarProduct(ShopCar shopCar);
 
     public List<ShopCar> queryShopCarList(ShopCar shopCar);
+
+    public int queryShopCatCount(ShopCar shopCar);
 
 }

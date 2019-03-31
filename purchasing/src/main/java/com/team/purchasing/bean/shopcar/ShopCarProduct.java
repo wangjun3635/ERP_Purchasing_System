@@ -1,27 +1,23 @@
 package com.team.purchasing.bean.shopcar;
 
+import com.team.purchasing.bean.Product;
 import com.team.purchasing.utils.Page;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.List;
-
 /**
  * @Auther:ynhuang
- * @Date:1/3/19 下午9:35
- * 购物车实体类
+ * @Date:31/3/19 下午1:13
  */
 @Data
-@ApiModel(value="购物车实体")
-public class ShopCar {
+public class ShopCarProduct {
 
     @ApiModelProperty(value = "购物车id")
     private Integer id;
 
     /** 商品Id **/
-    @ApiModelProperty(value = "产品id")
-    private Integer productId;
+    @ApiModelProperty(value = "产品信息")
+    private Product product;
 
     /** 医院学校供应商id **/
     @ApiModelProperty(value = "医院学校供应商id")

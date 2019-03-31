@@ -54,4 +54,9 @@ public class ShopCarServiceImpl implements ShopCarService {
 	public List<ShopCar> queryShopCarList(ShopCar shopCar) {
 		return shopCarDao.queryShopCarList(shopCar);
 	}
+
+    @Override
+    public int queryShopCatCount(ShopCar shopCar) {
+        return shopCarDao.queryShopCatCount(shopCar);
+    }
 }
