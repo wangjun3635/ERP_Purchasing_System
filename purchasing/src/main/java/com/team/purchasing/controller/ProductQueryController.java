@@ -1,5 +1,6 @@
 package com.team.purchasing.controller;
 
+import com.team.purchasing.bean.Supplier;
 import com.team.purchasing.bean.productquery.*;
 import com.team.purchasing.controller.response.ProductQueryResponse;
 import com.team.purchasing.mapper.ProductBrandDao;
@@ -69,13 +70,33 @@ public class ProductQueryController {
 
         ProductQueryResponse productQueryResponse = new ProductQueryResponse();
 
-        ProductQuery productQuery = new ProductQuery();
-        productQuery.setDeliveryTypeList(deliveryTypeList);
-        productQuery.setSupplierNameList(supplierNameList);
-        productQuery.setBrandNameList(brandNameList);
-        productQuery.setProductTypeNameList(productTypeNameList);
+        List<ProductQuery> productQueryList = new ArrayList<>();
 
-        productQueryResponse.setProductQuery(productQuery);
+        //5 期货参数拼接
+        ProductQuery<Delivery> deliveryProductQuery = new ProductQuery<>();
+        deliveryProductQuery.setResponseList(deliveryTypeList);
+        deliveryProductQuery.setName("期货");
+        productQueryList.add(deliveryProductQuery);
+
+        //6 供应商参数拼接
+        ProductQuery<SupplierName> supplierNameProductQuery = new ProductQuery<>();
+        supplierNameProductQuery.setResponseList(supplierNameList);
+        supplierNameProductQuery.setName("供应商");
+        productQueryList.add(supplierNameProductQuery);
+
+        //7 品牌查询参数拼接
+        ProductQuery<BrandName> brandNameProductQuery = new ProductQuery<>();
+        brandNameProductQuery.setResponseList(brandNameList);
+        brandNameProductQuery.setName("品牌");
+        productQueryList.add(brandNameProductQuery);
+
+        //8 产品分类信息参数拼接
+        ProductQuery<ProductTypeName> productTypeNameProductQuery = new ProductQuery<>();
+        productTypeNameProductQuery.setResponseList(productTypeNameList);
+        productTypeNameProductQuery.setName("产品分类");
+        productQueryList.add(productTypeNameProductQuery);
+
+        productQueryResponse.setProductQueryList(productQueryList);
 
         return productQueryResponse;
     }

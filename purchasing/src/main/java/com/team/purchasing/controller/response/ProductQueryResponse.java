@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Auther:ynhuang
  * @Date:19/3/19 下午9:52
@@ -15,6 +17,6 @@ import lombok.Data;
 public class ProductQueryResponse extends GeneralResponse {
 
     @ApiModelProperty
-    private ProductQuery productQuery;
+    private List<ProductQuery> productQueryList;
 
 }
