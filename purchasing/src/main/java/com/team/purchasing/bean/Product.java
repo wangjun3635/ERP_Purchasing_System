@@ -163,6 +163,9 @@ public class Product implements Serializable {
     //品牌id
     @ApiModelProperty(value = "品牌id")
     private Integer brandId;
+    
+    @ApiModelProperty(value = "品牌name")
+    private String brandName;
 
     //货期  1:现货2：期货
     @ApiModelProperty(value = "货期  1:现货2：期货")

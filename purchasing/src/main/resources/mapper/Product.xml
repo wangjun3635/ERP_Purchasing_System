@@ -6,6 +6,7 @@
         <result column="id" property="id" />
         <result column="supplierId" property="supplierId" />
         <result column="brandId" property="brandId" />
+        <result column="brandName" property="brandName" />
         <result column="code" property="code" />
         <result column="barCode" property="barCode" />
         <result column="name" property="name" />
@@ -103,6 +104,7 @@
         o.id,
         o.supplierId,
         o.brandId,
+        o.brandName,
         o.code,
         o.barCode,
         o.name,
@@ -143,7 +145,7 @@
         o.modifyUserId
         from
         (select row_number() over(order by unitPrice desc ) as rownumber, * from
-        ( select tp.* from tb_product tp
+        ( select tp.*, tb.name as brandName from tb_product tp
         left join tb_supplier ts on tp.supplierId = ts.id
         left join tb_supplier_sales_province tssp on ts.id =  tssp.supplierid
         left join tb_brand tb on tp.brandId = tb.id
