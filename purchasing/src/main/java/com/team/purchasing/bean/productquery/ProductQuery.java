@@ -15,6 +15,9 @@ import java.util.List;
 @ApiModel(value="产品筛选条件实体")
 public class ProductQuery<T> {
 
+    @ApiModelProperty("返回的过滤条件key值")
+    private String key;
+
 	@ApiModelProperty("返回的过滤条件名称")
     private String name;
 	

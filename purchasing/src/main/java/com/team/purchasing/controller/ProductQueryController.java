@@ -76,24 +76,28 @@ public class ProductQueryController {
         ProductQuery<Delivery> deliveryProductQuery = new ProductQuery<>();
         deliveryProductQuery.setResponseList(deliveryTypeList);
         deliveryProductQuery.setName("期货");
+        deliveryProductQuery.setKey("deliveryType");
         productQueryList.add(deliveryProductQuery);
 
         //6 供应商参数拼接
         ProductQuery<SupplierName> supplierNameProductQuery = new ProductQuery<>();
         supplierNameProductQuery.setResponseList(supplierNameList);
         supplierNameProductQuery.setName("供应商");
+        supplierNameProductQuery.setKey("supplierName");
         productQueryList.add(supplierNameProductQuery);
 
         //7 品牌查询参数拼接
         ProductQuery<BrandName> brandNameProductQuery = new ProductQuery<>();
         brandNameProductQuery.setResponseList(brandNameList);
         brandNameProductQuery.setName("品牌");
+        brandNameProductQuery.setKey("brandName");
         productQueryList.add(brandNameProductQuery);
 
         //8 产品分类信息参数拼接
         ProductQuery<ProductTypeName> productTypeNameProductQuery = new ProductQuery<>();
         productTypeNameProductQuery.setResponseList(productTypeNameList);
         productTypeNameProductQuery.setName("产品分类");
+        productTypeNameProductQuery.setKey("productTypeName");
         productQueryList.add(productTypeNameProductQuery);
 
         productQueryResponse.setProductQueryList(productQueryList);
