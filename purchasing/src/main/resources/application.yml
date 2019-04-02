@@ -11,7 +11,8 @@ spring:
     password: Ah7SiHdyMon#p
 
 file:
-  path: /Users/mac/Downloads
+  path: C:\project\image\
+  url: http://localhost:8080/image/
 
 logging:
   level:
