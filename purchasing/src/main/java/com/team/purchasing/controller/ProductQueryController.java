@@ -1,6 +1,5 @@
 package com.team.purchasing.controller;
 
-import com.team.purchasing.bean.Supplier;
 import com.team.purchasing.bean.productquery.*;
 import com.team.purchasing.controller.response.ProductQueryResponse;
 import com.team.purchasing.mapper.ProductBrandDao;
