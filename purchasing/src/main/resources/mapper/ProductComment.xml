@@ -3,17 +3,24 @@
 <mapper namespace="com.team.purchasing.mapper.productcomment.ProductCommentDao">
 
     <select id="queryProductComment" resultType="com.team.purchasing.bean.productcomment.ProductComment">
-        select id,
-         productId,
-         userId,
-         userNickName,
-         star,
-         comment,
-         createTime,
-         createUserId,
-         modifyTime,
-         modifyUserId from tb_product_comment
-         where productId=#{productId} order by modifyTime desc
+        select 
+        tbp.orderId, 
+        tpc.id,
+        tpc.productId,
+        tpc.userId,
+        tpc.userNickName,
+        tpc.star,
+        tpc.comment,
+        tpc.createTime,
+        tpc.createUserId,
+        tpc.modifyTime,
+        tpc.modifyUserId
+        from tb_order_product tbp 
+        left join tb_product_comment tpc 
+        on tbp.productId = tpc.productId
+        where tbp.productId = #{productId}
+        and tbp.orderId = #{orderId}
+        order by tpc.modifyTime desc
     </select>
 
     <insert id="addComment">

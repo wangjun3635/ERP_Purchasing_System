@@ -34,10 +34,10 @@ public class ProductCommentServiceImpl implements ProductCommentService {
     }
 
     @Override
-    public ProductComment queryProductComment(int productId) {
+    public ProductComment queryProductComment(int productId, Long orderId) {
 
         try {
-            ProductComment productComment = productCommentDao.queryProductComment(productId);
+            ProductComment productComment = productCommentDao.queryProductComment(productId, orderId);
             return productComment;
         }catch (Exception e) {
             log.error("查询数据异常,异常信息为: {}", e);

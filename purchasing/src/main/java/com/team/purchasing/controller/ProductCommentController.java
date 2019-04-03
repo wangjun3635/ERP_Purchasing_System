@@ -56,7 +56,7 @@ public class ProductCommentController {
         ProductComment productComment = buildUserInfo(request);
 
         ProductCommentResponse productCommentResponse = new ProductCommentResponse();
-        productCommentResponse.setProductComment(productCommentService.queryProductComment(productComment.getProductId()));
+        productCommentResponse.setProductComment(productCommentService.queryProductComment(productComment.getProductId(), productComment.getOrderId()));
         productCommentResponse.setPage(productComment.getPage());
 
         return productCommentResponse;

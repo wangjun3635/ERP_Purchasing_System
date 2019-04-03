@@ -19,6 +19,9 @@ public class ProductComment {
 
     @ApiModelProperty(value = "商品id")
     private Integer productId;
+    
+    @ApiModelProperty(value = "订单id")
+    private Long orderId;
 
     @ApiModelProperty(value = "用户id")
     private Long userId;

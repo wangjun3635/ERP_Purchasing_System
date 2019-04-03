@@ -12,6 +12,7 @@ public interface ProductCommentDao {
     /** 添加评价,针对每个产品 **/
     public int addComment(@Param("productComment") ProductComment productComment);
 
-    public ProductComment queryProductComment(@Param("productId") int productId);
+    public ProductComment queryProductComment(@Param("productId") int productId,
+    		                                  @Param("orderId") Long orderId);
 
 }
