@@ -12,7 +12,7 @@ spring:
 
 file:
   path: C:\project\image\
-  url: http://localhost:8080/image/
+  url: http://116.62.7.86:8080/image/
 
 logging:
   level:
