@@ -20,6 +20,7 @@
         on tbp.productId = tpc.productId
         where tbp.productId = #{productId}
         and tbp.orderId = #{orderId}
+        and tbp.orderid =  tpc.orderid 
         order by tpc.modifyTime desc
     </select>
 
@@ -33,7 +34,8 @@
          createTime,
          createUserId,
          modifyTime,
-         modifyUserId) values(#{productComment.productId},
+         modifyUserId,
+         orderId) values(#{productComment.productId},
           #{productComment.userId},
           #{productComment.userNickName},
           #{productComment.star},
@@ -41,7 +43,8 @@
           GETDATE(),
           #{productComment.createUserId},
           GETDATE(),
-          #{productComment.updateUserId});
+          #{productComment.updateUserId},
+          #{productComment.orderId});
     </insert>
 
 </mapper>
