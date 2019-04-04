@@ -159,6 +159,10 @@ public class Product implements Serializable {
     //供应商id
     @ApiModelProperty(value = "供应商id")
     private Integer supplierId;
+    
+    //供应商id
+    @ApiModelProperty(value = "供应商name")
+    private String supplierName;
 
     //品牌id
     @ApiModelProperty(value = "品牌id")

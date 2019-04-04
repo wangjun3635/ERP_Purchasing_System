@@ -24,6 +24,9 @@
             <if test="shopCar.HSCId != null">
                 and HSCId=#{shopCar.HSCId}
             </if>
+            <if test="shopCar.productId != null">
+            	and id=#{shopCar.id}
+            </if>
         </where>
     </delete>
 

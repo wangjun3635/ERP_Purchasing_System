@@ -5,6 +5,7 @@
     <resultMap id="BaseResultMap" type="com.team.purchasing.bean.Product">
         <result column="id" property="id" />
         <result column="supplierId" property="supplierId" />
+        <result column="supplierName" property="supplierName" />
         <result column="brandId" property="brandId" />
         <result column="brandName" property="brandName" />
         <result column="code" property="code" />
@@ -103,6 +104,7 @@
         select top (#{page.currentNum})
         o.id,
         o.supplierId,
+        o.supplierName,
         o.brandId,
         o.brandName,
         o.code,
@@ -145,7 +147,7 @@
         o.modifyUserId
         from
         (select row_number() over(order by unitPrice desc ) as rownumber, * from
-        ( select tp.*, tb.name as brandName from tb_product tp
+        ( select tp.*, ts.name as supplierName, tb.name as brandName from tb_product tp
         left join tb_supplier ts on tp.supplierId = ts.id
         left join tb_supplier_sales_province tssp on ts.id =  tssp.supplierid
         left join tb_brand tb on tp.brandId = tb.id
