@@ -29,24 +29,47 @@
     </delete>
 
     <update id="updateBookingOrder">
-        update tb_order set
-         <!--  userId=#{orderBooking.userId},
-         HCId=#{orderBooking.HCId}, -->
-         orderNumber=#{orderBooking.orderNumber},
-         totalAmount=#{orderBooking.totalAmount},
-         orderStatus=#{orderBooking.orderStatus},
-         orderRemark=#{orderBooking.orderRemark},
-         deliveryNumber=#{orderBooking.deliveryNumber},
-         receiverName=#{orderBooking.receiverName},
-         receiverPhone=#{orderBooking.receiverPhone},
-         receiverPostCode=#{orderBooking.receiverPostCode},
-         receiverProvince=#{orderBooking.receiverProvince},
-         receiverCity=#{orderBooking.receiverCity},
-         receiverRegion=#{orderBooking.receiverRegion},
-         <!-- createTime=#{orderBooking.createTime},
-         createUserId=#{orderBooking.createUserId}, -->
-         modifyTime=GETDATE(),
-         modifyUserId=#{orderBooking.updateUserId}
+        update tb_order
+         <trim prefix="set" suffixOverrides=",">
+         	<!--  userId=#{orderBooking.userId},
+	         HCId=#{orderBooking.HCId}, -->
+	         <if test="orderBooking.orderNumber != null">
+	         	orderNumber=#{orderBooking.orderNumber},
+	         </if>
+	         <if test="orderBooking.orderStatus != null">
+	         	orderStatus=#{orderBooking.orderStatus},
+	         </if>
+	         <if test="orderBooking.orderRemark != null">
+	         	orderRemark=#{orderBooking.orderRemark},
+	         </if>
+	         <if test="orderBooking.orderNumber != null">
+	         	deliveryNumber=#{orderBooking.orderNumber},
+	         </if>
+	         <if test="orderBooking.receiverName != null">
+	         	receiverName=#{orderBooking.receiverName},
+	         </if>
+	         <if test="orderBooking.receiverPhone != null">
+	         	receiverPhone=#{orderBooking.receiverPhone},
+	         </if>
+	         <if test="orderBooking.receiverPostCode != null">
+	         	receiverPostCode=#{orderBooking.receiverPostCode},
+	         </if>
+	         <if test="orderBooking.receiverProvince != null">
+	         	receiverProvince=#{orderBooking.receiverProvince},
+	         </if>
+	         <if test="orderBooking.receiverCity != null">
+	         	receiverCity=#{orderBooking.receiverCity},
+	         </if>
+	         <if test="orderBooking.receiverRegion != null">
+	         	receiverRegion=#{orderBooking.receiverRegion},
+	         </if>
+	         <if test="1==1">
+	         	modifyTime=GETDATE(),
+	         </if>
+	         <if test="orderBooking.updateUserId != null">
+	         	modifyUserId=#{orderBooking.updateUserId},
+	         </if>
+         </trim>
         where id=#{orderBooking.id}
     </update>
 
