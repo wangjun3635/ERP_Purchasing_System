@@ -17,6 +17,6 @@ import java.util.List;
 public class OrderBookingResponse extends GeneralResponse {
 
     @ApiModelProperty
-    private List<OrderBooking> orderBookings;
+    private OrderBooking orderBooking;
 
 }

@@ -1,9 +1,7 @@
 package com.team.purchasing.controller;
 
-import com.team.purchasing.bean.Proclamation;
 import com.team.purchasing.bean.booking.OrderBooking;
 import com.team.purchasing.common.MessageInfo;
-import com.team.purchasing.controller.request.ProclamationRequest;
 import com.team.purchasing.controller.request.booking.OrderBookingRequest;
 import com.team.purchasing.controller.response.booking.OrderBookingResponse;
 import com.team.purchasing.service.OrderBookingService;
@@ -50,6 +48,12 @@ public class OrderBookingController {
         }
         messageInfo.setCode("200");
         orderBookingResponse.setMessageInfo(messageInfo);
+
+        OrderBooking orderBookingResp = new OrderBooking();
+        orderBookingResp.setId(bookingOrderId);
+        orderBookingResp.setOrderNumber(orderBooking.getOrderNumber());
+
+        orderBookingResponse.setOrderBooking(orderBookingResp);
 
         return orderBookingResponse;
     }

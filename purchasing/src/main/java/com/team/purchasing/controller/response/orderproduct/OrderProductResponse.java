@@ -1,6 +1,6 @@
 package com.team.purchasing.controller.response.orderproduct;
 
-import com.team.purchasing.bean.orderproduct.OrderProduct;
+import com.team.purchasing.bean.orderproduct.OrderProductDeaily;
 import com.team.purchasing.common.GeneralResponse;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,6 +17,6 @@ import java.util.List;
 public class OrderProductResponse extends GeneralResponse {
 
     @ApiModelProperty
-    private List<OrderProduct> orderProducts;
+    private List<OrderProductDeaily> orderProducts;
 
 }

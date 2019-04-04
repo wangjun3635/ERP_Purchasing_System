@@ -10,7 +10,6 @@ import com.team.purchasing.controller.response.shopcar.ShopCarResponse;
 import com.team.purchasing.service.ProductService;
 import com.team.purchasing.service.ShopCarService;
 import com.team.purchasing.utils.Page;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther:ynhuang
@@ -64,7 +61,7 @@ public class ShopCarController {
     }
 
     @PostMapping("/deleteShopCarProduct")
-    @ApiOperation(value="删除购物车商品", notes = "删除购物车商品")
+    @ApiOperation(value="删除购物车商品 通过用户id或者购物车id删除购物车信息", notes = "删除购物车商品 通过用户id或者购物车id删除购物车信息")
     public ShopCarResponse deleteShopCarProduct(@RequestBody ShopCarRequest shopCarRequest){
 
         ShopCar shopCar = buildUserInfo(shopCarRequest);
@@ -84,7 +81,7 @@ public class ShopCarController {
     }
     
     @PostMapping("/queryShopCarListById")
-    @ApiOperation(value="查询购物车商品", notes = "查询购物车商品")
+    @ApiOperation(value="查询购物车商品 可以通过用户id和商品id查询购物车信息", notes = "查询购物车商品 可以通过用户id和商品id查询购物车信息")
     public ShopCarResponse queryShopCarListById(@RequestBody ShopCarRequest shopCarRequest){
     	
     	ShopCar shopCar = buildUserInfo(shopCarRequest);

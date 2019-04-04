@@ -6,6 +6,7 @@ import com.team.purchasing.service.ShopCarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -27,6 +28,27 @@ public class ShopCarServiceImpl implements ShopCarService {
     public int addShopCarProduct(ShopCar shopCar) {
 
         try {
+
+            //判断当前是否重复添加商品信息
+            shopCar.getPage().init(9999);
+            List<ShopCar> shopCars = shopCarDao.queryShopCarList(shopCar);
+
+            if(!CollectionUtils.isEmpty(shopCars)){
+                try {
+                    shopCars.stream()
+                            .filter(x -> x.getId() != null)
+                            .forEach(x -> {
+                                shopCarDao.updateShopCarProduct(x.getId());
+                            });
+                }catch (Exception e) {
+                    log.error("添加购物车信息失败,当前有重复商品信息:{}", shopCar, e);
+                    throw new RuntimeException();
+                }
+
+                return 1;
+            }
+
+
             int result = shopCarDao.addShopCarProduct(shopCar);
             return result;
         }catch (Exception e) {

@@ -1,10 +1,9 @@
 package com.team.purchasing.mapper;
 
 import com.team.purchasing.bean.shopcar.ShopCar;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 /**
  * @Auther:ynhuang
@@ -19,5 +18,7 @@ public interface ShopCarDao {
     public List<ShopCar> queryShopCarList(@Param("shopCar") ShopCar shopCar);
 
     public int queryShopCatCount(@Param("shopCar") ShopCar shopCar);
+
+    public int updateShopCarProduct(@Param("shopCarId") Integer shopCarId);
 
 }

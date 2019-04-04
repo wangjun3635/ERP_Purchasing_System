@@ -1,6 +1,5 @@
 package com.team.purchasing.controller.request.shopcar;
 
-import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.shopcar.ShopCar;
 import com.team.purchasing.common.GeneralRequest;
 import io.swagger.annotations.ApiModel;
@@ -18,7 +17,7 @@ public class ShopCarRequest extends GeneralRequest {
     @ApiModelProperty(value = "购物车信息")
     private ShopCar shopCar;
 
-    @ApiModelProperty(value = "购物车带有的产品信息")
-    private Product product;
+//    @ApiModelProperty(value = "购物车带有的产品信息")
+//    private Product product;
 
 }

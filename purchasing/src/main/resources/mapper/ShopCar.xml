@@ -71,6 +71,9 @@
             <if test="shopCar.HSCId != null">
                 and HSCId=#{shopCar.HSCId}
             </if>
+            <if test="shopCar.productId != null">
+                and productId=#{shopCar.productId}
+            </if>
         </where> ) as oo  )
         as o where rownumber <![CDATA[ > ]]> #{shopCar.page.rowNumber}
     </select>
@@ -86,5 +89,9 @@
             </if>
         </where>)t
     </select>
+
+    <update id="updateShopCarProduct">
+        update tb_shopcar set quantity = quantity + 1 where id=#{shopCarId}
+    </update>
 
 </mapper>

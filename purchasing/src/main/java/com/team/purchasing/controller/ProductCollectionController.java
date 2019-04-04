@@ -1,10 +1,8 @@
 package com.team.purchasing.controller;
 
 import com.team.purchasing.bean.ProductCollection;
-import com.team.purchasing.bean.shopcar.ShopCar;
 import com.team.purchasing.common.MessageInfo;
 import com.team.purchasing.controller.request.ProductCollectionRequest;
-import com.team.purchasing.controller.request.shopcar.ShopCarRequest;
 import com.team.purchasing.controller.response.ProductCollectionResponse;
 import com.team.purchasing.service.ProductCollectionService;
 import io.swagger.annotations.Api;
