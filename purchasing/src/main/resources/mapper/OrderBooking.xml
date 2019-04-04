@@ -30,11 +30,11 @@
 
     <update id="updateBookingOrder">
         update tb_order set
---          userId=#{orderBooking.userId},
---          HCId=#{orderBooking.HCId},
+         <!--  userId=#{orderBooking.userId},
+         HCId=#{orderBooking.HCId}, -->
          orderNumber=#{orderBooking.orderNumber},
          totalAmount=#{orderBooking.totalAmount},
-         orderstatus=#{orderBooking.orderstatus},
+         orderStatus=#{orderBooking.orderStatus},
          orderRemark=#{orderBooking.orderRemark},
          deliveryNumber=#{orderBooking.deliveryNumber},
          receiverName=#{orderBooking.receiverName},
@@ -47,7 +47,7 @@
          createUserId=#{orderBooking.createUserId}, -->
          modifyTime=GETDATE(),
          modifyUserId=#{orderBooking.updateUserId}
-        where id==#{orderBooking.id}
+        where id=#{orderBooking.id}
     </update>
 
     <insert id="createBookingOrder" parameterType="com.team.purchasing.bean.booking.OrderBooking"
