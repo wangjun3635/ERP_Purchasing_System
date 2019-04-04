@@ -19,6 +19,6 @@ public interface ShopCarDao {
 
     public int queryShopCatCount(@Param("shopCar") ShopCar shopCar);
 
-    public int updateShopCarProduct(@Param("shopCarId") Integer shopCarId);
+    public int updateShopCarProduct(@Param("shopCarId") Integer shopCarId, @Param("quantity") Integer quantity);
 
 }

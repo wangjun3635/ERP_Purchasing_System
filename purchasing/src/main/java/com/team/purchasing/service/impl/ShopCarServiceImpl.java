@@ -38,7 +38,7 @@ public class ShopCarServiceImpl implements ShopCarService {
                     shopCars.stream()
                             .filter(x -> x.getId() != null)
                             .forEach(x -> {
-                                shopCarDao.updateShopCarProduct(x.getId());
+                                shopCarDao.updateShopCarProduct(x.getId(), shopCar.getQuantity());
                             });
                 }catch (Exception e) {
                     log.error("添加购物车信息失败,当前有重复商品信息:{}", shopCar, e);

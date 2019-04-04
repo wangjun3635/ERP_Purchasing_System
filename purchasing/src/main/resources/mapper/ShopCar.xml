@@ -91,7 +91,7 @@
     </select>
 
     <update id="updateShopCarProduct">
-        update tb_shopcar set quantity = quantity + 1 where id=#{shopCarId}
+        update tb_shopcar set quantity = quantity + #{quantity} where id=#{shopCarId}
     </update>
 
 </mapper>
