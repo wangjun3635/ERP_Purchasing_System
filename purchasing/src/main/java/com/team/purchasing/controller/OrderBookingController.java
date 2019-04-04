@@ -52,6 +52,7 @@ public class OrderBookingController {
         OrderBooking orderBookingResp = new OrderBooking();
         orderBookingResp.setId(bookingOrderId);
         orderBookingResp.setOrderNumber(orderBooking.getOrderNumber());
+        orderBookingResp.setTotalAmount(orderBooking.getTotalAmount());
 
         orderBookingResponse.setOrderBooking(orderBookingResp);
 
