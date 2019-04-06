@@ -23,6 +23,9 @@
             <if test="userId != null">
                 and userId=#{userId}
             </if>
+            <if test="id != null">
+                and id=#{id}
+            </if>
         </where>
     </delete>
 
@@ -83,8 +86,8 @@
 
     <update id="updateProductCollection">
         update tb_collection set productId=#{productId},
---         hcId=#{hcId},
---         userId=#{userId},
+<!--           hcId=#{hcId},
+        userId=#{userId}, -->
         isValid=#{isValid},
         modifyTime=GETDATE(),
         modifyUserId=#{modifyUserId}
