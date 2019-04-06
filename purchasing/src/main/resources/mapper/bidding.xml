@@ -12,7 +12,7 @@
 		t.expireDay,
 		t.auditStatus,
 		t.remark,
-		CONVERT(CHAR(19), t.createTime, 20) as t.createTime,
+		CONVERT(CHAR(19), t.createTime, 20) as createTime,
 		t.createUserId
 	</sql>
 
@@ -124,7 +124,7 @@
 			expireDay,
 			auditStatus,
 			remark,
-			CONVERT(CHAR(19), createTime, 20) as createTime,
+			createTime,
 			createUserId
    		)values(
    			#{baseUserInfo.hcId},
