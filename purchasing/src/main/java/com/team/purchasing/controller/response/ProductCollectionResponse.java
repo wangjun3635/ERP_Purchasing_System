@@ -1,6 +1,7 @@
 package com.team.purchasing.controller.response;
 
 import com.team.purchasing.bean.ProductCollection;
+import com.team.purchasing.bean.productcollection.ProductCollectionRelationProduct;
 import com.team.purchasing.common.GeneralResponse;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,6 +19,6 @@ import java.util.List;
 public class ProductCollectionResponse extends GeneralResponse {
 
     @ApiModelProperty
-    private List<ProductCollection> productCollections;
+    private List<ProductCollectionRelationProduct> productCollectionRelationProducts;
 
 }
