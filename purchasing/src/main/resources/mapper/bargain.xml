@@ -123,7 +123,7 @@
 			supplierId,
 			expireDay,
 			remark,
-			CONVERT(CHAR(19), createTime, 20) as createTime,
+			createTime,
 			createUserId 
    		)values (
    			#{bargainComment.bargainId},
