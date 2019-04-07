@@ -19,8 +19,8 @@
 			createUserId
    		) values(
    			#{bargain.productId},
-   			#{bargain.userId},
-   			#{bargain.hcId},
+   			#{baseUserInfo.userId},
+   			#{baseUserInfo.hcId},
 			#{bargain.supplierId},
 			#{bargain.unitPrice},
 			#{bargain.quantity},
@@ -165,10 +165,24 @@
    			   t.* 
    		from(
    			select 
-   			<include refid="sql_queryBargainCommentList"></include>
-   			from tb_bargain_comment
+	   			bc.id,
+				bc.bargainId,
+				bc.supplierId,
+				bc.expireDay,
+				s.name as supplierName,
+				bc.remark,
+				CONVERT(CHAR(19), bc.createTime, 20) as createTime,
+				bc.createUserId 
+   			from tb_bargain_comment bc
+   			left join tb_supplier s
+   			on bc.supplierId = s.id
    			where 1=1
-   			<include refid="where_queryBargainComment"></include>
+   			<if test="supplierId != null">
+				and bc.supplierId = #{supplierId}
+			</if>
+			<if test="bargainId != null">
+				and bc.bargainId = #{bargainId}
+			</if>
    		) t
    			
    </select>

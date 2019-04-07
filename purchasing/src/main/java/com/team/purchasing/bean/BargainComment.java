@@ -17,6 +17,9 @@ public class BargainComment {
 	@ApiModelProperty(value = "供应商id")
 	private Long supplierId;
 	
+	@ApiModelProperty(value = "供应商名称")
+	private String supplierName;
+	
 	@ApiModelProperty(value = "有效天数")
 	private Integer expireDay;
 	
