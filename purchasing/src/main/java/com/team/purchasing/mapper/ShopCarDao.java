@@ -1,6 +1,7 @@
 package com.team.purchasing.mapper;
 
 import com.team.purchasing.bean.shopcar.ShopCar;
+import com.team.purchasing.bean.shopcar.ShopCarBatchDelete;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public interface ShopCarDao {
     public int addShopCarProduct(@Param("shopCar") ShopCar shopCar);
 
     public int deleteShopCarProduct(@Param("shopCar") ShopCar shopCar);
+
+    public void batchDeleteShopCarProduct(List<ShopCarBatchDelete> shopCarBatchDeletes);
     
     public List<ShopCar> queryShopCarList(@Param("shopCar") ShopCar shopCar);
 

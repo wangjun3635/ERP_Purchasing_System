@@ -1,6 +1,7 @@
 package com.team.purchasing.service.impl;
 
 import com.team.purchasing.bean.shopcar.ShopCar;
+import com.team.purchasing.bean.shopcar.ShopCarBatchDelete;
 import com.team.purchasing.mapper.ShopCarDao;
 import com.team.purchasing.service.ShopCarService;
 import lombok.extern.slf4j.Slf4j;
@@ -72,7 +73,20 @@ public class ShopCarServiceImpl implements ShopCarService {
 
     }
 
-	@Override
+    @Override
+    public int batchDeleteShopCarProduct(List<ShopCarBatchDelete> shopCarBatchDeletes) {
+
+        try {
+            shopCarDao.batchDeleteShopCarProduct(shopCarBatchDeletes);
+            return 1;
+        }catch (Exception e) {
+            log.error("购物车商品批量删除失败,shopCar为:{}", shopCarBatchDeletes, e);
+            throw new RuntimeException("购物车商品批量删除失败");
+        }
+
+    }
+
+    @Override
 	public List<ShopCar> queryShopCarList(ShopCar shopCar) {
 		return shopCarDao.queryShopCarList(shopCar);
 	}

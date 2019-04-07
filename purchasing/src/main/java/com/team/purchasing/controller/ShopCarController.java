@@ -3,8 +3,10 @@ package com.team.purchasing.controller;
 import com.team.purchasing.bean.Product;
 import com.team.purchasing.bean.ProductSupplierRelation;
 import com.team.purchasing.bean.shopcar.ShopCar;
+import com.team.purchasing.bean.shopcar.ShopCarBatchDelete;
 import com.team.purchasing.bean.shopcar.ShopCarProduct;
 import com.team.purchasing.common.MessageInfo;
+import com.team.purchasing.controller.request.shopcar.ShopCarDelteBatchRequest;
 import com.team.purchasing.controller.request.shopcar.ShopCarRequest;
 import com.team.purchasing.controller.response.shopcar.ShopCarResponse;
 import com.team.purchasing.service.ProductService;
@@ -54,6 +56,28 @@ public class ShopCarController {
             messageInfo.setMessageText("添加成功!");
         }else {
             messageInfo.setMessageText("添加失败!");
+        }
+        shopCarResponse.setMessageInfo(messageInfo);
+
+        return shopCarResponse;
+    }
+
+    @PostMapping("/batchDeleteShopCarProduct")
+    @ApiOperation(value="批量删除购物车商品 通过用户id或者购物车id删除购物车信息")
+    public ShopCarResponse batchDeleteShopCarProduct(@RequestBody ShopCarDelteBatchRequest shopCarDelteBatchRequest){
+
+
+        List<ShopCarBatchDelete> shopCarBatchDeletes = shopCarDelteBatchRequest.getShopCarBatchDeletes();
+
+        int result = shopCarService.batchDeleteShopCarProduct(shopCarBatchDeletes);
+
+        ShopCarResponse shopCarResponse = new ShopCarResponse();
+        MessageInfo messageInfo = new MessageInfo();
+        messageInfo.setCode("200");
+        if(result == 1) {
+            messageInfo.setMessageText("删除成功!");
+        }else {
+            messageInfo.setMessageText("删除失败!");
         }
         shopCarResponse.setMessageInfo(messageInfo);
 

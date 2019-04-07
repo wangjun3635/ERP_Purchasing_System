@@ -30,6 +30,23 @@
         </where>
     </delete>
 
+    <delete id="batchDeleteShopCarProduct" parameterType="java.util.List">
+        delete from tb_shopcar
+        where id in
+        <where>
+            <!--<if test="shopCar.userId != null">-->
+                <!--and userId=#{shopCar.userId}-->
+            <!--</if>-->
+            <!--<if test="shopCar.HSCId != null">-->
+                <!--and HSCId=#{shopCar.HSCId}-->
+            <!--</if>-->
+            <foreach collection="shopCarBatchDeletes" item="arr" index="no" open="("
+                     separator="," close=")">
+                #{arr}
+            </foreach>
+        </where>
+    </delete>
+
     <insert id="addShopCarProduct">
         insert into tb_shopcar(productId,
          HSCId,
