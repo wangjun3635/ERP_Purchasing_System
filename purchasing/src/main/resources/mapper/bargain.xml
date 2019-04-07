@@ -75,6 +75,8 @@
    		        b.id,
 				b.productId,
 				p.name as productName,
+				p.brandId,
+				b.name as brandName,
 				b.supplierId,
 				b.userId,
 				b.hcId,
@@ -89,6 +91,8 @@
    			from tb_bargain b
    			left join tb_product p
    			on b.productId = p.id
+   			left join tb_brand b
+   			on p.brandid = b.id
    			where 1=1
 		   	<if test="userId != null">
 			 and b.userId = #{userId}
