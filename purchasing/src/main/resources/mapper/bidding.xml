@@ -175,7 +175,7 @@
 			unitPrice,
 			remark,
 			isSelected,
-			CONVERT(CHAR(19), createTime, 20) as createTime,
+			createTime,
 			createUserId
    		)values(
    			#{biddingComment.biddingId},
