@@ -55,6 +55,20 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public Integer querySubjectCount(Subject subject) {
+        try {
+
+            Integer count = subjectDao.querySubjectCount(subject);
+
+            return count;
+
+        }catch (Exception e) {
+            log.error("subjects count查询失败", e);
+            throw new RuntimeException("subjects count查询失败");
+        }
+    }
+
+    @Override
     @Transactional
     public Integer updateSubject(Subject subject) {
 

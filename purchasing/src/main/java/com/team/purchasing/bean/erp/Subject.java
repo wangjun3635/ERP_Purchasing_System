@@ -1,5 +1,6 @@
 package com.team.purchasing.bean.erp;
 
+import com.team.purchasing.utils.Page;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.models.auth.In;
@@ -57,5 +58,6 @@ public class Subject {
     @ApiModelProperty(value = "更新用户id")
     private Integer updateUserId;
 
+    private Page page;
 
 }

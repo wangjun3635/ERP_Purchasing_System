@@ -57,6 +57,9 @@ public class SubjectController {
 
         Subject subject = subjectRequest.getSubject();
 
+        Integer count = subjectService.querySubjectCount(subject);
+        subject.getPage().init(count);
+
         SubjectResponse subjectResponse = new SubjectResponse();
 
         List<Subject> subjects = subjectService.querySubject(subject);

@@ -15,6 +15,8 @@ public interface SubjectDao {
 
     public List<Subject> querySubject(Subject subject);
 
+    public Integer querySubjectCount(Subject subject);
+
     public Integer updateSubject(Subject subject);
 
 }
