@@ -172,10 +172,9 @@
     </select>
 
     <select id="queryProductTypeName" resultMap="NameBase">
-        select t.name from
-          (select tpc.name as name from tb_product tp
-          left join tb_product_category tpc on tp.firstlevel = tpc.id where tpc.name != null) t
-        group by name;
+        select t.name from 
+		(select tpc.name as name from tb_product_category tpc 
+		left join tb_product tp on tp.firstlevel = tpc.id) t group by t.name; 
     </select>
 
     <resultMap id="NameBase" type="com.team.purchasing.bean.productquery.ProductTypeName">
