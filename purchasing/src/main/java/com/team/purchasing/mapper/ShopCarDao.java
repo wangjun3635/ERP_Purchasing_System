@@ -16,7 +16,7 @@ public interface ShopCarDao {
 
     public int deleteShopCarProduct(@Param("shopCar") ShopCar shopCar);
 
-    public void batchDeleteShopCarProduct(List<ShopCarBatchDelete> shopCarBatchDeletes);
+    public void batchDeleteShopCarProduct(@Param("shopCarBatchDeletes") List<ShopCarBatchDelete> shopCarBatchDeletes);
     
     public List<ShopCar> queryShopCarList(@Param("shopCar") ShopCar shopCar);
 

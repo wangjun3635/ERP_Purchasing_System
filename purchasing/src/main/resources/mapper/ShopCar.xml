@@ -33,7 +33,7 @@
     <delete id="batchDeleteShopCarProduct" parameterType="java.util.List">
         delete from tb_shopcar
         where id in
-        <where>
+        
             <!--<if test="shopCar.userId != null">-->
                 <!--and userId=#{shopCar.userId}-->
             <!--</if>-->
@@ -42,9 +42,9 @@
             <!--</if>-->
             <foreach collection="shopCarBatchDeletes" item="arr" index="no" open="("
                      separator="," close=")">
-                #{arr}
+                #{arr.id}
             </foreach>
-        </where>
+        
     </delete>
 
     <insert id="addShopCarProduct">
