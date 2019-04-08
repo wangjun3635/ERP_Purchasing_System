@@ -1,7 +1,8 @@
-package com.team.purchasing.erp.bean;
+package com.team.purchasing.bean.erp;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
 public class Subject {
 
     @ApiModelProperty(value = "课题id")
-    private int id;
+    private Integer id;
 
     @ApiModelProperty(value = "课题名称")
     private String name;
