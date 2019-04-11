@@ -19,4 +19,9 @@ public class GeneralResponse {
 		this.messageInfo = new MessageInfo();
 		this.page = new Page();
 	}
+	
+	public void processSuccess() {
+		this.messageInfo.setCode("200");
+		this.messageInfo.setMessageText("操作成功");
+	}
 }

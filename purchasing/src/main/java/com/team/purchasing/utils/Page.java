@@ -35,12 +35,22 @@ public class Page {
     @ApiModelProperty(value = "总页数")
     private Integer totalPage;
 
-    //数据库分页所取到的数据
+	//数据库分页所取到的数据
     @Getter
     @Setter
     @ApiModelProperty(value = "数据库分页所取到的数据")
     private Integer rowNumber;
 
+    
+    public Page() {
+  	}
+
+  	public Page(Integer currentPage, Integer currentNum) {
+  		this.currentPage = currentPage;
+  		this.currentNum = currentNum;
+  	}
+
+    
 //    public void setRowNumber(){
 //        this.rowNumber = this.currentNum * (currentPage - 1);
 //    }

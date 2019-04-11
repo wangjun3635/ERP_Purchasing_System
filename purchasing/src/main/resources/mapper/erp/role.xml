@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team.purchasing.mapper.BargainDao">
+
+   
+   <insert id="createRole" 
+   		parameterType="com.team.purchasing.controller.request.erp.OperateRoleCmd"
+   		useGeneratedKeys="true" keyProperty="role.id">
+   		insert into tb_role (
+   			type,
+   			name,
+   			remark,
+   			isvalid,
+   			createTime,
+   			createUserId
+   		) values(
+   			#{role.type},
+   			#{role.name},
+   			#{role.remark},
+			1,
+			GETDATE(),
+			#{baseUserInfo.userId}
+   		) 
+   </insert>
+   
+   <update id="updateRole"
+   	parameterType="com.team.purchasing.controller.request.erp.OperateRoleCmd">
+   	update tb_role set
+   		name = #{role.name},
+   		remark = #{role.remark},
+   		isvalid = #{role.isvalid},
+   		updatetime = GETDATE(),
+   		updateuserid = #{baseUserInfo.userId} 
+   	where id = #{role.id}
+   </update>
+  
+   <select id="countRoleList"
+   	parameterType="com.team.purchasing.controller.request.erp.QueryRoleListRequest"
+   	resultType="java.lang.Integer">
+   		select count(*) from tb_role
+   		where 1=1
+   		<if test="userId != null">
+		 and b.type = #{type}
+		</if>
+		<if test="hcId != null">
+		 and b.name = '%#{name}%'
+		</if>
+		<if test="isValid != null">
+		 and b.isValid = #{isValid}
+		</if>
+		<if test="id != null">
+		 and b.id = #{id}
+		</if>
+   </select>
+  
+   <select id="queryRoleList" 
+   	resultType="com.team.purchasing.bean.Role"
+ 	parameterType="com.team.purchasing.controller.request.erp.QueryRoleListRequest">
+   		select 
+   			top (#{page.currentNum})
+   			t.*
+   		from 
+   			(select 
+   			   (SELECT ROW_NUMBER() OVER (order by b.createTime DESC )) AS rownum ,
+   		        b.id,
+				b.type,
+				p.name,
+				p.remark,
+				p.isValid,
+				CONVERT(CHAR(19), b.createTime, 20) as createTime,
+				b.createUserId,
+			 	CONVERT(CHAR(19), b.updateTime, 20) as updateTime, 
+			 	b.updateUserId
+   			from tb_role b
+   			where 1=1
+		   	<if test="userId != null">
+			 and b.type = #{type}
+			</if>
+			<if test="hcId != null">
+			 and b.name = '%#{name}%'
+			</if>
+			<if test="isValid != null">
+			 and b.isValid = #{isValid}
+			</if>
+			<if test="id != null">
+			 and b.id = #{id}
+			</if>
+			order by b.createTime DESC
+   			) t
+   		where t.rownum <![CDATA[ > ]]> #{page.rowNumber}
+
+   </select>
+   
+</mapper>
